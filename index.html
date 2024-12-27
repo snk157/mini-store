@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ministore</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- script ================================================== -->
+    <script>
+      function loadHeaderFooter()
+      {
+        // Fetch and insert header content
+        fetch('header.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+          });
+
+        // Fetch and insert footer content
+        fetch('footer.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+          });
+        }
+
+        // Call function to load header and footer
+        window.onload = loadHeaderFooter;
+    </script>
+    <!-- script ================================================== -->
+    <script src="js/modernizr.js"></script>
+  </head>
+  <div id="header-container"></div>
+    <section id="billboard" class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="slide-content">
+              <h1 class="text-center text-dark">Master Your Game with Premium Accessories</h1>
+              <br><br>
+              <a href="shop.html" class="btn btn-dark">Shop Now</a>
+            </div>
+            <div class="image-holder">
+              <img src="images/banner-image.png" alt="banner">
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="slide-content">
+              <h1 class="text-center text-dark">Elevate Every Shot with Elite Gear</h1>
+              <br><br>
+              <a href="shop.html" class="btn btn-dark">Shop Now</a>
+            </div>
+            <div class="image-holder">
+              <img src="images/banner-image2.png" alt="banner">
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="slide-content">
+              <h1 class="text-center text-dark">Precision Tools for the Perfect Game</h1>
+              <br><br>
+              <a href="shop.html" class="btn btn-dark">Shop Now</a>
+            </div>
+            <div class="image-holder">
+              <img src="images/banner-image3.png" alt="banner">
+            </div>
+          </div>
+        </div>
+
+      <div class="swiper-arrow swiper-arrow-prev">
+        <svg class="chevron-left">
+          <use xlink:href="#chevron-left" />
+        </svg>
+      </div>
+      <div class="swiper-arrow swiper-arrow-next">
+        <svg class="chevron-right">
+          <use xlink:href="#chevron-right" />
+        </svg>
+      </div>
+    </section>
+    <section id="company-services" class="padding-large">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 pb-3">
+            <div class="icon-box d-flex">
+              <div class="icon-box-icon pe-3 pb-3">
+                <svg class="cart-outline">
+                  <use xlink:href="#cart-outline" />
+                </svg>
+              </div>
+              <div class="icon-box-content">
+                <h3 class="card-title text-uppercase text-dark">Free delivery</h3>
+                <p>Get your orders delivered to your doorstep, free of charge, for purchases above $50.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 pb-3">
+            <div class="icon-box d-flex">
+              <div class="icon-box-icon pe-3 pb-3">
+                <svg class="quality">
+                  <use xlink:href="#quality" />
+                </svg>
+              </div>
+              <div class="icon-box-content">
+                <h3 class="card-title text-uppercase text-dark">Quality guarantee</h3>
+                <p>We ensure the best quality products, meeting your expectations every time.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 pb-3">
+            <div class="icon-box d-flex">
+              <div class="icon-box-icon pe-3 pb-3">
+                <svg class="price-tag">
+                  <use xlink:href="#price-tag" />
+                </svg>
+              </div>
+              <div class="icon-box-content">
+                <h3 class="card-title text-uppercase text-dark">Daily offers</h3>
+                <p>Enjoy exclusive discounts and special deals every single day.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 pb-3">
+            <div class="icon-box d-flex">
+              <div class="icon-box-icon pe-3 pb-3">
+                <svg class="shield-plus">
+                  <use xlink:href="#shield-plus" />
+                </svg>
+              </div>
+              <div class="icon-box-content">
+                <h3 class="card-title text-uppercase text-dark">100% secure payment</h3>
+                <p>Shop with confidence using our fully secure and encrypted payment system.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="feature-product" class="product-store position-relative padding-large no-padding-top">
+      <div class="container">
+        <div class="row">
+          <div class="display-header d-flex justify-content-between pb-3">
+            <h2 class="display-7 text-dark text-uppercase">✨ Features Product ✨</h2>
+            <div class="btn-right">
+              <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+            </div>
+          </div>
+          <div class="swiper product-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item1.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 10</a>
+                    </h3>
+                    <span class="item-price text-primary">$980</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item2.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 11</a>
+                    </h3>
+                    <span class="item-price text-primary">$1100</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item3.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 8</a>
+                    </h3>
+                    <span class="item-price text-primary">$780</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item4.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 13</a>
+                    </h3>
+                    <span class="item-price text-primary">$1500</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination position-absolute text-center"></div>
+    </section>
+    <section id="best-selling" class="product-store position-relative padding-large no-padding-top">
+      <div class="container">
+        <div class="row">
+          <div class="display-header d-flex justify-content-between pb-3">
+            <h2 class="display-7 text-dark text-uppercase">🔥 Best Selling 🔥</h2>
+            <div class="btn-right">
+              <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+            </div>
+          </div>
+          <div class="swiper product-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item1.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 10</a>
+                    </h3>
+                    <span class="item-price text-primary">$980</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item2.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 11</a>
+                    </h3>
+                    <span class="item-price text-primary">$1100</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item3.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 8</a>
+                    </h3>
+                    <span class="item-price text-primary">$780</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item4.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 13</a>
+                    </h3>
+                    <span class="item-price text-primary">$1500</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="product-card position-relative">
+                  <div class="image-holder">
+                    <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
+                  </div>
+                  <div class="cart-concern position-absolute">
+                    <div class="cart-button d-flex">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    </div>
+                  </div>
+                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                    <h3 class="card-title text-uppercase">
+                      <a href="#">Iphone 12</a>
+                    </h3>
+                    <span class="item-price text-primary">$1300</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination position-absolute text-center"></div>
+    </section>
+    <section id="testimonials" class="position-relative">
+      <div class="container">
+        <div class="row">
+          <div class="review-content position-relative">
+            <div class="swiper-icon swiper-arrow swiper-arrow-prev position-absolute d-flex align-items-center">
+              <svg class="chevron-left">
+                <use xlink:href="#chevron-left" />
+              </svg>
+            </div>
+            <div class="swiper testimonial-swiper">
+              <div class="quotation text-center">
+                <svg class="quote">
+                  <use xlink:href="#quote" />
+                </svg>
+              </div>
+              <div class="swiper-wrapper">
+                <div class="swiper-slide text-center d-flex justify-content-center">
+                  <div class="review-item col-md-10">
+                    <i class="icon icon-review"></i>
+                    <blockquote>“This store never disappoints. The daily offers are fantastic, and the service is top-notch!”</blockquote>
+                    <div class="rating">
+                      <svg class="star star-fill">
+                        <use xlink:href="#star-fill"></use>
+                      </svg>
+                      <svg class="star star-fill">
+                        <use xlink:href="#star-fill"></use>
+                      </svg>
+                      <svg class="star star-fill">
+                        <use xlink:href="#star-fill"></use>
+                      </svg>
+                      <svg class="star star-half">
+                        <use xlink:href="#star-half"></use>
+                      </svg>
+                      <svg class="star star-empty">
+                        <use xlink:href="#star-empty"></use>
+                      </svg>
+                    </div>
+                    <div class="author-detail">
+                      <div class="name text-dark text-uppercase pt-2">Emma Chamberlin</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide text-center d-flex justify-content-center">
+                  <div class="review-item col-md-10">
+                    <i class="icon icon-review"></i>
+                    <blockquote>“I feel secure shopping here. The payment process is smooth, and the support team is very helpful.”</blockquote>
+                    <div class="rating">
+                      <svg class="star star-fill">
+                        <use xlink:href="#star-fill"></use>
+                      </svg>
+                      <svg class="star star-fill">
+                        <use xlink:href="#star-fill"></use>
+                      </svg>
+                      <svg class="star star-fill">
+                        <use xlink:href="#star-fill"></use>
+                      </svg>
+                      <svg class="star star-half">
+                        <use xlink:href="#star-half"></use>
+                      </svg>
+                      <svg class="star star-empty">
+                        <use xlink:href="#star-empty"></use>
+                      </svg>
+                    </div>
+                    <div class="author-detail">
+                      <div class="name text-dark text-uppercase pt-2">Jennie Rose</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-icon swiper-arrow swiper-arrow-next position-absolute d-flex align-items-center">
+              <svg class="chevron-right">
+                <use xlink:href="#chevron-right" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </section>
+    <section id="subscribe" class="container-grid padding-large position-relative overflow-hidden">
+      <div class="container">
+        <div class="row">
+          <div class="subscribe-content bg-dark d-flex flex-wrap justify-content-center align-items-center padding-medium">
+            <div class="col-md-6 col-sm-12">
+              <div class="display-header pe-3">
+                <h2 class="display-7 text-uppercase text-light">Subscribe Us Now</h2>
+                <p>Get latest news, updates and deals directly mailed to your inbox.</p>
+              </div>
+            </div>
+            <div class="col-md-5 col-sm-12">
+              <form class="subscription-form validate">
+                <div class="input-group flex-wrap">
+                  <input class="form-control btn-rounded-none" type="email" name="EMAIL" placeholder="Your email address here" required="">
+                  <button class="btn btn-medium btn-primary text-uppercase btn-rounded-none" type="submit" name="subscribe">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <div id="footer-container"></div>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>

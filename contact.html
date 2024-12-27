@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ministore</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- script ================================================== -->
+    <script>
+      function loadHeaderFooter()
+      {
+        // Fetch and insert header content
+        fetch('header.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+          });
+
+        // Fetch and insert footer content
+        fetch('footer.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+          });
+        }
+
+        // Call function to load header and footer
+        window.onload = loadHeaderFooter;
+    </script>
+    <!-- script ================================================== -->
+    <script src="js/modernizr.js"></script>
+  </head>
+  <div id="header-container"></div>
+    <section class="hero-section position-relative bg-light-blue padding-medium">
+      <div class="hero-content">
+        <div class="container">
+          <div class="row">
+            <div class="text-center padding-large no-padding-bottom">
+              <h1 class="display-2 text-uppercase text-dark">Contact</h1>
+              <div class="breadcrumbs">
+                <span class="item">
+                  <a href="index.html">Home ></a>
+                </span>
+                <span class="item">Contact</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="contact-us padding-large">
+      <div class="container">
+        <div class="row">
+          <div class="contact-info col-lg-6 pb-3">
+            <h2 class="display-7 text-uppercase text-dark">Contact info</h2>
+            <p>Tortor dignissim convallis aenean et tortor at risus viverra adipiscing.</p>
+            <div class="page-content d-flex flex-wrap">
+              <div class="col-lg-6 col-sm-12">
+                <div class="content-box text-dark pe-4 mb-5">
+                  <h3 class="card-title text-uppercase text-decoration-underline">Office</h3>
+                  <div class="contact-address pt-3">
+                    <p>730 Glenstone Ave 65802, Springfield, US</p>
+                  </div>
+                  <div class="contact-number">
+                    <p>
+                      <a href="#">+123 987 321</a>
+                    </p>
+                    <p>
+                      <a href="#">+123 123 654</a>
+                    </p>
+                  </div>
+                  <div class="email-address">
+                    <p>
+                      <a href="#">ministore@yourinfo.com</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <div class="content-box">
+                  <h3 class="card-title text-uppercase text-decoration-underline">Management</h3>
+                  <div class="contact-address pt-3">
+                    <p>730 Glenstone Ave 65802, Springfield, US</p>
+                  </div>
+                  <div class="contact-number">
+                    <p>
+                      <a href="#">+123 987 321</a>
+                    </p>
+                    <p>
+                      <a href="#">+123 123 654</a>
+                    </p>
+                  </div>
+                  <div class="email-address">
+                    <p>
+                      <a href="#">ministore@yourinfo.com</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="map col-lg-6 -pb-3">
+            <div class="image-holder mb-5">
+              <iframe
+                  width="600"
+                  height="400"
+                  frameborder="0"
+                  scrolling="no"
+                  marginheight="0"
+                  marginwidth="0"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=101.70985%2C3.15685%2C101.71485%2C3.15885&layer=mapnik&marker=3.15785%2C101.71235"
+              ></iframe>
+              <br />
+              <small>
+                  <a href="https://www.openstreetmap.org/?mlat=3.15785&amp;mlon=101.71235#map=15/3.15785/101.71235">
+                      View Larger Map
+                  </a>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section id="subscribe" class="container-grid padding-large position-relative overflow-hidden">
+      <div class="container">
+        <div class="row">
+          <div class="subscribe-content bg-dark d-flex flex-wrap justify-content-center align-items-center padding-medium">
+            <div class="col-md-6 col-sm-12">
+              <div class="display-header pe-3">
+                <h2 class="display-7 text-uppercase text-light">Subscribe Us Now</h2>
+                <p>Get latest news, updates and deals directly mailed to your inbox.</p>
+              </div>
+            </div>
+            <div class="col-md-5 col-sm-12">
+              <form class="subscription-form validate">
+                <div class="input-group flex-wrap">
+                  <input class="form-control btn-rounded-none" type="email" name="EMAIL" placeholder="Your email address here" required="">
+                  <button class="btn btn-medium btn-primary text-uppercase btn-rounded-none" type="submit" name="subscribe">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <div id="footer-container"></div>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>
