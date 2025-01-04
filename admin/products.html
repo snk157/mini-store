@@ -13,6 +13,8 @@
   <meta name="robots" content="noindex,nofollow" />
   <title>Material Pro Free Bootstrap Admin Template by WrapPixel</title>
   <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png" />
   <!-- Custom CSS -->
@@ -258,7 +260,7 @@
                   <h4 class="card-title">Add New Product</h4>
                   <button class="btn btn-secondary" id="cancel-btn">Cancel</button>
                 </div>
-                <form id="product-form" action="#" method="post" enctype="multipart/form-data">
+                <form id="product-form">
                   <!-- Product Name -->
                   <div class="mb-3">
                     <label for="product-name" class="form-label">Product Name</label>
@@ -286,8 +288,7 @@
                   <!-- Item Price -->
                   <div class="mb-3">
                     <label for="product-price" class="form-label">Price (MYR)</label>
-                    <input type="number" class="form-control" id="product-price" name="price" step="0.01" min="0" value="0.00" inputmode="decimal" 
-                    pattern="^\d+(\.\d{1,2})?$" required />
+                    <input type="text" class="form-control" id="product-price" name="price" placeholder="0.00" inputmode="decimal" required />
                   </div>
                   
                   <!-- Stock/Quantity -->
@@ -306,7 +307,7 @@
         
                   <!-- Submit Button -->
                   <div class="d-flex justify-content-end mt-3">
-                    <button type="submit" class="btn btn-primary">Add Product</button>
+                    <button type="button" id="add-product-button" class="btn btn-primary">Add Product</button>
                   </div>
                 </form>
               </div>
@@ -360,14 +361,15 @@
   <script src="js/custom.js"></script>
 </body>
 <script>
-   document.addEventListener("DOMContentLoaded", function () {
-    const addProductButton = document.querySelector(".btn-primary");
+  document.addEventListener("DOMContentLoaded", function () {
+    const newProductButton = document.querySelector(".btn-primary")
     const cancelButton = document.querySelector("#cancel-btn");
     const productFormCard = document.querySelector("#product-form").closest(".card");
     const productTableCard = document.querySelector(".product-table").closest(".card");
-
+    const addProductButton = document.getElementById("add-product-button")
     const priceInput = document.getElementById('product-price');
     const quantityInput = document.getElementById('product-quantity');
+    const token = localStorage.getItem("token");
 
     // Enforce numeric input
     enforceNumericInput(priceInput, true);  // Allows decimals
@@ -376,8 +378,7 @@
     // Initially hide the form card
     productFormCard.style.display = "none";
 
-    addProductButton.addEventListener("click", function () {
-      // Toggle visibility of table and form
+    newProductButton.addEventListener("click", async function () {
       if (productTableCard.style.display === "none") {
         productTableCard.style.display = "block";
         productFormCard.style.display = "none";
@@ -388,33 +389,61 @@
     });
 
     cancelButton.addEventListener("click", function (e) {
-      e.preventDefault();
-      productTableCard.style.display = "block";
-      productFormCard.style.display = "none";
-    });
+    e.preventDefault();
+    productTableCard.style.display = "block";
+    productFormCard.style.display = "none";
   });
+
+    addProductButton.addEventListener("click", async function () {
+      const form = document.getElementById('product-form');
+      const formData = new FormData(form);
+
+      try {
+        const response = await axios.post('https://mini-store-api-ud3r.onrender.com/product', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+          },
+        });
+        console.log('Product added successfully:', response.data);
+        alert('Product added successfully!');
+      } catch (error) {
+        console.error('Error adding product:', error.response?.data || error.message);
+        alert('Failed to add product. Please check the form and try again.');
+      }
+    });
+});
   
   function enforceNumericInput(input, allowDecimal = false) {
     input.addEventListener('input', function () {
       const regex = allowDecimal ? /[^0-9.]/g : /[^0-9]/g;
       this.value = this.value.replace(regex, ''); // Remove invalid characters
+
+      // Allow only one decimal point
       if (allowDecimal && this.value.split('.').length > 2) {
-        this.value = this.value.replace(/\.+$/, ''); // Remove extra decimals
+        const parts = this.value.split('.');
+        this.value = parts[0] + '.' + parts.slice(1).join(''); // Keep the first decimal
       }
     });
 
     input.addEventListener('blur', function () {
-      const value = allowDecimal ? parseFloat(this.value) : parseInt(this.value, 10);
-      if (isNaN(value) || value < 0) {
-        this.value = allowDecimal ? '0.00' : '0'; // Reset to default
+      // Ensure the value is valid on blur
+      if (allowDecimal) {
+        if (this.value === '.' || this.value === '') {
+          this.value = '0.00'; // Reset invalid input
+        } else {
+          this.value = parseFloat(this.value).toFixed(2); // Format to two decimals
+        }
       } else {
-        this.value = allowDecimal ? value.toFixed(2) : value; // Format the value
+        if (this.value === '' || isNaN(parseInt(this.value, 10))) {
+          this.value = '0'; // Reset invalid input
+        }
       }
     });
   }
 
-   // JavaScript to show image thumbnails after upload
-   document.getElementById('product-images').addEventListener('change', function(event) {
+  // JavaScript to show image thumbnails after upload
+  document.getElementById('product-images').addEventListener('change', function(event) {
       const files = event.target.files;
       const imageThumbnailsContainer = document.getElementById('image-thumbnails');
       imageThumbnailsContainer.innerHTML = ''; // Clear existing thumbnails
