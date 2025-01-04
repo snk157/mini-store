@@ -278,10 +278,6 @@
                     <label for="product-category" class="form-label">Category</label>
                     <select class="form-select" id="product-category" name="category" required>
                       <option value="" disabled selected>- Select Category -</option>
-                      <option value="smartphone">Smartphone</option>
-                      <option value="watches">Watches</option>
-                      <option value="laptops">Laptops</option>
-                      <option value="accessories">Accessories</option>
                     </select>
                   </div>
         
@@ -296,6 +292,18 @@
                     <label for="product-quantity" class="form-label">Stock / Quantity</label>
                     <input type="number" class="form-control" id="product-quantity" name="quantity" min="0" value="0" inputmode="decimal" 
                     required/>
+                  </div>
+
+                  <!-- Is Hot -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="is-hot" name="is_hot" />
+                    <label for="is-hot" class="form-check-label">Hot Product</label>
+                  </div>
+
+                  <!-- Is Feature -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="is-feature" name="is_feature" />
+                    <label for="is-feature" class="form-check-label">Featured Product</label>
                   </div>
         
                   <!-- Product Images (Multiple Upload) -->
@@ -377,6 +385,23 @@
 
     // Initially hide the form card
     productFormCard.style.display = "none";
+
+    async function loadCategories() {
+      try {
+        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories');
+        const categories = response.data;
+
+        const categorySelect = document.getElementById('product-category');
+        categories.forEach(category => {
+          const option = document.createElement('option');
+          option.value = category.id;
+          option.textContent = category.category_name;
+          categorySelect.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Failed to load categories:', error);
+      }
+    }
 
     newProductButton.addEventListener("click", async function () {
       if (productTableCard.style.display === "none") {
