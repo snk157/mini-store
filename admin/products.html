@@ -39,7 +39,7 @@
   
   async function fetchProductList() {
       try {
-        const response = await axios.get('http://localhost:3000/products');
+        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/products');
         if (response.status === 200) {
           const products = response.data;
           const tableBody = document.querySelector('.product-table tbody');
@@ -383,6 +383,7 @@
     enforceNumericInput(priceInput, true);  // Allows decimals
     enforceNumericInput(quantityInput, false);  // Only integers
 
+    loadCategories();
     // Initially hide the form card
     productFormCard.style.display = "none";
 
