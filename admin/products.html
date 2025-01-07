@@ -39,7 +39,11 @@
   
   async function fetchProductList() {
       try {
-        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/products');
+        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/products', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         if (response.status === 200) {
           const products = response.data;
           const tableBody = document.querySelector('.product-table tbody');
@@ -389,7 +393,11 @@
 
     async function loadCategories() {
       try {
-        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories');
+        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         const categories = response.data;
 
         const categorySelect = document.getElementById('product-category');
