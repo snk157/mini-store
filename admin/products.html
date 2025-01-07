@@ -27,55 +27,6 @@
     <![endif]-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<script>
-  function loadSidebar() {
-    // Fetch and insert header content
-    fetch('sidebar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('sidebar-container').innerHTML = data;
-      });
-  }
-  
-  async function fetchProductList() {
-      try {
-        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/products', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (response.status === 200) {
-          const products = response.data;
-          const tableBody = document.querySelector('.product-table tbody');
-          tableBody.innerHTML = '';
-
-          // Populate table rows with data
-          products.forEach((product) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-              <td>${product.id}</td>
-              <td>${product.name}</td>
-              <td>${product.description}</td>
-              <td>${product.price}</td>
-              <td>${product.stock}</td>
-            `;
-            tableBody.appendChild(row);
-          });
-        } else {
-          console.error('Failed to fetch products', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    }
-  
-  // Call function to load header and footer
-  window.onload = () => {
-    loadSidebar();
-    fetchProductList();
-  };
-
-</script>
 <body>
   <!-- ============================================================== -->
   <!-- Preloader - style you can find in spinners.css -->
@@ -387,48 +338,92 @@
     enforceNumericInput(priceInput, true);  // Allows decimals
     enforceNumericInput(quantityInput, false);  // Only integers
 
+    loadSidebar();
+    fetchProductList();
     loadCategories();
+
     // Initially hide the form card
     productFormCard.style.display = "none";
 
-    async function loadCategories() {
-      try {
-        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        const categories = response.data;
+    function loadSidebar() {
+    // Fetch and insert header content
+    fetch('sidebar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('sidebar-container').innerHTML = data;
+      });
+  }
 
-        const categorySelect = document.getElementById('product-category');
-        categories.forEach(category => {
-          const option = document.createElement('option');
-          option.value = category.id;
-          option.textContent = category.category_name;
-          categorySelect.appendChild(option);
-        });
-      } catch (error) {
-        console.error('Failed to load categories:', error);
-      }
-    }
+  async function fetchProductList() {
+    try {
+      const response = await axios.get('https://mini-store-api-ud3r.onrender.com/products', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (response.status === 200) {
+        const products = response.data;
+        const tableBody = document.querySelector('.product-table tbody');
+        tableBody.innerHTML = '';
 
-    newProductButton.addEventListener("click", async function () {
-      if (productTableCard.style.display === "none") {
-        productTableCard.style.display = "block";
-        productFormCard.style.display = "none";
+        // Populate table rows with data
+        products.forEach((product) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.description}</td>
+            <td>${product.price}</td>
+            <td>${product.stock}</td>
+          `;
+          tableBody.appendChild(row);
+        });
       } else {
-        productTableCard.style.display = "none";
-        productFormCard.style.display = "block";
+        console.error('Failed to fetch products', response.status);
       }
-    });
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  }
 
-    cancelButton.addEventListener("click", function (e) {
-    e.preventDefault();
-    productTableCard.style.display = "block";
-    productFormCard.style.display = "none";
+  async function loadCategories() {
+    try {
+      const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const categories = response.data;
+
+      const categorySelect = document.getElementById('product-category');
+      categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.id;
+        option.textContent = category.category_name;
+        categorySelect.appendChild(option);
+      });
+    } catch (error) {
+      console.error('Failed to load categories:', error);
+    }
+  }
+
+  newProductButton.addEventListener("click", async function () {
+    if (productTableCard.style.display === "none") {
+      productTableCard.style.display = "block";
+      productFormCard.style.display = "none";
+    } else {
+      productTableCard.style.display = "none";
+      productFormCard.style.display = "block";
+    }
   });
 
-    addProductButton.addEventListener("click", async function () {
+  cancelButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  productTableCard.style.display = "block";
+  productFormCard.style.display = "none";
+});
+
+  addProductButton.addEventListener("click", async function () {
       const form = document.getElementById('product-form');
       const formData = new FormData(form);
 
