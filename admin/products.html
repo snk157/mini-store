@@ -395,17 +395,14 @@
       });
 
       const categories = response.data;
-      if (Array.isArray(categories)) {
-        const categorySelect = document.getElementById('product-category');
-        categories.forEach(category => {
-          const option = document.createElement('option');
-          option.value = category.id;
-          option.textContent = category.category_name;
-          categorySelect.appendChild(option);
-        });
-      }
-      else {
-        console.error('Categories is not an array:', categories);
+      const categorySelect = document.getElementById('product-category');
+
+      for(var i = 9; i < categories.length; i++)
+      {
+        const option = document.createElement('option');
+        option.value = categories[i].id;
+        option.textContent = categories[i].category_name;
+        categorySelect.appendChild(option);
       }
     } catch (error) {
       console.error('Failed to load categories:', error);
