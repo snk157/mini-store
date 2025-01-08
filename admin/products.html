@@ -398,7 +398,7 @@
       const categories = response.data;
       const categorySelect = document.getElementById('product-category');
 
-      for(var i = 9; i < categories.length; i++)
+      for(var i = 0; i < categories.length; i++)
       {
         const option = document.createElement('option');
         option.value = categories[i].id;
