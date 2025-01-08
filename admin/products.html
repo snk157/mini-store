@@ -397,13 +397,15 @@
 
       const categories = response.data;
       const categorySelect = document.getElementById('product-category');
-
+      console.log('Categories Response:', response.data);
+      
       for(var i = 0; i < categories.length; i++)
       {
         const option = document.createElement('option');
         option.value = categories[i].id;
         option.textContent = categories[i].category_name;
         categorySelect.appendChild(option);
+        console.log(`Appending option: ${categories[i].category_name}`);
       }
     } catch (error) {
       console.error('Failed to load categories:', error);
