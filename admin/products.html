@@ -367,17 +367,18 @@
         tableBody.innerHTML = '';
 
         // Populate table rows with data
-        products.forEach((product) => {
+        for(var i = 0; i < products.length; i++)
+        {
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>${product.description}</td>
-            <td>${product.price}</td>
-            <td>${product.stock}</td>
+            <td>${products[i].id}</td>
+            <td>${products[i].name}</td>
+            <td>${products[i].description}</td>
+            <td>${products[i].price}</td>
+            <td>${products[i].stock}</td>
           `;
           tableBody.appendChild(row);
-        });
+        }
       } else {
         console.error('Failed to fetch products', response.status);
       }
