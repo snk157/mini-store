@@ -395,10 +395,8 @@
         }
       });
 
-      const categories = response.data;
+      const categories = response.data.data;
       const categorySelect = document.getElementById('product-category');
-      console.log('Categories Response:', response.data);
-      console.log('length:', categories.length);
       for(var i = 0; i < categories.length; i++)
       {
         const option = document.createElement('option');
