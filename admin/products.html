@@ -197,7 +197,6 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
                     </tbody>
                   </table>
                 </div>
@@ -355,6 +354,7 @@
   }
 
   async function fetchProductList() {
+    alert("fetchProductList");
     try {
       const response = await axios.get('https://mini-store-api-ud3r.onrender.com/products', {
         headers: {
