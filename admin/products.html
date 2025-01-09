@@ -436,8 +436,11 @@
             'Authorization': `Bearer ${token}`
           },
         });
-        console.log('Product added successfully:', response.data);
+
         alert('Product added successfully!');
+        productFormCard.style.display = "none";
+        productTableCard.style.display = "block";
+        form.reset();
       } catch (error) {
         console.error('Error adding product:', error.response?.data || error.message);
         alert('Failed to add product. Please check the form and try again.');
