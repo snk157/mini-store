@@ -219,7 +219,7 @@
                   <!-- Product Name -->
                   <div class="mb-3">
                     <label for="product-name" class="form-label">Product Name</label>
-                    <input type="text" class="form-control" id="product-name" name="product_name" required />
+                    <input type="text" class="form-control" id="product-name" name="product-name" required />
                   </div>
         
                   <!-- Product Description -->
@@ -231,7 +231,7 @@
                   <!-- Category Selection -->
                   <div class="mb-3">
                     <label for="product-category" class="form-label">Category</label>
-                    <select class="form-select" id="product-category" name="category" required>
+                    <select class="form-select" id="product-category" name="product-category" required>
                       <option value="" disabled selected>- Select Category -</option>
                     </select>
                   </div>
@@ -251,13 +251,13 @@
 
                   <!-- Is Hot -->
                   <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" id="is-hot" name="is_hot" />
+                    <input type="checkbox" class="form-check-input" id="is-hot" name="is-hot" />
                     <label for="is-hot" class="form-check-label">Hot Product</label>
                   </div>
 
                   <!-- Is Feature -->
                   <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" id="is-feature" name="is_feature" />
+                    <input type="checkbox" class="form-check-input" id="is-feature" name="is-feature" />
                     <label for="is-feature" class="form-check-label">Featured Product</label>
                   </div>
         
@@ -403,7 +403,6 @@
         option.value = categories[i].id;
         option.textContent = categories[i].category_name;
         categorySelect.appendChild(option);
-        console.log(`Appending option: ${categories[i].category_name}`);
       }
     } catch (error) {
       console.error('Failed to load categories:', error);
