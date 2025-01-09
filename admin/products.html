@@ -371,12 +371,17 @@
         {
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td>${products[i].id}</td>
-            <td>${products[i].name}</td>
-            <td>${products[i].description}</td>
-            <td>${products[i].price}</td>
-            <td>${products[i].stock}</td>
-          `;
+          <td><img src="${products[i].images?.[0] || 'default-thumbnail.jpg'}" alt="Thumbnail" style="width: 50px; height: auto;"></td>
+          <td>${products[i].id}</td>
+          <td>${products[i].name}</td>
+          <td>${products[i].description}</td>
+          <td>${products[i].price}</td>
+          <td>${products[i].stock}</td>
+          <td>
+            <button class="btn btn-sm btn-primary">Edit</button>
+            <button class="btn btn-sm btn-danger">Delete</button>
+          </td>
+        `;
           tableBody.appendChild(row);
         }
       } else {
