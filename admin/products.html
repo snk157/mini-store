@@ -354,38 +354,34 @@
   }
 
   async function fetchProductList() {
-    alert("fetchProductList");
     try {
       const response = await axios.get('https://mini-store-api-ud3r.onrender.com/products', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-      if (response.status === 200) {
-        const products = response.data;
-        const tableBody = document.querySelector('.product-table tbody');
-        tableBody.innerHTML = '';
 
-        // Populate table rows with data
-        for(var i = 0; i < products.length; i++)
-        {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-          <td><img src="${products[i].images?.[0] || 'default-thumbnail.jpg'}" alt="Thumbnail" style="width: 50px; height: auto;"></td>
-          <td>${products[i].id}</td>
-          <td>${products[i].name}</td>
-          <td>${products[i].description}</td>
-          <td>${products[i].price}</td>
-          <td>${products[i].stock}</td>
-          <td>
-            <button class="btn btn-sm btn-primary">Edit</button>
-            <button class="btn btn-sm btn-danger">Delete</button>
-          </td>
-        `;
-          tableBody.appendChild(row);
-        }
-      } else {
-        console.error('Failed to fetch products', response.status);
+      const products = response.data;
+      const tableBody = document.querySelector('.product-table tbody');
+      tableBody.innerHTML = '';
+
+      // Populate table rows with data
+      for(var i = 0; i < products.length; i++)
+      {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td><img src="${products[i].images?.[0] || 'default-thumbnail.jpg'}" alt="Thumbnail" style="width: 50px; height: auto;"></td>
+        <td>${products[i].id}</td>
+        <td>${products[i].name}</td>
+        <td>${products[i].description}</td>
+        <td>${products[i].price}</td>
+        <td>${products[i].stock}</td>
+        <td>
+          <button class="btn btn-sm btn-primary">Edit</button>
+          <button class="btn btn-sm btn-danger">Delete</button>
+        </td>
+      `;
+        tableBody.appendChild(row);
       }
     } catch (error) {
       console.error('Error fetching products:', error);
