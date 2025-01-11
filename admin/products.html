@@ -477,13 +477,15 @@
       });
 
       const categories = response.data.data;
-      const categorySelect = document.getElementById('product-category');
+      const createProductCategorySelect = document.getElementById('product-category');
+      const editProductCategorySelect = document.getElementById('edit-product-category');
       for(var i = 0; i < categories.length; i++)
       {
         const option = document.createElement('option');
         option.value = categories[i].id;
         option.textContent = categories[i].category_name;
-        categorySelect.appendChild(option);
+        createProductCategorySelect.appendChild(option);
+        editProductCategorySelect.appendChild(option);
       }
     } catch (error) {
       console.error('Failed to load categories:', error);
@@ -565,7 +567,7 @@
         document.getElementById('edit-product-description').value = product.description;
         document.getElementById('edit-product-category').value = product.category;
         document.getElementById('edit-product-price').value = product.price;
-        document.getElementById('edit-product-quantity').value = product.stock;
+        document.getElementById('edit-product-quantity').value = product.qty;
         document.getElementById('edit-is-hot').checked = product.is_hot;
         document.getElementById('edit-is-feature').checked = product.is_feature;
 
