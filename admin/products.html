@@ -275,6 +275,75 @@
               </div>
             </div>
           </div>
+
+          <!-- Edit Product Form -->
+          <div class="col-12">
+            <div class="card" id="edit-product-form-card" style="display: none;">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="card-title">Edit Product</h4>
+                  <button class="btn btn-secondary" id="edit-cancel-btn">Cancel</button>
+                </div>
+                <form id="edit-product-form">
+                  <!-- Product Name -->
+                  <div class="mb-3">
+                    <label for="edit-product-name" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" id="edit-product-name" name="product-name" required />
+                  </div>
+          
+                  <!-- Product Description -->
+                  <div class="mb-3">
+                    <label for="edit-product-description" class="form-label">Description</label>
+                    <textarea class="form-control" id="edit-product-description" name="description" rows="3" required></textarea>
+                  </div>
+          
+                  <!-- Category Selection -->
+                  <div class="mb-3">
+                    <label for="edit-product-category" class="form-label">Category</label>
+                    <select class="form-select" id="edit-product-category" name="product-category" required>
+                      <option value="" disabled>- Select Category -</option>
+                    </select>
+                  </div>
+          
+                  <!-- Item Price -->
+                  <div class="mb-3">
+                    <label for="edit-product-price" class="form-label">Price (MYR)</label>
+                    <input type="text" class="form-control" id="edit-product-price" name="price" placeholder="0.00" inputmode="decimal" required />
+                  </div>
+          
+                  <!-- Stock/Quantity -->
+                  <div class="mb-3">
+                    <label for="edit-product-quantity" class="form-label">Stock / Quantity</label>
+                    <input type="number" class="form-control" id="edit-product-quantity" name="quantity" min="0" value="0" inputmode="decimal" required />
+                  </div>
+          
+                  <!-- Is Hot -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="edit-is-hot" name="is-hot" />
+                    <label for="edit-is-hot" class="form-check-label">Hot Product</label>
+                  </div>
+          
+                  <!-- Is Feature -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="edit-is-feature" name="is-feature" />
+                    <label for="edit-is-feature" class="form-check-label">Featured Product</label>
+                  </div>
+          
+                  <!-- Product Images (Multiple Upload) -->
+                  <div class="mb-3">
+                    <label for="edit-product-images" class="form-label">Product Images</label>
+                    <input type="file" class="form-control" id="edit-product-images" name="images[]" accept="image/*" multiple />
+                    <div id="edit-image-thumbnails" class="mt-3"></div>
+                  </div>
+          
+                  <!-- Submit Button -->
+                  <div class="d-flex justify-content-end mt-3">
+                    <button type="button" id="edit-product-button" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- ============================================================== -->
         <!-- End PAge Content -->
@@ -326,8 +395,11 @@
   document.addEventListener("DOMContentLoaded", function () {
     const newProductButton = document.querySelector(".btn-primary")
     const cancelButton = document.querySelector("#cancel-btn");
+
     const productFormCard = document.querySelector("#product-form").closest(".card");
     const productTableCard = document.querySelector(".product-table").closest(".card");
+    const editFormCard = document.querySelector("#edit-product-form").closest(".card");
+
     const addProductButton = document.getElementById("add-product-button")
     const priceInput = document.getElementById('product-price');
     const quantityInput = document.getElementById('product-quantity');
@@ -366,22 +438,22 @@
       tableBody.innerHTML = '';
 
       // Populate table rows with data
-      for(var i = 0; i < products.length; i++)
+      for(let i = 0; i < products.length; i++)
       {
         const row = document.createElement('tr');
         row.innerHTML = `
         <td><img src="${products[i].images?.[0] || 'default-thumbnail.jpg'}" alt="Thumbnail" style="width: 50px; height: auto;"></td>
         <td>${products[i].id}</td>
-        <td>${products[i].name}</td>
+        <td>${products[i].product_name}</td>
         <td>${products[i].description}</td>
         <td>${products[i].price}</td>
         <td>${products[i].stock}</td>
         <td>
-          <button class="btn btn-sm btn-primary">Edit</button>
-          <button class="btn btn-sm btn-danger">Delete</button>
+          <button class="btn btn-sm btn-primary" onclick="editProduct(${products[i].id})"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-sm btn-danger" onclick="deleteProduct(${products[i].id})"><i class="fas fa-trash"></i></button>
         </td>
       `;
-        tableBody.appendChild(row);
+        tableBody.appendChild(row); 
       }
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -411,6 +483,9 @@
   }
 
   newProductButton.addEventListener("click", async function () {
+    
+    editFormCard.style.display = 'none';
+
     if (productTableCard.style.display === "none") {
       productTableCard.style.display = "block";
       productFormCard.style.display = "none";
@@ -421,32 +496,136 @@
   });
 
   cancelButton.addEventListener("click", function (e) {
-  e.preventDefault();
-  productTableCard.style.display = "block";
-  productFormCard.style.display = "none";
-});
+    e.preventDefault();
+    productTableCard.style.display = "block";
+    productFormCard.style.display = "none";
+  });
 
   addProductButton.addEventListener("click", async function () {
-      const form = document.getElementById('product-form');
-      const formData = new FormData(form);
+    const form = document.getElementById('product-form');
+    const formData = new FormData(form);
 
-      try {
-        const response = await axios.post('https://mini-store-api-ud3r.onrender.com/product', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${token}`
-          },
-        });
+    try {
+      const response = await axios.post('https://mini-store-api-ud3r.onrender.com/product', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
+        },
+      });
 
-        alert('Product added successfully!');
-        productFormCard.style.display = "none";
-        productTableCard.style.display = "block";
-        form.reset();
-      } catch (error) {
-        console.error('Error adding product:', error.response?.data || error.message);
-        alert('Failed to add product. Please check the form and try again.');
-      }
+      alert('Product added successfully!');
+      productFormCard.style.display = "none";
+      productTableCard.style.display = "block";
+      form.reset();
+    } catch (error) {
+      console.error('Error adding product:', error.response?.data || error.message);
+      alert('Failed to add product. Please check the form and try again.');
+    }
+  });
+
+  async function deleteProduct(productId) {
+  try {
+    const response = await axios.delete(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
     });
+
+    if (response.status === 200) {
+      alert('Product deleted successfully!');
+      fetchProductList(); // Refresh the product list
+    } else {
+      alert('Failed to delete the product.');
+    }
+  } catch (error) {
+    console.error('Error deleting product:', error);
+  }
+}
+
+  function editProduct(productId) {
+
+    productTableCard.style.display = 'none';
+    productFormCard.style.display = 'none';
+    editFormCard.style.display = 'block';
+
+    // Fetch the product details to prefill the edit form
+    axios.get(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    }).then((response) => {
+      if (response.status === 200) {
+        const product = response.data.data;
+
+        document.getElementById('edit-product-name').value = product.product_name;
+        document.getElementById('edit-product-description').value = product.description;
+        document.getElementById('edit-product-category').value = product.category;
+        document.getElementById('edit-product-price').value = product.price;
+        document.getElementById('edit-product-quantity').value = product.stock;
+        document.getElementById('edit-is-hot').checked = product.is_hot;
+        document.getElementById('edit-is-feature').checked = product.is_feature;
+
+        document.getElementById('save-edit-button').onclick = () => saveEdit(productId);
+
+        const thumbnailsContainer = document.querySelector("#edit-image-thumbnails");
+        thumbnailsContainer.innerHTML = "";
+
+        if (product.images && product.images.length > 0) {
+          for (let i = 0; i < product.images.length; i++) {
+            const imageUrl = product.images[i];
+
+            const imgContainer = document.createElement("div");
+            imgContainer.classList.add("thumbnail-container");
+            imgContainer.style.display = "inline-block";
+            imgContainer.style.marginRight = "10px";
+            imgContainer.style.position = "relative";
+
+            const img = document.createElement("img");
+            img.src = imageUrl;
+            img.alt = "Product Image";
+            img.style.maxWidth = "100px";
+            img.style.maxHeight = "100px";
+            img.style.objectFit = "cover";
+            img.style.borderRadius = "5px";
+            img.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
+
+            imgContainer.appendChild(img);
+            thumbnailsContainer.appendChild(imgContainer);
+          }
+        }
+      }
+    }).catch((error) => {
+      console.error('Error fetching product details:', error);
+    });
+  }
+
+  async function saveEdit(productId) {
+    try {
+      const editForm = document.getElementById("edit-product-form");
+      const formData = new FormData(editForm);
+
+      formData.set("is_hot", document.getElementById("edit-is-hot").checked);
+      formData.set("is_feature", document.getElementById("edit-is-feature").checked);
+
+      const response = await axios.put(
+        `https://mini-store-api-ud3r.onrender.com/products/${productId}`,
+        formData,
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Product updated successfully!");
+        productTableCard.style.display = "block";
+        productFormCard.style.display = "none";
+        fetchProductList();
+      } else {
+        alert("Failed to update the product.");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
+  }
 });
   
   function enforceNumericInput(input, allowDecimal = false) {
