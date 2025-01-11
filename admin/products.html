@@ -450,8 +450,8 @@
         <td>${products[i].price}</td>
         <td>${products[i].qty}</td>
         <td>
-          <button class="btn btn-sm btn-primary" onclick="editProduct(${products[i].id})"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-sm btn-danger" onclick="deleteProduct(${products[i].id})"><i class="fas fa-trash"></i></button>
+          <button class="btn btn-sm btn-primary edit-btn" data-id="${products[i].id}"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-sm btn-danger delete-btn" data-id="${products[i].id}"><i class="fas fa-trash"></i></button>
         </td>
       `;
         tableBody.appendChild(row); 
@@ -460,6 +460,13 @@
       console.error('Error fetching products:', error);
     }
   }
+
+  document.querySelector('.product-table tbody').addEventListener('click', (event) => {
+    if (event.target.closest('.edit-btn')) {
+      const productId = event.target.closest('.edit-btn').getAttribute('data-id');
+      editProduct(productId);
+    }
+  });
 
   async function loadCategories() {
     try {
