@@ -417,255 +417,251 @@
 
     // Initially hide the form card
     productFormCard.style.display = "none";
-});
 
-  function loadSidebar() {
-    fetch('sidebar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('sidebar-container').innerHTML = data;
+    function loadSidebar() {
+      fetch('sidebar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('sidebar-container').innerHTML = data;
       });
-  }
+    }
   
-  async function fetchProductList() {
-    try {
-      const response = await axios.get('https://mini-store-api-ud3r.onrender.com/products', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      const products = response.data.data;
-      const tableBody = document.querySelector('.product-table tbody');
-      tableBody.innerHTML = '';
-
-      // Populate table rows with data
-      for(let i = 0; i < products.length; i++)
-      {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-        <td><img src="${products[i].images?.[0] || 'default-thumbnail.jpg'}" alt="Thumbnail" style="width: 50px; height: auto;"></td>
-        <td>${products[i].id}</td>
-        <td>${products[i].product_name}</td>
-        <td>${products[i].description}</td>
-        <td>${products[i].price}</td>
-        <td>${products[i].qty}</td>
-        <td>
-          <button class="btn btn-sm btn-primary" onclick="editProduct(${products[i].id})"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-sm btn-danger" onclick="deleteProduct(${products[i].id})"><i class="fas fa-trash"></i></button>
-        </td>
-      `;
-        tableBody.appendChild(row); 
-      }
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    }
-  }
-
-  document.querySelector('.product-table tbody').addEventListener('click', (event) => {
-    if (event.target.closest('.edit-btn')) {
-      const productId = event.target.closest('.edit-btn').getAttribute('data-id');
-      editProduct(productId);
-    }
-  });
-
-  async function loadCategories() {
-    try {
-      const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      const categories = response.data.data;
-      const createProductCategorySelect = document.getElementById('product-category');
-      const editProductCategorySelect = document.getElementById('edit-product-category');
-      for(var i = 0; i < categories.length; i++)
-      {
-        const option = document.createElement('option');
-        option.value = categories[i].id;
-        option.textContent = categories[i].category_name;
-        createProductCategorySelect.appendChild(option);
-        editProductCategorySelect.appendChild(option);
-      }
-    } catch (error) {
-      console.error('Failed to load categories:', error);
-    }
-  }
-
-  newProductButton.addEventListener("click", async function () {
-    
-    editFormCard.style.display = 'none';
-
-    if (productTableCard.style.display === "none") {
-      productTableCard.style.display = "block";
-      productFormCard.style.display = "none";
-    } else {
-      productTableCard.style.display = "none";
-      productFormCard.style.display = "block";
-    }
-  });
-
-  cancelButton.addEventListener("click", function (e) {
-    e.preventDefault();
-    productTableCard.style.display = "block";
-    productFormCard.style.display = "none";
-  });
-
-  addProductButton.addEventListener("click", async function () {
-    const form = document.getElementById('product-form');
-    const formData = new FormData(form);
-
-    try {
-      const response = await axios.post('https://mini-store-api-ud3r.onrender.com/product', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`
-        },
-      });
-
-      alert('Product added successfully!');
-      productFormCard.style.display = "none";
-      productTableCard.style.display = "block";
-      form.reset();
-    } catch (error) {
-      console.error('Error adding product:', error.response?.data || error.message);
-      alert('Failed to add product. Please check the form and try again.');
-    }
-  });
-
-  updateProductButton.addEventListener("click", async function (productId) {
-    try {
-      const editForm = document.getElementById("edit-product-form");
-      const formData = new FormData(editForm);
-
-      formData.set("is_hot", document.getElementById("edit-is-hot").checked);
-      formData.set("is_feature", document.getElementById("edit-is-feature").checked);
-
-      const response = await axios.put(
-        `https://mini-store-api-ud3r.onrender.com/products/${productId}`,
-        formData,
-        {
+    async function fetchProductList() {
+      try {
+        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/products', {
           headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+            'Authorization': `Bearer ${token}`
+          }
+        });
 
-      if (response.status === 200) {
-        alert("Product updated successfully!");
+        const products = response.data.data;
+        const tableBody = document.querySelector('.product-table tbody');
+        tableBody.innerHTML = '';
+
+        // Populate table rows with data
+        for(let i = 0; i < products.length; i++)
+        {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+          <td><img src="${products[i].images?.[0] || 'default-thumbnail.jpg'}" alt="Thumbnail" style="width: 50px; height: auto;"></td>
+          <td>${products[i].id}</td>
+          <td>${products[i].product_name}</td>
+          <td>${products[i].description}</td>
+          <td>${products[i].price}</td>
+          <td>${products[i].qty}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" onclick="editProduct(${products[i].id})"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-sm btn-danger" onclick="deleteProduct(${products[i].id})"><i class="fas fa-trash"></i></button>
+          </td>
+        `;
+          tableBody.appendChild(row); 
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    }
+
+    document.querySelector('.product-table tbody').addEventListener('click', (event) => {
+      if (event.target.closest('.edit-btn')) {
+        const productId = event.target.closest('.edit-btn').getAttribute('data-id');
+        editProduct(productId);
+      }
+    });
+
+    async function loadCategories() {
+      try {
+        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const categories = response.data.data;
+        const createProductCategorySelect = document.getElementById('product-category');
+        const editProductCategorySelect = document.getElementById('edit-product-category');
+        for(var i = 0; i < categories.length; i++)
+        {
+          const option = document.createElement('option');
+          option.value = categories[i].id;
+          option.textContent = categories[i].category_name;
+          createProductCategorySelect.appendChild(option);
+          editProductCategorySelect.appendChild(option);
+        }
+      } catch (error) {
+        console.error('Failed to load categories:', error);
+      }
+    }
+
+    newProductButton.addEventListener("click", async function () {
+      editFormCard.style.display = 'none';
+
+      if (productTableCard.style.display === "none") {
         productTableCard.style.display = "block";
         productFormCard.style.display = "none";
-        fetchProductList();
       } else {
-        alert("Failed to update the product.");
+        productTableCard.style.display = "none";
+        productFormCard.style.display = "block";
       }
-    } catch (error) {
-      console.error("Error updating product:", error);
+    });
+
+    cancelButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      productTableCard.style.display = "block";
+      productFormCard.style.display = "none";
+    });
+
+    addProductButton.addEventListener("click", async function () {
+      const form = document.getElementById('product-form');
+      const formData = new FormData(form);
+
+      try {
+        const response = await axios.post('https://mini-store-api-ud3r.onrender.com/product', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+          },
+        });
+
+        alert('Product added successfully!');
+        productFormCard.style.display = "none";
+        productTableCard.style.display = "block";
+        form.reset();
+      } catch (error) {
+        console.error('Error adding product:', error.response?.data || error.message);
+        alert('Failed to add product. Please check the form and try again.');
+      }
+    });
+
+    updateProductButton.addEventListener("click", async function (productId) {
+      try {
+        const editForm = document.getElementById("edit-product-form");
+        const formData = new FormData(editForm);
+
+        formData.set("is_hot", document.getElementById("edit-is-hot").checked);
+        formData.set("is_feature", document.getElementById("edit-is-feature").checked);
+
+        const response = await axios.put(
+          `https://mini-store-api-ud3r.onrender.com/products/${productId}`,
+          formData,
+          {
+            headers: {
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          alert("Product updated successfully!");
+          productTableCard.style.display = "block";
+          productFormCard.style.display = "none";
+          fetchProductList();
+        } else {
+          alert("Failed to update the product.");
+        }
+      } catch (error) {
+        console.error("Error updating product:", error);
+      }
+  });
+    
+    async function deleteProduct(productId) {
+      try {
+        const response = await axios.delete(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.status === 200) {
+          alert('Product deleted successfully!');
+          fetchProductList(); // Refresh the product list
+        } else {
+          alert('Failed to delete the product.');
+        }
+      } catch (error) {
+        console.error('Error deleting product:', error);
+      }
     }
-});
-  
-  async function deleteProduct(productId) {
-    try {
-      const response = await axios.delete(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
+
+    async function editProduct(productId) {
+      productTableCard.style.display = 'none';
+      productFormCard.style.display = 'none';
+      editFormCard.style.display = 'block';
+
+      // Fetch the product details to prefill the edit form
+      await axios.get(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
-      });
+      }).then((response) => {
+        if (response.status === 200) {
+          const product = response.data.data;
 
-      if (response.status === 200) {
-        alert('Product deleted successfully!');
-        fetchProductList(); // Refresh the product list
-      } else {
-        alert('Failed to delete the product.');
-      }
-    } catch (error) {
-      console.error('Error deleting product:', error);
-    }
-  }
+          document.getElementById('edit-product-name').value = product.product_name;
+          document.getElementById('edit-product-description').value = product.description;
+          document.getElementById('edit-product-category').value = product.category;
+          document.getElementById('edit-product-price').value = product.price;
+          document.getElementById('edit-product-quantity').value = product.qty;
+          document.getElementById('edit-is-hot').checked = product.is_hot;
+          document.getElementById('edit-is-feature').checked = product.is_feature;
 
-  async function editProduct(productId) {
+          const thumbnailsContainer = document.querySelector("#edit-image-thumbnails");
+          thumbnailsContainer.innerHTML = "";
 
-    productTableCard.style.display = 'none';
-    productFormCard.style.display = 'none';
-    editFormCard.style.display = 'block';
+          if (product.images && product.images.length > 0) {
+            for (let i = 0; i < product.images.length; i++) {
+              const imageUrl = product.images[i];
 
-    // Fetch the product details to prefill the edit form
-    await axios.get(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    }).then((response) => {
-      if (response.status === 200) {
-        const product = response.data.data;
+              const imgContainer = document.createElement("div");
+              imgContainer.classList.add("thumbnail-container");
+              imgContainer.style.display = "inline-block";
+              imgContainer.style.marginRight = "10px";
+              imgContainer.style.position = "relative";
 
-        document.getElementById('edit-product-name').value = product.product_name;
-        document.getElementById('edit-product-description').value = product.description;
-        document.getElementById('edit-product-category').value = product.category;
-        document.getElementById('edit-product-price').value = product.price;
-        document.getElementById('edit-product-quantity').value = product.qty;
-        document.getElementById('edit-is-hot').checked = product.is_hot;
-        document.getElementById('edit-is-feature').checked = product.is_feature;
+              const img = document.createElement("img");
+              img.src = imageUrl;
+              img.alt = "Product Image";
+              img.style.maxWidth = "100px";
+              img.style.maxHeight = "100px";
+              img.style.objectFit = "cover";
+              img.style.borderRadius = "5px";
+              img.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
 
-        const thumbnailsContainer = document.querySelector("#edit-image-thumbnails");
-        thumbnailsContainer.innerHTML = "";
-
-        if (product.images && product.images.length > 0) {
-          for (let i = 0; i < product.images.length; i++) {
-            const imageUrl = product.images[i];
-
-            const imgContainer = document.createElement("div");
-            imgContainer.classList.add("thumbnail-container");
-            imgContainer.style.display = "inline-block";
-            imgContainer.style.marginRight = "10px";
-            imgContainer.style.position = "relative";
-
-            const img = document.createElement("img");
-            img.src = imageUrl;
-            img.alt = "Product Image";
-            img.style.maxWidth = "100px";
-            img.style.maxHeight = "100px";
-            img.style.objectFit = "cover";
-            img.style.borderRadius = "5px";
-            img.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
-
-            imgContainer.appendChild(img);
-            thumbnailsContainer.appendChild(imgContainer);
+              imgContainer.appendChild(img);
+              thumbnailsContainer.appendChild(imgContainer);
+            }
           }
         }
-      }
-    }).catch((error) => {
-      console.error('Error fetching product details:', error);
-    });
-  }
+      }).catch((error) => {
+        console.error('Error fetching product details:', error);
+      });
+    }
 
-  function enforceNumericInput(input, allowDecimal = false) {
-    input.addEventListener('input', function () {
-      const regex = allowDecimal ? /[^0-9.]/g : /[^0-9]/g;
-      this.value = this.value.replace(regex, ''); // Remove invalid characters
+    function enforceNumericInput(input, allowDecimal = false) {
+      input.addEventListener('input', function () {
+        const regex = allowDecimal ? /[^0-9.]/g : /[^0-9]/g;
+        this.value = this.value.replace(regex, ''); // Remove invalid characters
 
-      // Allow only one decimal point
-      if (allowDecimal && this.value.split('.').length > 2) {
-        const parts = this.value.split('.');
-        this.value = parts[0] + '.' + parts.slice(1).join(''); // Keep the first decimal
-      }
-    });
+        // Allow only one decimal point
+        if (allowDecimal && this.value.split('.').length > 2) {
+          const parts = this.value.split('.');
+          this.value = parts[0] + '.' + parts.slice(1).join(''); // Keep the first decimal
+        }
+      });
 
-    input.addEventListener('blur', function () {
-      // Ensure the value is valid on blur
-      if (allowDecimal) {
-        if (this.value === '.' || this.value === '') {
-          this.value = '0.00'; // Reset invalid input
+      input.addEventListener('blur', function () {
+        // Ensure the value is valid on blur
+        if (allowDecimal) {
+          if (this.value === '.' || this.value === '') {
+            this.value = '0.00'; // Reset invalid input
+          } else {
+            this.value = parseFloat(this.value).toFixed(2); // Format to two decimals
+          }
         } else {
-          this.value = parseFloat(this.value).toFixed(2); // Format to two decimals
+          if (this.value === '' || isNaN(parseInt(this.value, 10))) {
+            this.value = '0'; // Reset invalid input
+          }
         }
-      } else {
-        if (this.value === '' || isNaN(parseInt(this.value, 10))) {
-          this.value = '0'; // Reset invalid input
-        }
-      }
-    });
-  }
+      });
+    }
 
-  // JavaScript to show image thumbnails after upload
-  document.getElementById('product-images').addEventListener('change', function(event) {
+    document.getElementById('product-images').addEventListener('change', function(event) {
       const files = event.target.files;
       const imageThumbnailsContainer = document.getElementById('image-thumbnails');
       imageThumbnailsContainer.innerHTML = ''; // Clear existing thumbnails
@@ -685,5 +681,6 @@
         reader.readAsDataURL(file);
       });
     });
+});
 </script>
 </html>
