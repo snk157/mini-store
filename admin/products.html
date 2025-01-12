@@ -213,7 +213,7 @@
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h4 class="card-title">Add New Product</h4>
-                  <button class="btn btn-secondary" id="cancel-btn">Cancel</button>
+                  <button class="btn btn-secondary" id="add-cancel-btn">Cancel</button>
                 </div>
                 <form id="product-form">
                   <!-- Product Name -->
@@ -395,7 +395,8 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const newProductButton = document.querySelector(".btn-primary")
-    const cancelButton = document.querySelector("#cancel-btn");
+    const addCancelButton = document.querySelector("#add-cancel-btn");
+    const editCancelButton = document.querySelector("#edit-cancel-btn");
 
     const productFormCard = document.querySelector("#product-form").closest(".card");
     const productTableCard = document.querySelector(".product-table").closest(".card");
@@ -511,10 +512,16 @@
       }
     });
 
-    cancelButton.addEventListener("click", function (e) {
+    addCancelButton.addEventListener("click", function (e) {
       e.preventDefault();
       productTableCard.style.display = "block";
       productFormCard.style.display = "none";
+    });
+
+    editCancelButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      productTableCard.style.display = "block";
+      editFormCard.style.display = "none";
     });
 
     addProductButton.addEventListener("click", async function () {
@@ -602,9 +609,7 @@
 
           document.getElementById('edit-product-name').value = product.product_name;
           document.getElementById('edit-product-description').value = product.description;
-
           document.getElementById('edit-product-category').options[product.category-1].setAttribute('selected', 'selected');
-
           document.getElementById('edit-product-price').value = product.price;
           document.getElementById('edit-product-quantity').value = product.qty;
           document.getElementById('edit-is-hot').checked = product.is_hot;
