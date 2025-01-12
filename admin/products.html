@@ -202,7 +202,7 @@
                   </table>
                 </div>
               </div>
-              <!-- <div id="product-pagination" class="pagination"></div> -->
+              <div id="product-pagination" class="pagination"></div>
             </div>
           </div>
         </div>
@@ -414,11 +414,12 @@
     enforceNumericInput(quantityInput, false);  // Only integers
 
     loadSidebar();
-    fetchProductList();
+    fetchProducts();
     loadCategories();
 
     // Initially hide the form card
     productFormCard.style.display = "none";
+    editFormCard.style.display = "none";
 
     function loadSidebar() {
       fetch('sidebar.html')
