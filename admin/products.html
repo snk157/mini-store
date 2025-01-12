@@ -402,6 +402,7 @@
     const editFormCard = document.querySelector("#edit-product-form").closest(".card");
 
     const addProductButton = document.getElementById("add-product-button")
+    const updateProductButton = document.getElementById("save-edit-button")
     const priceInput = document.getElementById('product-price');
     const quantityInput = document.getElementById('product-quantity');
     const token = localStorage.getItem("token");
@@ -416,16 +417,16 @@
 
     // Initially hide the form card
     productFormCard.style.display = "none";
+});
 
-    function loadSidebar() {
-    // Fetch and insert header content
+  function loadSidebar() {
     fetch('sidebar.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('sidebar-container').innerHTML = data;
       });
   }
-
+  
   async function fetchProductList() {
     try {
       const response = await axios.get('https://mini-store-api-ud3r.onrender.com/products', {
@@ -450,8 +451,8 @@
         <td>${products[i].price}</td>
         <td>${products[i].qty}</td>
         <td>
-          <button class="btn btn-sm btn-primary edit-btn" data-id="${products[i].id}"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-sm btn-danger delete-btn" data-id="${products[i].id}"><i class="fas fa-trash"></i></button>
+          <button class="btn btn-sm btn-primary" onclick="editProduct(${products[i].id})"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-sm btn-danger" onclick="deleteProduct(${products[i].id})"><i class="fas fa-trash"></i></button>
         </td>
       `;
         tableBody.appendChild(row); 
@@ -533,31 +534,63 @@
     }
   });
 
-  async function deleteProduct(productId) {
-  try {
-    const response = await axios.delete(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
+  updateProductButton.addEventListener("click", async function (productId) {
+    try {
+      const editForm = document.getElementById("edit-product-form");
+      const formData = new FormData(editForm);
 
-    if (response.status === 200) {
-      alert('Product deleted successfully!');
-      fetchProductList(); // Refresh the product list
-    } else {
-      alert('Failed to delete the product.');
+      formData.set("is_hot", document.getElementById("edit-is-hot").checked);
+      formData.set("is_feature", document.getElementById("edit-is-feature").checked);
+
+      const response = await axios.put(
+        `https://mini-store-api-ud3r.onrender.com/products/${productId}`,
+        formData,
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Product updated successfully!");
+        productTableCard.style.display = "block";
+        productFormCard.style.display = "none";
+        fetchProductList();
+      } else {
+        alert("Failed to update the product.");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
     }
-  } catch (error) {
-    console.error('Error deleting product:', error);
-  }
-}
+});
+  
+  async function deleteProduct(productId) {
+    try {
+      const response = await axios.delete(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
 
-  function editProduct(productId) {
+      if (response.status === 200) {
+        alert('Product deleted successfully!');
+        fetchProductList(); // Refresh the product list
+      } else {
+        alert('Failed to delete the product.');
+      }
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  }
+
+  async function editProduct(productId) {
 
     productTableCard.style.display = 'none';
     productFormCard.style.display = 'none';
     editFormCard.style.display = 'block';
 
     // Fetch the product details to prefill the edit form
-    axios.get(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
+    await axios.get(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     }).then((response) => {
       if (response.status === 200) {
@@ -570,8 +603,6 @@
         document.getElementById('edit-product-quantity').value = product.qty;
         document.getElementById('edit-is-hot').checked = product.is_hot;
         document.getElementById('edit-is-feature').checked = product.is_feature;
-
-        document.getElementById('save-edit-button').onclick = () => saveEdit(productId);
 
         const thumbnailsContainer = document.querySelector("#edit-image-thumbnails");
         thumbnailsContainer.innerHTML = "";
@@ -605,39 +636,6 @@
     });
   }
 
-  async function saveEdit(productId) {
-    try {
-      const editForm = document.getElementById("edit-product-form");
-      const formData = new FormData(editForm);
-
-      formData.set("is_hot", document.getElementById("edit-is-hot").checked);
-      formData.set("is_feature", document.getElementById("edit-is-feature").checked);
-
-      const response = await axios.put(
-        `https://mini-store-api-ud3r.onrender.com/products/${productId}`,
-        formData,
-        {
-          headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        alert("Product updated successfully!");
-        productTableCard.style.display = "block";
-        productFormCard.style.display = "none";
-        fetchProductList();
-      } else {
-        alert("Failed to update the product.");
-      }
-    } catch (error) {
-      console.error("Error updating product:", error);
-    }
-  }
-});
-  
   function enforceNumericInput(input, allowDecimal = false) {
     input.addEventListener('input', function () {
       const regex = allowDecimal ? /[^0-9.]/g : /[^0-9]/g;
