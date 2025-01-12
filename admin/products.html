@@ -470,16 +470,46 @@
 
     function generatePagination(total, limit, currentPage) {
       const totalPages = Math.ceil(total / limit);
-      const paginationDiv = document.getElementById('product-pagination');
-      paginationDiv.innerHTML = '';
+      const paginationNav = document.getElementById('product-pagination');
+      paginationNav.innerHTML = '';
 
+      const ul = document.createElement('ul');
+      ul.className = 'pagination justify-content-center';
+
+      // Previous Button
+      const prevButton = document.createElement('li');
+      prevButton.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+      prevButton.innerHTML = `
+        <a class="page-link" href="#" aria-label="Previous" tabindex="-1">
+          <span aria-hidden="true">&laquo;</span>
+        </a>`;
+      prevButton.onclick = () => {
+        if (currentPage > 1) fetchProducts(currentPage - 1);
+      };
+      ul.appendChild(prevButton);
+
+      // Page Number Buttons
       for (let i = 1; i <= totalPages; i++) {
-        const button = document.createElement('button');
-        button.textContent = i;
-        button.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
-        button.onclick = () => fetchProducts(i);
-        paginationDiv.appendChild(button);
+        const pageItem = document.createElement('li');
+        pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+        pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        pageItem.onclick = () => fetchProducts(i);
+        ul.appendChild(pageItem);
       }
+
+      // Next Button
+      const nextButton = document.createElement('li');
+      nextButton.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+      nextButton.innerHTML = `
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>`;
+      nextButton.onclick = () => {
+        if (currentPage < totalPages) fetchProducts(currentPage + 1);
+      };
+      ul.appendChild(nextButton);
+
+      paginationNav.appendChild(ul);
     }
 
     document.querySelector('.product-table tbody').addEventListener('click', (event) => {
