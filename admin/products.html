@@ -439,7 +439,7 @@
 
         const { data, total } = response.data;
         displayProducts(data);
-        generatePagination(total, 15, page);
+        generatePagination(total, 5, page);
 
       } catch (error) {
         console.error('Error fetching products:', error);
