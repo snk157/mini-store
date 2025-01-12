@@ -606,7 +606,7 @@
 
           for (let i = 0; i < document.getElementById('edit-product-category').options.length; i++) {
             if (document.getElementById('edit-product-category').options[i].value == product.category) {
-              document.getElementById('edit-product-category').options[i].setAttribute('selected', 'selected');
+              document.getElementById('edit-product-category').options[i].selected = true
               break;
             }
           }
