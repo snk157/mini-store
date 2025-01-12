@@ -644,6 +644,21 @@
       }
   });
     
+    document.getElementById('product-search').addEventListener('input', function (event) {
+    const searchTerm = event.target.value.toLowerCase();
+    const tableRows = document.querySelectorAll('.product-table tbody tr');
+
+    tableRows.forEach(row => {
+      const productName = row.cells[2].textContent.toLowerCase();
+      const description = row.cells[3].textContent.toLowerCase();
+
+      if (productName.includes(searchTerm) || description.includes(searchTerm))
+        row.style.display = '';
+      else
+        row.style.display = 'none';
+    });
+  });
+
     async function deleteProduct(productId) {
       try {
         const response = await axios.delete(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
