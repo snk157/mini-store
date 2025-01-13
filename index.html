@@ -19,15 +19,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- script ================================================== -->
     <script>
+      async function fetchProducts() {
+        try {
+          // Fetch feature products
+          const featureResponse = await fetch('https://mini-store-api-ud3r.onrender.com/products?isFeature=true');
+          const featureProducts = await featureResponse.json();
+          const featureContainer = document.getElementById('feature-product');
+          featureProducts.forEach(product => {
+            const productElement = createProductElement(product);
+            featureContainer.appendChild(productElement);
+          });
+    
+          // Fetch best-selling products
+          const bestSellingResponse = await fetch('https://mini-store-api-ud3r.onrender.com/products?isHot=true');
+          const bestSellingProducts = await bestSellingResponse.json();
+          const bestSellingContainer = document.getElementById('best-selling');
+          bestSellingProducts.forEach(product => {
+            const productElement = createProductElement(product);
+            bestSellingContainer.appendChild(productElement);
+          });
+        } catch (error) {
+          console.error('Error fetching products:', error);
+        }
+      }
+    
+      function createProductElement(product) {
+        const div = document.createElement('div');
+        div.className = 'product-item';
+        div.innerHTML = `
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+          <p>Price: $${product.price}</p>
+        `;
+        return div;
+      }
+    
       function loadHeaderFooter() {
-        // Fetch and insert header content
         fetch('header.html')
           .then(response => response.text())
           .then(data => {
             document.getElementById('header-container').innerHTML = data;
           });
     
-        // Fetch and insert footer content
         fetch('footer.html')
           .then(response => response.text())
           .then(data => {
@@ -35,69 +68,11 @@
           });
       }
     
-      function fetchProducts() {
-        const apiEndpoint = 'https://mini-store-api-ud3r.onrender.com/products';
-    
-        const createProductCard = (product) => `
-          <div class="swiper-slide">
-            <div class="product-card position-relative">
-              <div class="image-holder">
-                <img src="${product.image}" alt="${product.name}" class="img-fluid">
-              </div>
-              <div class="cart-concern position-absolute">
-                <div class="cart-button d-flex">
-                  <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                </div>
-              </div>
-              <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                <h3 class="card-title text-uppercase">
-                  <a href="#">${product.name}</a>
-                </h3>
-                <span class="item-price text-primary">$${product.price}</span>
-              </div>
-            </div>
-          </div>
-        `;
-    
-        const fetchProductsByFilter = async (queryParam) => {
-          try {
-            const response = await axios.get(`${apiEndpoint}?${queryParam}`);
-            return response.data;
-          } catch (error) {
-            console.error('Error fetching products:', error);
-            return [];
-          }
-        };
-    
-        const populateSwiper = async (swiperContainer, queryParam) => {
-          const products = await fetchProductsByFilter(queryParam);
-          const swiperWrapper = document.querySelector(`${swiperContainer} .swiper-wrapper`);
-          if (swiperWrapper) {
-            swiperWrapper.innerHTML = products.map(createProductCard).join('');
-            new Swiper(swiperContainer, {
-              slidesPerView: 4,
-              spaceBetween: 20,
-              pagination: {
-                el: `${swiperContainer} .swiper-pagination`,
-                clickable: true,
-              },
-              navigation: {
-                nextEl: `${swiperContainer} .swiper-button-next`,
-                prevEl: `${swiperContainer} .swiper-button-prev`,
-              },
-            });
-          }
-        };
-    
-        populateSwiper('#feature-product', 'isfeature=true'); // Fetch featured products
-        populateSwiper('#best-selling', 'ishot=true'); // Fetch best-selling products
-      }
-    
       window.onload = () => {
         loadHeaderFooter();
         fetchProducts();
       };
-    </script>
+    </script>    
     <!-- script ================================================== -->
     <script src="js/modernizr.js"></script>
   </head>
