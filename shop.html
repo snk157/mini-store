@@ -18,6 +18,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- script ================================================== -->
     <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        loadCategories();
+      });
+
+      async function loadCategories() {
+        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories');
+        const categoriesList = document.getElementById('categories-list');
+
+        const categories = response.data.data;
+        categoriesList.innerHTML = '';
+
+        const allCategory = document.createElement('li');
+        allCategory.classList.add('cat-item');
+        allCategory.innerHTML = `<a href="/collections/categories">All</a>`;
+        categoriesList.appendChild(allCategory);
+
+        categories.forEach((categoryName, index) => {
+          const categoryItem = document.createElement('li');
+          categoryItem.classList.add('cat-item');
+          categoryItem.innerHTML = `<a href="#" onclick="fetchProducts(${index + 1})">${categoryName}</a>`;
+          categoriesList.appendChild(categoryItem);
+        });
+      }
+      
       function loadHeaderFooter()
       {
         // Fetch and insert header content
@@ -81,21 +105,7 @@
             <div class="widget-product-categories pt-5">
               <h5 class="widget-title text-decoration-underline text-uppercase">Categories</h5>
               <ul class="product-categories sidebar-list list-unstyled">
-                <li class="cat-item">
-                  <a href="/collections/categories">All</a>
-                </li>
-                <li class="cat-item">
-                  <a href="">Phones</a>
-                </li>
-                <li class="cat-item">
-                  <a href="">Accessories</a>
-                </li>
-                <li class="cat-item">
-                  <a href="">Tablets</a>
-                </li>
-                <li class="cat-item">
-                  <a href="">Watches</a>
-                </li>
+                <!-- Categories will be dynamically loaded here -->
               </ul>
             </div>
         </aside>
