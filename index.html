@@ -24,7 +24,7 @@
           // Fetch feature products
           const featureResponse = await axios.get('https://mini-store-api-ud3r.onrender.com/products?isFeature=true');
           const featureProducts = featureResponse.data.data;
-          const featureContainer = document.querySelector('#feature-products .swiper-wrapper');
+          const featureContainer = document.querySelector('#feature-product .swiper-wrapper');
           featureProducts.forEach(product => {
             const productElement = createProductElement(product);
             featureContainer.appendChild(productElement);
@@ -68,7 +68,6 @@
           </div>
         `;
         
-        alert(swiperSlide.innerHTML);
         return swiperSlide;
       }
     
