@@ -722,6 +722,12 @@ h3.cart-title {
 
 /* 4. Product
 /*----------------------------------------------*/
+.product-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
 .product-store .product-card .cart-concern {
     bottom: 75px;
     width: 100%;
@@ -947,12 +953,6 @@ figure.instagram-item img.insta-image {
 /* 10. Single Product Page
 /*----------------------------------------------*/
 /*------------ Product Info -----------*/
-.product-image {
-  width: 200px; /* Set fixed width */
-  height: 200px; /* Set fixed height */
-  object-fit: cover; /* Ensures the image fills the space without distortion */
-}
-
 .product-info .rating svg.star-fill {
     fill: var(--dark-color);
 }
