@@ -947,6 +947,12 @@ figure.instagram-item img.insta-image {
 /* 10. Single Product Page
 /*----------------------------------------------*/
 /*------------ Product Info -----------*/
+.product-image {
+  width: 200px; /* Set fixed width */
+  height: 200px; /* Set fixed height */
+  object-fit: cover; /* Ensures the image fills the space without distortion */
+}
+
 .product-info .rating svg.star-fill {
     fill: var(--dark-color);
 }
