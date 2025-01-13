@@ -54,7 +54,7 @@
             </div>
             <div class="cart-concern position-absolute">
               <div class="cart-button d-flex">
-                <a href="#" class="btn btn-medium btn-black">Add to Cart
+                <a href="#" class="btn btn-medium btn-black" onclick="addToCart('product-id')">Add to Cart
                   <svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg>
                 </a>
               </div>
@@ -85,6 +85,29 @@
           });
       }
     
+      function addToCart(productId) {
+        const userToken = localStorage.getItem('userToken');
+        if (!userToken || userToken == null || userToken == "")
+        {
+          alert('Please log in to add items to your cart.');
+          window.location.href = `${window.location.origin}/login.html`;
+          return;
+        }
+
+        axios.post("https://mini-store-api-ud3r.onrender.com/products", { productId }, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        .then(response => {
+          window.location.href = `${window.location.origin}/cart.html`;
+        })
+        .catch(error => {
+          console.error('Error adding product to cart:', error);
+          alert('Failed to add product to cart. Please try again.');
+        });
+      }
+
       window.onload = () => {
         loadHeaderFooter();
         fetchProducts();
