@@ -722,6 +722,19 @@ h3.cart-title {
 
 /* 4. Product
 /*----------------------------------------------*/
+.image-holder {
+  width: 310px; /* Fixed width */
+  height: 418px; /* Fixed height */
+  overflow: hidden; /* Prevents image overflow */
+  margin: 0 auto; /* Centers the image horizontally if needed */
+}
+
+.product-image {
+  width: 100%; /* Ensure the image fits the container's width */
+  height: 100%; /* Ensure the image fits the container's height */
+  object-fit: cover; /* Maintain aspect ratio while filling the container */
+}
+
 .product-store .product-card .cart-concern {
     bottom: 75px;
     width: 100%;
