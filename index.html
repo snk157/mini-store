@@ -24,7 +24,7 @@
           // Fetch feature products
           const featureResponse = await axios.get('https://mini-store-api-ud3r.onrender.com/products?isFeature=true');
           const featureProducts = featureResponse.data.data;
-          const featureContainer = document.getElementById('feature-product');
+          const featureContainer = document.querySelector('#feature-products .swiper-wrapper');
           featureProducts.forEach(product => {
             const productElement = createProductElement(product);
             featureContainer.appendChild(productElement);
@@ -33,7 +33,7 @@
           // Fetch best-selling products
           const bestSellingResponse = await axios.get('https://mini-store-api-ud3r.onrender.com/products?isHot=true');
           const bestSellingProducts = bestSellingResponse.data.data;
-          const bestSellingContainer = document.getElementById('best-selling');
+          const bestSellingContainer = document.querySelector('#best-selling .swiper-wrapper');
           bestSellingProducts.forEach(product => {
             const productElement = createProductElement(product);
             bestSellingContainer.appendChild(productElement);
