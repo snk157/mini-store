@@ -23,7 +23,7 @@
         try {
           // Fetch feature products
           const featureResponse = await fetch('https://mini-store-api-ud3r.onrender.com/products?isFeature=true');
-          const featureProducts = await featureResponse.json();
+          const featureProducts = await featureResponse.data.data;
           const featureContainer = document.getElementById('feature-product');
           featureProducts.forEach(product => {
             const productElement = createProductElement(product);
@@ -32,7 +32,7 @@
     
           // Fetch best-selling products
           const bestSellingResponse = await fetch('https://mini-store-api-ud3r.onrender.com/products?isHot=true');
-          const bestSellingProducts = await bestSellingResponse.json();
+          const bestSellingProducts = await bestSellingResponse.data.data;
           const bestSellingContainer = document.getElementById('best-selling');
           bestSellingProducts.forEach(product => {
             const productElement = createProductElement(product);
