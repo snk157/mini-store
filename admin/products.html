@@ -462,7 +462,7 @@
       try {
         const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/products?page=${page}`);
 
-        const { data, total } = response.data;
+        const { data, total, categoryId=null} = response.data;
         displayProducts(data);
         generatePagination(total, 15, page);
 
@@ -553,11 +553,7 @@
 
     async function loadCategories() {
       try {
-        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories');
 
         const categories = response.data.data;
         const createProductCategorySelect = document.getElementById('product-category');
