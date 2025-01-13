@@ -460,11 +460,7 @@
   
     async function fetchProducts(page = 1) {
       try {
-        const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/products?page=${page}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+        const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/products?page=${page}`);
 
         const { data, total } = response.data;
         displayProducts(data);
