@@ -22,17 +22,18 @@
       async function fetchProducts() {
         try {
 
-          const swiper = new Swiper('.swiper', {
-            slidesPerView: 1,  // Adjust as per your layout
-            spaceBetween: 10,   // Adjust space between slides
+          new Swiper('.product-swiper', {
+            slidesPerView: 'auto',
+            spaceBetween: 20,
+            loop: true,
             pagination: {
               el: '.swiper-pagination',
-              clickable: true
+              clickable: true,
             },
             navigation: {
               nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev'
-            }
+              prevEl: '.swiper-button-prev',
+            },
           });
 
           // Fetch feature products
@@ -58,37 +59,32 @@
       }
     
       function createProductElement(product) {
-        const div = document.createElement('div');
-        div.className = 'swiper-slide';
-        
-        // Ensure description is not undefined or null
-        const productDescription = product.description || 'No description available.';
-        
-        // Create the product card with image, description, and price
-        div.innerHTML = `
+        const swiperSlide = document.createElement('div');
+        swiperSlide.classList.add('swiper-slide');
+
+        const productCard = `
           <div class="product-card position-relative">
             <div class="image-holder">
-              <img src="${product.image || 'default-image.jpg'}" alt="${product.product_name}" class="img-fluid">
+              <img src="${product.image}" alt="${product.name}" class="img-fluid">
             </div>
             <div class="cart-concern position-absolute">
               <div class="cart-button d-flex">
                 <a href="#" class="btn btn-medium btn-black">Add to Cart
-                  <svg class="cart-outline">
-                    <use xlink:href="#cart-outline"></use>
-                  </svg>
+                  <svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg>
                 </a>
               </div>
             </div>
             <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
               <h3 class="card-title text-uppercase">
-                <a href="#">${product.product_name}</a>
+                <a href="#">${product.name}</a>
               </h3>
               <span class="item-price text-primary">$${product.price}</span>
             </div>
           </div>
         `;
-        
-        return div;
+
+        swiperSlide.innerHTML = productCard;
+        return swiperSlide;
       }
     
       function loadHeaderFooter() {
