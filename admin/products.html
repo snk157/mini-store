@@ -123,7 +123,7 @@
                     text-muted
                     waves-effect waves-dark
                   " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="assets/images/users/1.jpg" alt="user" class="profile-pic me-2" />Markarn Doe
+                <img src="assets/images/users/1.jpg" alt="user" class="profile-pic me-2" /><p id="username"></p>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
             </li>
@@ -410,6 +410,19 @@
   <script src="js/custom.js"></script>
 </body>
 <script>
+  if (token)
+  {
+    var decoded_token = jwt_decode(token);
+    document.getElementById("username").innerHTML = decoded_token.username;
+
+    if (decoded_token.exp < Math.floor(Date.now()/1000))
+    {
+      window.stop();
+      localStorage.removeItem("token");
+      window.location.href = `${window.location.origin}/admin.html`;
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     const newProductButton = document.querySelector(".btn-primary")
     const addCancelButton = document.querySelector("#add-cancel-btn");
@@ -455,7 +468,7 @@
 
         const { data, total } = response.data;
         displayProducts(data);
-        generatePagination(total, 5, page);
+        generatePagination(total, 15, page);
 
       } catch (error) {
         console.error('Error fetching products:', error);
