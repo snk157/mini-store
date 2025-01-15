@@ -57,8 +57,80 @@
         }
       }
 
-      function generatePagination(total, limit, currentPage) {
-        
+      function displayProducts(products) {
+        const productContainer = document.querySelector('.product-content');
+        productContainer.innerHTML = ''; 
+
+        products.forEach(product => {
+          const productCard = `
+            <div class="col-lg-4 col-md-6">
+              <div class="product-card position-relative pe-3 pb-3">
+                <div class="image-holder">
+                  <img src="${product.image}" alt="${product.name}" class="img-fluid">
+                </div>
+                <div class="cart-concern position-absolute">
+                  <div class="cart-button d-flex">
+                    <div class="btn-left">
+                      <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
+                      <svg class="cart-outline position-absolute">
+                        <use xlink:href="#cart-outline"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-detail d-flex justify-content-between pt-3 pb-3">
+                  <h3 class="card-title text-uppercase">
+                    <a href="#">${product.name}</a>
+                  </h3>
+                  <span class="item-price text-primary">$${product.price}</span>
+                </div>
+              </div>
+            </div>
+          `;
+          productContainer.innerHTML += productCard;
+        });
+      }
+
+      function generatePagination(totalItems, itemsPerPage, currentPage) {
+        const paginationContainer = document.querySelector('.pagination.loop-pagination');
+        paginationContainer.innerHTML = '';
+
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+        // Previous button
+        if (currentPage > 1) {
+          paginationContainer.innerHTML += `
+            <a href="#" onclick="fetchProducts(${currentPage - 1})">
+              <svg class="chevron-left pe-3">
+                <use xlink:href="#chevron-left"></use>
+              </svg>
+            </a>
+          `;
+        }
+
+        // Page numbers
+        for (let page = 1; page <= totalPages; page++) {
+          paginationContainer.innerHTML += `
+            <a 
+              class="page-numbers ${page === currentPage ? 'current pe-3' : 'pe-3'}" 
+              href="#" 
+              onclick="fetchProducts(${page})"
+              aria-current="${page === currentPage ? 'page' : ''}">
+              ${page}
+            </a>
+          `;
+        }
+
+        // Next button
+        if (currentPage < totalPages) {
+          paginationContainer.innerHTML += `
+            <a href="#" onclick="fetchProducts(${currentPage + 1})">
+              <svg class="chevron-right ps-3">
+                <use xlink:href="#chevron-right"></use>
+              </svg>
+            </a>
+          `;
+        }
       }
 
       function loadHeaderFooter()
@@ -140,239 +212,15 @@
                 <option value="">Name (Z - A)</option>
                 <option value="">Price (Low-High)</option>
                 <option value="">Price (High-Low)</option>
-                <option value="">Rating (Highest)</option>
-                <option value="">Rating (Lowest)</option>
-                <option value="">Model (A - Z)</option>
-                <option value="">Model (Z - A)</option>   
               </select>
             </div>
           </div>
           <div class="product-content product-store d-flex justify-content-between flex-wrap">
-            <div class="col-lg-4 col-md-6">
-              <div class="product-card position-relative pe-3 pb-3">
-                <div class="image-holder">
-                  <img src="images/product-item1.jpg" alt="product-item" class="img-fluid">
-                </div>
-                <div class="cart-concern position-absolute">
-                  <div class="cart-button d-flex">
-                    <div class="btn-left">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
-                      <svg class="cart-outline position-absolute">
-                        <use xlink:href="#cart-outline"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-detail d-flex justify-content-between pt-3 pb-3">
-                  <h3 class="card-title text-uppercase">
-                    <a href="#">Iphone 10</a>
-                  </h3>
-                  <span class="item-price text-primary">$980</span>
-                </div>
-              </div>                  
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="product-card position-relative pe-3 pb-3">
-                <div class="image-holder">
-                  <img src="images/product-item2.jpg" alt="product-item" class="img-fluid">
-                </div>
-                <div class="cart-concern position-absolute">
-                  <div class="cart-button d-flex">
-                    <div class="btn-left">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
-                      <svg class="cart-outline position-absolute">
-                        <use xlink:href="#cart-outline"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-detail d-flex justify-content-between pt-3">
-                  <h3 class="card-title text-uppercase">
-                    <a href="#">Iphone 11</a>
-                  </h3>
-                  <span class="item-price text-primary">$110</span>
-                </div>
-              </div>                  
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="product-card position-relative pe-3 pb-3">
-                <div class="image-holder">
-                  <img src="images/product-item3.jpg" alt="product-item" class="img-fluid">
-                </div>
-                <div class="cart-concern position-absolute">
-                  <div class="cart-button d-flex">
-                    <div class="btn-left">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
-                      <svg class="cart-outline position-absolute">
-                        <use xlink:href="#cart-outline"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-detail d-flex justify-content-between pt-3">
-                  <h3 class="card-title text-uppercase">
-                    <a href="#">Iphone 8</a>
-                  </h3>
-                  <span class="item-price text-primary">$780</span>
-                </div>
-              </div>                  
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="product-card position-relative pe-3 pb-3">
-                <div class="image-holder">
-                  <img src="images/product-item4.jpg" alt="product-item" class="img-fluid">
-                </div>
-                <div class="cart-concern position-absolute">
-                  <div class="cart-button d-flex">
-                    <div class="btn-left">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
-                      <svg class="cart-outline position-absolute">
-                        <use xlink:href="#cart-outline"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-detail d-flex justify-content-between pt-3">
-                  <h3 class="card-title text-uppercase">
-                    <a href="#">Iphone 13</a>
-                  </h3>
-                  <span class="item-price text-primary">$1500</span>
-                </div>
-              </div>                  
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="product-card position-relative pe-3 pb-3">
-                <div class="image-holder">
-                  <img src="images/product-item6.jpg" alt="product-item" class="img-fluid">
-                </div>
-                <div class="cart-concern position-absolute">
-                  <div class="cart-button d-flex">
-                    <div class="btn-left">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
-                      <svg class="cart-outline position-absolute">
-                        <use xlink:href="#cart-outline"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-detail d-flex justify-content-between pt-3">
-                  <h3 class="card-title text-uppercase">
-                    <a href="#">Pink watch</a>
-                  </h3>
-                  <span class="item-price text-primary">$870</span>
-                </div>
-              </div>                  
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="product-card position-relative pe-3 pb-3">
-                <div class="image-holder">
-                  <img src="images/product-item7.jpg" alt="product-item" class="img-fluid">
-                </div>
-                <div class="cart-concern position-absolute">
-                  <div class="cart-button d-flex">
-                    <div class="btn-left">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
-                      <svg class="cart-outline position-absolute">
-                        <use xlink:href="#cart-outline"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-detail d-flex justify-content-between pt-3">
-                  <h3 class="card-title text-uppercase">
-                    <a href="#">Heavy watch</a>
-                  </h3>
-                  <span class="item-price text-primary">$680</span>
-                </div>
-              </div>                  
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="product-card position-relative pe-3 pb-3">
-                <div class="image-holder">
-                  <img src="images/product-item8.jpg" alt="product-item" class="img-fluid">
-                </div>
-                <div class="cart-concern position-absolute">
-                  <div class="cart-button d-flex">
-                    <div class="btn-left">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
-                      <svg class="cart-outline position-absolute">
-                        <use xlink:href="#cart-outline"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-detail d-flex justify-content-between pt-3">
-                  <h3 class="card-title text-uppercase">
-                    <a href="#">spotted watch</a>
-                  </h3>
-                  <span class="item-price text-primary">$750</span>
-                </div>
-              </div>                  
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="product-card position-relative pe-3 pb-3">
-                <div class="image-holder">
-                  <img src="images/product-item10.jpg" alt="product-item" class="img-fluid">
-                </div>
-                <div class="cart-concern position-absolute">
-                  <div class="cart-button d-flex">
-                    <div class="btn-left">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
-                      <svg class="cart-outline position-absolute">
-                        <use xlink:href="#cart-outline"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-detail d-flex justify-content-between pt-3">
-                  <h3 class="card-title text-uppercase">
-                    <a href="#">Black Watch</a>
-                  </h3>
-                  <span class="item-price text-primary">$750</span>
-                </div>
-              </div>                  
-            </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="product-card position-relative pe-3 pb-3">
-                <div class="image-holder">
-                  <img src="images/product-item5.jpg" alt="product-item" class="img-fluid">
-                </div>
-                <div class="cart-concern position-absolute">
-                  <div class="cart-button d-flex">
-                    <div class="btn-left">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
-                      <svg class="cart-outline position-absolute">
-                        <use xlink:href="#cart-outline"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-detail d-flex justify-content-between pt-3">
-                  <h3 class="card-title text-uppercase">
-                    <a href="#">Iphone 12</a>
-                  </h3>
-                  <span class="item-price text-primary">$1300</span>
-                </div>
-              </div>                  
-            </div>
+            <!-- Product list be dynamically generated here -->
           </div>
           <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
             <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
-              <a href="#">
-                <svg class="chevron-left pe-3">
-                  <use xlink:href="#chevron-left"></use>
-                </svg>
-              </a>
-              <span aria-current="page" class="page-numbers current pe-3">1</span>
-              <a class="page-numbers pe-3" href="#">2</a>
-              <a class="page-numbers pe-3" href="#">3</a>
-              <a class="page-numbers pe-3" href="#">4</a>
-              <a class="page-numbers" href="#">5</a>
-              <a href="#">
-                <svg class="chevron-right ps-3">
-                  <use xlink:href="#chevron-right"></use>
-                </svg>
-              </a>
+              <!-- Pagination buttons will be dynamically generated here -->
             </div>
           </nav>
         </main>
