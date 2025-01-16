@@ -49,7 +49,7 @@
       try {
         const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/products?page=${page}`);
 
-        const { data, total, categoryId=null} = response.data;
+        const { data, total, categoryId=null} = response.data.data;
         displayProducts(data);
         generatePagination(total, 15, page);
 
