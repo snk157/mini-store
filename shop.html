@@ -34,7 +34,7 @@
 
         const allCategory = document.createElement('li');
         allCategory.classList.add('cat-item');
-        allCategory.innerHTML = `<a href="/collections/categories">All</a>`;
+        allCategory.innerHTML = `<a href="#" onclick="fetchProducts()">All</a>`;
         categoriesList.appendChild(allCategory);
 
         categories.forEach((category, index) => {
