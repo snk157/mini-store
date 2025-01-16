@@ -37,10 +37,10 @@
         allCategory.innerHTML = `<a href="/collections/categories">All</a>`;
         categoriesList.appendChild(allCategory);
 
-        categories.forEach((categoryName, index) => {
+        categories.forEach((category, index) => {
           const categoryItem = document.createElement('li');
           categoryItem.classList.add('cat-item');
-          categoryItem.innerHTML = `<a href="#" onclick="fetchProducts(${index + 1})">${categoryName}</a>`;
+          categoryItem.innerHTML = `<a href="#" onclick="fetchProducts(${index + 1})">${category.category_name}</a>`;
           categoriesList.appendChild(categoryItem);
         });
       }
