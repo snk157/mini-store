@@ -45,11 +45,11 @@
         });
       }
       
-      async function fetchProducts(page = 1) {
+      async function fetchProducts(page = 1, categoryId = 0) {
       try {
-        const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/products?page=${page}`);
+        const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/products?page=${page}&categoryId=${categoryId}`);
 
-        const { data, total, categoryId = null} = response.data;
+        const { data, total = null} = response.data;
         displayProducts(data);
         generatePagination(total, 15, page);
 
