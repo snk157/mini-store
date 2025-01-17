@@ -735,6 +735,13 @@ h3.cart-title {
   object-fit: cover; /* Maintain aspect ratio while filling the container */
 }
 
+.product-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  gap: 20px; /* Space between items */
+  justify-items: start; /* Ensures items in the last row align to the left */
+}
+
 .product-store .product-card .cart-concern {
     bottom: 75px;
     width: 100%;
