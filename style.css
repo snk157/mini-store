@@ -737,9 +737,14 @@ h3.cart-title {
 
 .product-content {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
-  gap: 20px; /* Space between items */
-  justify-items: start; /* Ensures items in the last row align to the left */
+  grid-template-columns: repeat(3, 1fr); /* Ensures 3 items per row */
+  gap: 20px; /* Adjust spacing between grid items */
+  justify-content: start; /* Ensures items align to the left on the last row */
+}
+
+.product-content .product-card {
+  width: 100%; /* Ensures cards fit properly in the grid cell */
+  height: auto; /* Maintains aspect ratio for product content */
 }
 
 .product-store .product-card .cart-concern {
