@@ -47,7 +47,12 @@
       
       async function fetchProducts(page = 1, categoryId = 0) {
       try {
-        const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/products?page=${page}&categoryId=${categoryId}`);
+        var url = `https://mini-store-api-ud3r.onrender.com/products?page=${page}`;
+
+        if(categoryId != 0)
+          url += `&categoryId=${categoryId}`;
+
+        const response = await axios.get(url);
 
         const { data, total = null} = response.data;
         displayProducts(data);
