@@ -75,16 +75,6 @@
                 <div class="image-holder">
                   <img src="${product.images[0]}" alt="${product.product_name}" class="img-fluid product-image">
                 </div>
-                <div class="cart-concern position-absolute">
-                  <div class="cart-button d-flex">
-                    <div class="btn-left">
-                      <a href="#" class="btn btn-medium btn-black" onclick="addToCart('product-id')">Add to Cart</a>
-                      <svg class="cart-outline position-absolute">
-                        <use xlink:href="#cart-outline"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
                 <div class="card-detail pt-3 pb-3">
                   <h3 class="card-title text-uppercase">
                     <a href="#" onclick="loadProduct('product-id')">${product.product_name}</a>
@@ -156,29 +146,6 @@
             document.getElementById('footer-container').innerHTML = data;
           });
         }
-
-      function addToCart(productId) {
-        const userToken = localStorage.getItem('userToken');
-        if (!userToken || userToken == null || userToken == "")
-        {
-          alert('Please log in to add items to your cart.');
-          window.location.href = `${window.location.origin}/login.html`;
-          return;
-        }
-
-        axios.post("https://mini-store-api-ud3r.onrender.com/products", { productId }, {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        })
-        .then(response => {
-          window.location.href = `${window.location.origin}/cart.html`;
-        })
-        .catch(error => {
-          console.error('Error adding product to cart:', error);
-          alert('Failed to add product to cart. Please try again.');
-        });
-      }
 
       function loadProduct(productId) {
         window.location.href = `${window.location.origin}/single-product.html?productId=${productId}`;
