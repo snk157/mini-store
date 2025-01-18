@@ -744,7 +744,15 @@ h3.cart-title {
     text-transform: uppercase;
     transition: all 0.3s ease-out;
     opacity: 0;
+    cursor: pointer;
 }
+
+.product-card.hover-effect:hover {
+  background-color: #333; /* Darker background color */
+  color: #fff; /* Change text color to white for better contrast */
+  transform: translateY(-5px); /* Slightly lift the card */
+}
+
 .product-store .product-card:hover .cart-concern {
     bottom: 90px;
     opacity: 1;
