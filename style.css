@@ -736,35 +736,29 @@ h3.cart-title {
 }
 
 .product-store .product-card .cart-concern {
-    bottom: 75px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.3s ease-out;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.product-card.hover-effect:hover {
-  background-color: #333; /* Darker background color */
-  color: #fff; /* Change text color to white for better contrast */
-  transform: translateY(-5px); /* Slightly lift the card */
+  bottom: 75px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s ease-out;
+  opacity: 0;
 }
 
 .product-store .product-card:hover .cart-concern {
-    bottom: 90px;
-    opacity: 1;
+  bottom: 90px;
+  opacity: 1;
+  cursor: pointer;
 }
 .product-card .cart-concern svg {
-    width: 16px;
-    height: 16px;
-    fill: var(--light-color);
-    margin-left: 9px;
+  width: 16px;
+  height: 16px;
+  fill: var(--light-color);
+  margin-left: 9px;
 }
 .product-card .card-detail span {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 @media only screen and (max-width: 575px) {
