@@ -181,14 +181,6 @@
       }
 
       function loadProduct(productId) {
-        const userToken = localStorage.getItem('userToken');
-        if (!userToken || userToken == null || userToken == "")
-        {
-          alert('Please log in to add items to your cart.');
-          window.location.href = `${window.location.origin}/login.html`;
-          return;
-        }
-
         window.location.href = `${window.location.origin}/single-product.html?productId=${productId}`;
       }
       // Call function to load header and footer
