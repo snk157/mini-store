@@ -55,6 +55,7 @@
         const response = await axios.get(url);
 
         const { data, total = null} = response.data;
+        document.getElementById("product-info").innerHTML = `Showing 1–15 of ${total} results`
         displayProducts(data);
         generatePagination(total, 15, page);
 
@@ -97,7 +98,7 @@
         });
       }
 
-      function generatePagination(totalItems, itemsPerPage, currentPage) {
+      function generatePagination(total, limit, currentPage) {
         const paginationContainer = document.querySelector('.pagination.loop-pagination');
         paginationContainer.innerHTML = '';
 
@@ -209,7 +210,7 @@
         <main class="col-md-9">
           <div class="filter-shop d-flex justify-content-between">
             <div class="showing-product">
-              <p>Showing 1–9 of 55 results</p>
+              <p id="product-info">Showing 1–15 of 55 results</p>
             </div>
             <div class="sort-by">
               <select id="input-sort" class="form-control" data-filter-sort="" data-filter-order="">
@@ -224,11 +225,7 @@
           <div class="product-content product-store d-flex justify-content-between flex-wrap">
             <!-- Product list be dynamically generated here -->
           </div>
-          <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
-            <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
-              <!-- Pagination buttons will be dynamically generated here -->
-            </div>
-          </nav>
+          <div id="product-pagination" class="pagination"></div>
         </main>
       </div>
     </div>
