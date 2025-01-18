@@ -184,16 +184,67 @@
         const emailField = document.getElementById('user-email');
         const contactField = document.getElementById('user-contact');
         const button = document.querySelector('.btn-dark');
+        const cancelButtonId = 'cancel-edit-btn';
 
         if (button.innerText === 'Edit Profile') {
-          nameField.contentEditable = emailField.contentEditable = contactField.contentEditable = true;
+          const nameValue = nameField.innerText.trim();
+          const emailValue = emailField.innerText.trim();
+          const contactValue = contactField.innerText.trim();
+
+          nameField.outerHTML = `<input id="user-name" type="text" value="${nameValue}" class="form-control" />`;
+          emailField.outerHTML = `<input id="user-email" type="email" value="${emailValue}" class="form-control" />`;
+          contactField.outerHTML = `<input id="user-contact" type="text" value="${contactValue}" class="form-control" />`;
+
           button.innerText = 'Save Profile';
-          nameField.style.border = emailField.style.border = contactField.style.border = '1px dashed #ccc';
+
+          const cancelButton = document.createElement('button');
+          cancelButton.id = cancelButtonId;
+          cancelButton.className = 'btn btn-secondary text-uppercase btn-rounded-none mt-3 ms-2';
+          cancelButton.innerText = 'Cancel';
+          cancelButton.onclick = function () {
+          cancelEditProfile(nameValue, emailValue, contactValue);
+        };
+        
+        button.parentNode.appendChild(cancelButton);
         } else {
-          nameField.contentEditable = emailField.contentEditable = contactField.contentEditable = false;
-          button.innerText = 'Edit Profile';
-          nameField.style.border = emailField.style.border = contactField.style.border = 'none';
+          const updatedName = document.getElementById('user-name').value.trim();
+          const updatedEmail = document.getElementById('user-email').value.trim();
+          const updatedContact = document.getElementById('user-contact').value.trim();
+
+          // API call to save the changes
+          axios
+          .post('/api/update-profile', {
+              name: updatedName,
+              email: updatedEmail,
+              contact: updatedContact,
+          })
+          .then(() => {
+              nameField.outerHTML = `<span id="user-name">${updatedName}</span>`;
+              emailField.outerHTML = `<span id="user-email">${updatedEmail}</span>`;
+              contactField.outerHTML = `<span id="user-contact">${updatedContact}</span>`;
+
+              button.innerText = 'Edit Profile';
+              const cancelButton = document.getElementById(cancelButtonId);
+              if (cancelButton) cancelButton.remove();
+          })
+          .catch((error) => {
+              alert('Failed to update profile. Please try again.');
+              console.error(error);
+          });
         }
+      }
+
+      function cancelEditProfile(originalName, originalEmail, originalContact) {
+        document.getElementById('user-name').outerHTML = `<span id="user-name">${originalName}</span>`;
+        document.getElementById('user-email').outerHTML = `<span id="user-email">${originalEmail}</span>`;
+        document.getElementById('user-contact').outerHTML = `<span id="user-contact">${originalContact}</span>`;
+
+        const button = document.querySelector('.btn-dark');
+        button.innerText = 'Edit Profile';
+
+        const cancelButton = document.getElementById('cancel-edit-btn');
+        if (cancelButton)
+          cancelButton.remove();
       }
     </script>
   </body>
