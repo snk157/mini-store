@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ministore</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+   <!-- script ================================================== -->
+   <script>
+    function loadHeaderFooter()
+    {
+      // Fetch and insert header content
+      fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header-container').innerHTML = data;
+        });
+
+      // Fetch and insert footer content
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-container').innerHTML = data;
+        });
+      }
+
+      // Call function to load header and footer
+      window.onload = loadHeaderFooter;
+  </script>
+  <!-- script ================================================== -->
+    <script src="js/modernizr.js"></script>
+  </head>
+  <div id="header-container"></div>
+    <section class="hero-section position-relative bg-light-blue padding-medium">
+      <div class="hero-content">
+        <div class="container">
+          <div class="row">
+            <div class="text-center padding-large no-padding-bottom">
+              <h1 class="display-2 text-uppercase text-dark">About Us</h1>
+              <div class="breadcrumbs">
+                <span class="item">
+                  <a href="index.html">Home ></a>
+                </span>
+                <span class="item">About Us</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="about-us" class="padding-large no-padding-top">
+      <div class="container">
+        <div class="row d-flex flex-wrap align-items-center justify-content-between">
+          <div class="col-lg-6 col-md-12">
+            <div class="image-holder mb-4">
+              <div>
+                <img src="images/single-image3.jpg" alt="single" class="single-image">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <div class="detail ps-5">
+              <div class="display-header">
+                <h2 class="display-7 text-uppercase text-dark">How was Ministore Found?</h2>
+                <p class="pb-3">Risus augue curabitur diam senectus congue velit et. Sed vitae metus nibh sit era. Nulla adipiscing pharetra pellentesque maecenas odio eros at. Et libero vulputate amet duis erat volutpat vitae eget. Sed vitae metus nibh sit era. Nulla adipiscing pharetra pellentesque maecenas odio eros at. Quam libero etiam et in ac at quis. </br>
+                Sed vitae metus nibh sit era. Nulla adipiscing pharetra pellentesque maecenas odio eros at. Et libero vulputate amet duis erat volutpat vitae eget. Quam libero etiam et in ac at quis. Risus augue curabitur diam senectus congue velit et. </p>
+                <a href="#" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Our store</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <div id="footer-container"></div>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>
