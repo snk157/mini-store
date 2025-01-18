@@ -84,7 +84,6 @@
           </div>
         </div>
 
-        <!-- Order History (Initially Hidden) -->
         <div id="order-history-section" class="row mt-5" style="display: none;">
           <div class="col-lg-12">
             <div class="profile-card p-4 bg-light rounded">
@@ -114,13 +113,6 @@
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-
-        <!-- Show History Button -->
-        <div class="row mt-3">
-          <div class="col-lg-12 text-center">
-            <button class="btn btn-dark text-uppercase btn-rounded-none" onclick="showHistory()">Show Order History</button>
           </div>
         </div>
       </div>
@@ -168,10 +160,6 @@
           `;
           addressBook.innerHTML += addressHTML;
         }
-      }
-
-      function showHistory() {
-        document.getElementById('order-history-section').style.display = 'block';
       }
 
       function showOrderDetails(orderId) {
