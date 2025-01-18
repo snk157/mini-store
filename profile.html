@@ -84,6 +84,7 @@
           </div>
         </div>
 
+        <!-- Order History -->
         <div id="order-history-section" class="row mt-5">
           <div class="col-lg-12">
             <div class="profile-card p-4 bg-light rounded">
@@ -120,6 +121,7 @@
 
     <div id="footer-container"></div>
 
+    <!-- Scripts -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
@@ -127,12 +129,20 @@
     <script type="text/javascript" src="js/script.js"></script>
     <script>
       function setPrimary(button) {
-        const addresses = document.querySelectorAll('.address-item');
-        addresses.forEach((address) => {
-          address.querySelector('.btn-outline-primary')?.setAttribute('class', 'btn btn-sm btn-outline-secondary');
-          address.querySelector('.btn-outline-secondary')?.innerText = 'Set as Primary';
+        const addressItems = document.querySelectorAll('.address-item');
+
+        addressItems.forEach((item) => {
+          const primaryButton = item.querySelector('.btn-primary');
+          if (primaryButton) {
+            primaryButton.classList.replace('btn-primary', 'btn-outline-secondary');
+            primaryButton.disabled = false;
+            primaryButton.innerText = 'Set as Primary';
+          }
+          const label = item.querySelector('small');
+          if (label) label.innerText = 'Secondary Address';
         });
-        button.classList.replace('btn-outline-secondary', 'btn-outline-primary');
+
+        button.classList.replace('btn-outline-secondary', 'btn-primary');
         button.disabled = true;
         button.innerText = 'Primary';
         button.closest('.address-item').querySelector('small').innerText = 'Primary Address';
@@ -143,31 +153,47 @@
       }
 
       function addAddress() {
-        const addressBook = document.getElementById('address-book');
-        const newAddress = prompt('Enter your new address:');
-        if (newAddress) {
-          const addressHTML = `
-            <div class="address-item d-flex align-items-center justify-content-between p-2 border-bottom">
-              <div>
-                <p class="mb-0"><strong>${newAddress}</strong></p>
-                <small class="text-muted">Secondary Address</small>
-              </div>
-              <div>
-                <button class="btn btn-sm btn-outline-secondary" onclick="setPrimary(this)">Set as Primary</button>
-                <button class="btn btn-sm btn-danger" onclick="removeAddress(this)">Remove</button>
-              </div>
-            </div>
-          `;
-          addressBook.innerHTML += addressHTML;
+        const newAddress = prompt('Enter your new address:').trim();
+        if (!newAddress || newAddress.length < 5) {
+          alert('Please enter a valid address.');
+          return;
         }
+
+        const addressBook = document.getElementById('address-book');
+        const addressHTML = `
+          <div class="address-item d-flex align-items-center justify-content-between p-2 border-bottom">
+            <div>
+              <p class="mb-0"><strong>${newAddress}</strong></p>
+              <small class="text-muted">Secondary Address</small>
+            </div>
+            <div>
+              <button class="btn btn-sm btn-outline-secondary" onclick="setPrimary(this)">Set as Primary</button>
+              <button class="btn btn-sm btn-danger" onclick="removeAddress(this)">Remove</button>
+            </div>
+          </div>
+        `;
+        addressBook.innerHTML += addressHTML;
       }
 
       function showOrderDetails(orderId) {
-        alert(`Order details for ${orderId}`);
+        window.location.href = `${window.location.origin}/order.html?orderId=${orderId}`;
       }
 
       function editProfile() {
-        alert('Edit profile clicked!');
+        const nameField = document.getElementById('user-name');
+        const emailField = document.getElementById('user-email');
+        const contactField = document.getElementById('user-contact');
+        const button = document.querySelector('.btn-dark');
+
+        if (button.innerText === 'Edit Profile') {
+          nameField.contentEditable = emailField.contentEditable = contactField.contentEditable = true;
+          button.innerText = 'Save Profile';
+          nameField.style.border = emailField.style.border = contactField.style.border = '1px dashed #ccc';
+        } else {
+          nameField.contentEditable = emailField.contentEditable = contactField.contentEditable = false;
+          button.innerText = 'Edit Profile';
+          nameField.style.border = emailField.style.border = contactField.style.border = 'none';
+        }
       }
     </script>
   </body>
