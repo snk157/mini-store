@@ -37,8 +37,68 @@
           });
         }
 
+        async function fetchCart(page) {
+          try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/cart?id=${id}`);
+            const cartItems = response.data;
+
+            // Populate the cart dynamically
+            populateCart(cartItems);
+          } catch (error) {
+            console.error('Error fetching cart data:', error);
+          }
+        }
+        
+        function populateCart(cartItems) {
+          const cartContainer = document.querySelector('.cart-table');
+          cartContainer.innerHTML = '';
+
+          cartItems.forEach((item) => {
+            // Create a cart item element
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item', 'border-top', 'border-bottom', 'padding-small');
+            cartItem.setAttribute('data-cart-id', item.id);
+
+            // Populate the cart item
+            cartItem.innerHTML = `
+              <div class="row align-items-center">
+                <div class="col-lg-4 col-md-3">
+                  <div class="cart-info d-flex align-items-center">
+                    <img src="${item.images[0]}" alt="${item.product_name}" class="img-fluid me-3" style="width: 60px;">
+                    <div>
+                      <h4 class="card-title text-uppercase mb-1">${item.product_name}</h4>
+                      <span class="money text-primary">$${item.price.toFixed(2)}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                  <div class="qty-number">
+                    <input class="spin-number-output text-center mx-2" type="text" readonly value="${item.qty}" style="width: 50px;">
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 text-end">
+                  <span class="money text-dark">$${(item.price * item.qty).toFixed(2)}</span>
+                </div>
+                <div class="col-lg-1 col-md-1 text-end">
+                  <a href="#" class="text-danger remove-item" data-cart-id="${item.id}">
+                    <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
+                  </a>
+                </div>
+              </div>
+            `;
+
+            // Append the cart item to the cart container
+            cartContainer.appendChild(cartItem);
+          });
+        }
+        
         // Call function to load header and footer
-        window.onload = loadHeaderFooter;
+        window.onload = function () {
+          loadHeaderFooter();
+          fetchCart();
+        };
     </script>
     <!-- script ================================================== -->
     <script src="js/modernizr.js"></script>
@@ -65,85 +125,7 @@
       <div class="container">
         <div class="row">
           <div class="cart-table">
-            <div class="cart-header">
-              <div class="row d-flex text-uppercase">
-                <h3 class="cart-title col-lg-4 pb-3">Product</h3>
-                <h3 class="cart-title col-lg-3 pb-3">Quantity</h3>
-                <h3 class="cart-title col-lg-4 pb-3 text-end">Subtotal</h3>
-              </div>
-            </div>
-            <div class="cart-item border-top border-bottom padding-small">
-              <div class="row align-items-center">
-                <div class="col-lg-4 col-md-3">
-                  <div class="cart-info d-flex align-items-center">
-                    <img src="images/cart-item1.jpg" alt="Iphone 13" class="img-fluid me-3" style="width: 60px;">
-                    <div>
-                      <h4 class="card-title text-uppercase mb-1">Iphone 13</h4>
-                      <span class="money text-primary">$1500.00</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                  <div class="qty-number">
-                    <button class="quntity-button incriment-button btn btn-light border" style="width: 50px;">+</button>
-                    <input class="spin-number-output text-center mx-2" type="text" readonly value="1" style="width: 50px;">
-                    <button class="quntity-button decriment-button btn btn-light border" style="width: 50px;">-</button>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-4 text-end">
-                  <span class="money text-dark">$1500.00</span>
-                </div>
-                <div class="col-lg-1 col-md-1 text-end">
-                  <a href="#" class="text-danger">
-                    <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="cart-item border-top border-bottom padding-small">
-              <div class="row align-items-center">
-                <div class="col-lg-4 col-md-3">
-                  <div class="cart-info d-flex align-items-center">
-                    <img src="images/cart-item2.jpg" alt="Pink Watch" class="img-fluid me-3" style="width: 60px;">
-                    <div>
-                      <h4 class="card-title text-uppercase mb-1">Pink Watch</h4>
-                      <span class="money text-primary">$870.00</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                  <div class="qty-number">
-                    <input class="spin-number-output text-center mx-2" type="text" readonly value="1" style="width: 50px;">
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-4 text-end">
-                  <span class="money text-dark">$870.00</span>
-                </div>
-                <div class="col-lg-1 col-md-1 text-end">
-                  <a href="#" class="text-danger">
-                    <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="cart-summary border-top mt-4">
-              <table class="table table-borderless">
-                <tbody>
-                  <tr>
-                    <th class="text-start">Subtotal</th>
-                    <td class="text-end text-dark">$2370.00</td>
-                  </tr>
-                  <tr>
-                    <th class="text-start">Total</th>
-                    <td class="text-end text-primary">$2370.00</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="text-end mt-4">
-              <button class="btn btn-light me-2">Continue Shopping</button>
-              <button class="btn btn-primary">Proceed to Checkout</button>
-            </div>
+            
           </div>
         </div>
       </div>
