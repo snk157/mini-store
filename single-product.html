@@ -52,6 +52,29 @@
         price.innerHTML = product.data.data.product_name;
       }
 
+      function addToCart() {
+        const userToken = localStorage.getItem('userToken');
+        if (!userToken || userToken == null || userToken == "")
+        {
+          alert('Please log in to add items to your cart.');
+          window.location.href = `${window.location.origin}/login.html`;
+          return;
+        }
+
+        axios.post("https://mini-store-api-ud3r.onrender.com/products", { id }, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        .then(response => {
+          window.location.href = `${window.location.origin}/cart.html`;
+        })
+        .catch(error => {
+          console.error('Error adding product to cart:', error);
+          alert('Failed to add product to cart. Please try again.');
+        });
+      }
+
       // Call function to load header and footer
       window.onload = function () {
         loadHeaderFooter();
@@ -142,7 +165,7 @@
                         </span>
                     </div>
                     <div class="qty-button d-flex flex-wrap pt-3">
-                      <button type="submit" class="btn btn-primary btn-medium text-uppercase me-3 mt-3">Buy now</button>                   
+                      <button type="submit" class="btn btn-primary btn-medium text-uppercase me-3 mt-3" onclick="">ADD TO CART</button>                   
                     </div>
                   </div>
                 </div>
