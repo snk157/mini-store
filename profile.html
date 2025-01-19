@@ -188,11 +188,9 @@
         const button = document.querySelector('.btn-dark');
         const cancelButtonId = 'cancel-edit-btn';
 
+        alert(button.innerText === 'Edit Profile')
         if (button.innerText === 'Edit Profile') {
           // Save original values
-          alert(nameField)
-          alert(nameField.innerText);
-          alert(nameField.innerHTML);
           const nameValue = nameField.innerText.trim();
           const emailValue = emailField.innerText.trim();
           const contactValue = contactField.innerText.trim();
