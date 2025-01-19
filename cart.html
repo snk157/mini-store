@@ -63,76 +63,89 @@
     </section>
     <section class="shopify-cart padding-large">
       <div class="container">
-        <h1 class="text-center mb-4">Your Shopping Cart</h1>
-        <div class="cart-table bg-white shadow-sm rounded p-4 mb-4">
-          <div class="row text-uppercase fw-bold text-muted border-bottom pb-2 mb-3">
-            <div class="col-lg-6">Product</div>
-            <div class="col-lg-2 text-center">Quantity</div>
-            <div class="col-lg-2 text-end">Subtotal</div>
-            <div class="col-lg-2 text-center">Action</div>
-          </div>
-          <!-- Cart Item 1 -->
-          <div class="row align-items-center py-3 border-bottom">
-            <div class="col-lg-6 d-flex align-items-center">
-              <img src="images/cart-item1.jpg" alt="Product" class="img-fluid rounded me-3" width="80">
-              <div>
-                <h6 class="mb-1">Iphone 13</h6>
-                <p class="mb-0 text-muted">$1500.00</p>
+        <div class="row">
+          <div class="cart-table">
+            <div class="cart-header">
+              <div class="row d-flex text-uppercase">
+                <h3 class="cart-title col-lg-4 pb-3">Product</h3>
+                <h3 class="cart-title col-lg-3 pb-3">Quantity</h3>
+                <h3 class="cart-title col-lg-4 pb-3">Subtotal</h3>
               </div>
             </div>
-            <div class="col-lg-2 text-center">
-              <div class="d-inline-flex align-items-center">
-                <button class="btn btn-light btn-sm">-</button>
-                <input type="text" class="form-control text-center mx-2" value="1" style="width: 50px;">
-                <button class="btn btn-light btn-sm">+</button>
+            <div class="cart-item border-top border-bottom padding-small">
+              <div class="row align-items-center">
+                <div class="col-lg-4 col-md-3">
+                  <div class="cart-info d-flex align-items-center">
+                    <img src="images/cart-item1.jpg" alt="Iphone 13" class="img-fluid me-3" style="width: 60px;">
+                    <div>
+                      <h4 class="card-title text-uppercase mb-1">Iphone 13</h4>
+                      <span class="money text-primary">$1500.00</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                  <div class="qty-number d-flex align-items-center">
+                    <button class="quntity-button incriment-button btn btn-light border">+</button>
+                    <input class="spin-number-output text-center mx-2" type="text" readonly value="1" style="width: 50px;">
+                    <button class="quntity-button decriment-button btn btn-light border">-</button>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <span class="money text-dark">$1500.00</span>
+                </div>
+                <div class="col-lg-1 col-md-1 text-end">
+                  <a href="#" class="text-danger">
+                    <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
+                  </a>
+                </div>
               </div>
             </div>
-            <div class="col-lg-2 text-end">
-              <p class="mb-0 text-primary fw-bold">$1500.00</p>
-            </div>
-            <div class="col-lg-2 text-center">
-              <button class="btn btn-danger btn-sm">Remove</button>
-            </div>
-          </div>
-          <!-- Cart Item 2 -->
-          <div class="row align-items-center py-3">
-            <div class="col-lg-6 d-flex align-items-center">
-              <img src="images/cart-item2.jpg" alt="Product" class="img-fluid rounded me-3" width="80">
-              <div>
-                <h6 class="mb-1">Pink Watch</h6>
-                <p class="mb-0 text-muted">$870.00</p>
+            <div class="cart-item border-top border-bottom padding-small">
+              <div class="row align-items-center">
+                <div class="col-lg-4 col-md-3">
+                  <div class="cart-info d-flex align-items-center">
+                    <img src="images/cart-item2.jpg" alt="Pink Watch" class="img-fluid me-3" style="width: 60px;">
+                    <div>
+                      <h4 class="card-title text-uppercase mb-1">Pink Watch</h4>
+                      <span class="money text-primary">$870.00</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                  <div class="qty-number d-flex align-items-center">
+                    <button class="quntity-button incriment-button btn btn-light border">+</button>
+                    <input class="spin-number-output text-center mx-2" type="text" readonly value="1" style="width: 50px;">
+                    <button class="quntity-button decriment-button btn btn-light border">-</button>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <span class="money text-dark">$870.00</span>
+                </div>
+                <div class="col-lg-1 col-md-1 text-end">
+                  <a href="#" class="text-danger">
+                    <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
+                  </a>
+                </div>
               </div>
             </div>
-            <div class="col-lg-2 text-center">
-              <div class="d-inline-flex align-items-center">
-                <button class="btn btn-light btn-sm">-</button>
-                <input type="text" class="form-control text-center mx-2" value="1" style="width: 50px;">
-                <button class="btn btn-light btn-sm">+</button>
-              </div>
+            <div class="cart-summary border-top mt-4">
+              <table class="table table-borderless">
+                <tbody>
+                  <tr>
+                    <th class="text-start">Subtotal</th>
+                    <td class="text-end text-dark">$2370.00</td>
+                  </tr>
+                  <tr>
+                    <th class="text-start">Total</th>
+                    <td class="text-end text-primary">$2370.00</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="col-lg-2 text-end">
-              <p class="mb-0 text-primary fw-bold">$870.00</p>
+            <div class="text-end mt-4">
+              <button class="btn btn-light me-2">Continue Shopping</button>
+              <button class="btn btn-primary">Proceed to Checkout</button>
             </div>
-            <div class="col-lg-2 text-center">
-              <button class="btn btn-danger btn-sm">Remove</button>
-            </div>
-          </div>
-        </div>
-        <div class="cart-totals bg-white shadow-sm rounded p-4">
-          <h2 class="mb-4">Cart Totals</h2>
-          <table class="table">
-            <tr>
-              <th>Subtotal</th>
-              <td class="text-end">$2,370.00</td>
-            </tr>
-            <tr>
-              <th>Total</th>
-              <td class="text-end fw-bold">$2,370.00</td>
-            </tr>
-          </table>
-          <div class="text-center mt-4">
-            <button class="btn btn-outline-dark">Continue Shopping</button>
-            <button class="btn btn-primary ms-3">Proceed to Checkout</button>
           </div>
         </div>
       </div>
