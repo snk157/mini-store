@@ -41,7 +41,7 @@
           });
         }
 
-        async function fetchCart(page) {
+      async function fetchCart(page) {
           try {
             const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/cart?id=${id}`);
             const cartItems = response.data;
@@ -53,7 +53,7 @@
           }
         }
         
-        function populateCart(cartItems) {
+      function populateCart(cartItems) {
           const cartContainer = document.querySelector('.cart-table');
           cartContainer.innerHTML = '';
 
@@ -96,15 +96,15 @@
           });
         }
         
-        function proceedToCheckOut() {
-          window.location.href = `${window.location.origin}/checkout.html?id=${id}`;
-        }
+      function proceedToCheckOut() {
+        window.location.href = `${window.location.origin}/checkout.html?id=${id}`;
+      }
 
-        // Call function to load header and footer
-        window.onload = function () {
-          loadHeaderFooter();
-          fetchCart();
-        };
+      // Call function to load header and footer
+      window.onload = function () {
+        loadHeaderFooter();
+        fetchCart();
+      };
     </script>
     <!-- script ================================================== -->
     <script src="js/modernizr.js"></script>

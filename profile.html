@@ -217,7 +217,7 @@
           const updatedContact = document.getElementById('user-contact').value.trim();
 
           // Make an API call using Axios
-          axios.post(`https://mini-store-api-ud3r.onrender.com/profile?id=${page}`, {
+          axios.post(`https://mini-store-api-ud3r.onrender.com/profile`, {
             name: updatedName,
             email: updatedEmail,
             contact: updatedContact,

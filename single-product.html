@@ -20,6 +20,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- script ================================================== -->
     <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('productId');
+
       function loadHeaderFooter()
       {
         // Fetch and insert header content
@@ -35,10 +38,25 @@
           .then(data => {
             document.getElementById('footer-container').innerHTML = data;
           });
-        }
+      }
 
-        // Call function to load header and footer
-        window.onload = loadHeaderFooter;
+      async function loadProduct()
+      {
+        let productName = document.getElementById("product_name");
+        let description = document.getElementById("description");
+        let price = document.getElementById("price");
+        
+        let product = await axios.get(`https://mini-store-api-ud3r.onrender.com/product/${id}`);
+        productName.innerHTML = product.data.data.product_name;
+        description.innerHTML = product.data.data.product_name;
+        price.innerHTML = product.data.data.product_name;
+      }
+
+      // Call function to load header and footer
+      window.onload = function () {
+        loadHeaderFooter();
+        fetchCart();
+      };
     </script>
     <!-- script ================================================== -->
     <script src="js/modernizr.js"></script>
@@ -55,20 +73,20 @@
           <div class="col-lg-6">
             <div class="product-info">
               <div class="element-header">
-                <h3 itemprop="name" class="display-7 text-uppercase">Pink Watch</h3>
+                <h3 id="product_name" itemprop="name" class="display-7 text-uppercase">Pink Watch</h3>
                 <div class="rating-container d-flex align-items-center">
                   <div class="rating" data-rating="1" onclick=rate(1)>
                     <svg class="star star-fill">
                       <use xlink:href="#star-fill"></use>
                     </svg>
-                    <span class="rating-count ps-2">5.2</span>
+                    <span class="rating-count ps-2">5.0</span>
                   </div>
                 </div>
               </div>
               <div class="product-price pt-3 pb-3">
-                <strong class="text-primary display-6 fw-bold">$870.00</strong>
+                <strong id="price" class="text-primary display-6 fw-bold">$870.00</strong>
               </div>
-              <p>Justo, cum feugiat imperdiet nulla molestie ac vulputate scelerisque amet. Bibendum adipiscing platea blandit sit sed quam semper rhoncus. Diam ultrices maecenas consequat eu tortor orci, cras lectus mauris, cras egestas quam venenatis neque.</p>
+              <p id="description">Justo, cum feugiat imperdiet nulla molestie ac vulputate scelerisque amet. Bibendum adipiscing platea blandit sit sed quam semper rhoncus. Diam ultrices maecenas consequat eu tortor orci, cras lectus mauris, cras egestas quam venenatis neque.</p>
               <div class="cart-wrap padding-small">
                 <!-- <div class="color-options product-select">
                   <div class="color-toggle" data-option-index="0">
