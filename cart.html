@@ -20,6 +20,10 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- script ================================================== -->
     <script>
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+
       function loadHeaderFooter()
       {
         // Fetch and insert header content
@@ -39,8 +43,6 @@
 
         async function fetchCart(page) {
           try {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
             const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/cart?id=${id}`);
             const cartItems = response.data;
 
@@ -94,6 +96,10 @@
           });
         }
         
+        function proceedToCheckOut() {
+          window.location.href = `${window.location.origin}/checkout.html?id=${id}`;
+        }
+
         // Call function to load header and footer
         window.onload = function () {
           loadHeaderFooter();
@@ -126,6 +132,10 @@
         <div class="row">
           <div class="cart-table">
             
+          </div>
+          <div class="text-end mt-4">
+            <button class="btn btn-light me-2">Continue Shopping</button>
+            <button class="btn btn-primary" onclick='proceedToCheckOut()'>Proceed to Checkout</button>
           </div>
         </div>
       </div>
