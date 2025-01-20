@@ -75,7 +75,10 @@
         alert(response.data.message);
 
         if(response.data.status)
+        {
+          localStorage.setItem("token", response.data.data.token);
           window.location.href = `${window.location.origin}/index.html`;
+        }
       })
     }
 
