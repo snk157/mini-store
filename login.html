@@ -70,6 +70,10 @@
       axios.post("https://mini-store-api-ud3r.onrender.com/login", {
         email: email,
         password: password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
       .then(response => {
         alert(response.data.message);
