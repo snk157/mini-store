@@ -43,9 +43,17 @@
       async function loadProduct()
       {
         const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/product/${id}`);
-        const images = response.data.data;
+        const images = response.data.data.images;
         const previewImage = document.getElementById("preview-image");
         const gallery = document.getElementById("gallery");
+
+        let productName = document.getElementById("product_name");
+        let description = document.getElementById("description");
+        let price = document.getElementById("price");
+
+        productName.innerHTML = response.data.data.product_name;
+        description.innerHTML = response.data.data.product_name;
+        price.innerHTML = response.data.data.product_name;
 
         if (images.length > 0) {
           previewImage.src = images[0];
