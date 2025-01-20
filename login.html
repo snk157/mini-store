@@ -76,7 +76,7 @@
         }
       })
       .then(response => {
-        
+        alert(JSON.stringify(response.data))
         if(response.data.status)
         {
           localStorage.setItem("token", response.data.data.token);
