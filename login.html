@@ -76,12 +76,16 @@
         }
       })
       .then(response => {
-        alert(response.data.message);
-
+        
         if(response.data.status)
         {
           localStorage.setItem("token", response.data.data.token);
           window.location.href = `${window.location.origin}/index.html`;
+        }
+        else
+        {
+          alert(response.data.message);
+          window.location.href = `${window.location.origin}/login.html`;
         }
       })
     }
