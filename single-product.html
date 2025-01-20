@@ -42,14 +42,30 @@
 
       async function loadProduct()
       {
-        let productName = document.getElementById("product_name");
-        let description = document.getElementById("description");
-        let price = document.getElementById("price");
-        
-        let product = await axios.get(`https://mini-store-api-ud3r.onrender.com/product/${id}`);
-        productName.innerHTML = product.data.data.product_name;
-        description.innerHTML = product.data.data.product_name;
-        price.innerHTML = product.data.data.product_name;
+        const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/product/${id}`);
+        const images = response.data.data;
+        const previewImage = document.getElementById("preview-image");
+        const gallery = document.getElementById("gallery");
+
+        if (images.length > 0) {
+          previewImage.src = images[0];
+        }
+
+        images.forEach((url, index) => {
+          const thumbnail = document.createElement("img");
+          thumbnail.src = url;
+          thumbnail.alt = `Thumbnail ${index + 1}`;
+          thumbnail.className = "img-thumbnail shadow-sm";
+          thumbnail.style.width = "80px";
+          thumbnail.style.cursor = "pointer";
+          thumbnail.style.margin = "5px";
+
+          thumbnail.addEventListener("click", () => {
+            previewImage.src = url;
+          });
+
+          gallery.appendChild(thumbnail);
+        });
       }
 
       function addToCart() {
