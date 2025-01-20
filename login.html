@@ -67,7 +67,7 @@
         return;
       }
 
-      axios.post("https://mini-store-api-ud3r.onrender.com/login", {
+      await axios.post("https://mini-store-api-ud3r.onrender.com/login", {
         email: email,
         password: password
       }, {
