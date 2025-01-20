@@ -21,6 +21,12 @@
     <!-- script ================================================== -->
     <script>
 
+      const token = localStorage.getItem("token");
+      if(!token)
+      {
+        window.location.href = `${window.location.origin}/login.html`;
+      }
+
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get('id');
 
