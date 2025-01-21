@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
     <script>
       const token = localStorage.getItem("token");
       if(!token)
@@ -26,6 +27,18 @@
         window.location.href = `${window.location.origin}/login.html`;
       }
 
+      var decoded_token = jwt_decode(token);
+
+      await axios.get("https://mini-store-api-ud3r.onrender.com/user/"+decoded_token.userId, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        document.getElementById("user-name").innerHTML = response.data.data.username;
+        document.getElementById("user-email").innerHTML = response.data.data.email;
+        document.getElementById("user-contact").innerHTML = response.data.data.contact;
+      })
 
       function loadHeaderFooter() {
         fetch('header.html')
@@ -55,9 +68,9 @@
           <div class="col-lg-6 col-md-12">
             <div class="profile-card p-4 bg-light rounded">
               <h2 class="text-uppercase text-dark">Your Profile</h2>
-              <p><strong>Name:</strong> <span id="user-name">John Doe</span></p>
-              <p><strong>Email:</strong> <span id="user-email">johndoe@example.com</span></p>
-              <p><strong>Contact:</strong> <span id="user-contact">+123456789</span></p>
+              <p><strong>Name:</strong> <span id="user-name"></span></p>
+              <p><strong>Email:</strong> <span id="user-email"></span></p>
+              <p><strong>Contact:</strong> <span id="user-contact"></span></p>
               <button class="btn btn-dark text-uppercase btn-rounded-none mt-3" onclick="editProfile()">Edit Profile</button>
             </div>
           </div>
