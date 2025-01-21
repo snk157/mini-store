@@ -27,19 +27,6 @@
         window.location.href = `${window.location.origin}/login.html`;
       }
 
-      var decoded_token = jwt_decode(token);
-
-      await axios.get("https://mini-store-api-ud3r.onrender.com/user/"+decoded_token.userId, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => {
-        document.getElementById("user-name").innerHTML = response.data.data.username;
-        document.getElementById("user-email").innerHTML = response.data.data.email;
-        document.getElementById("user-contact").innerHTML = response.data.data.contact;
-      })
-
       function loadHeaderFooter() {
         fetch('header.html')
           .then(response => response.text())
@@ -53,7 +40,30 @@
             document.getElementById('footer-container').innerHTML = data;
           });
       }
-      window.onload = loadHeaderFooter;
+      
+      async function getUserinfo()
+      {
+        if(!token) return;
+        
+        var decoded_token = jwt_decode(token);
+
+        await axios.get("https://mini-store-api-ud3r.onrender.com/user/"+decoded_token.userId, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+          document.getElementById("user-name").innerHTML = response.data.data.username;
+          document.getElementById("user-email").innerHTML = response.data.data.email;
+          document.getElementById("user-contact").innerHTML = response.data.data.contact;
+        })
+      };
+
+      window.onload = function()
+      {
+        loadHeaderFooter,
+        getUserinfo
+      };
     </script>
     <script src="js/modernizr.js"></script>
   </head>
