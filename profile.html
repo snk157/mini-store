@@ -187,7 +187,7 @@
 
           // Replace spans with input fields
           nameField.outerHTML = `<input id="user-name" type="text" value="${nameValue}" class="form-control" />`;
-          emailField.outerHTML = `<input id="user-email" type="email" value="${emailValue}" class="form-control" />`;
+          emailField.outerHTML = `<input id="user-email" type="email" value="${emailValue}" class="form-control" disabled/>`;
           contactField.outerHTML = `<input id="user-contact" type="text" value="${contactValue}" class="form-control" />`;
 
           button.innerText = 'Save Profile';
