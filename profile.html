@@ -178,93 +178,68 @@
         const contactField = document.getElementById('user-contact');
         const button = document.querySelector('.btn-dark');
         const cancelButtonId = 'cancel-edit-btn';
-        const passwordFieldId = 'user-old-password';
-        const newPasswordFieldId = 'user-new-password';
-        const reenterPasswordFieldId = 'user-reenter-password';
 
         if (button.innerText === 'EDIT PROFILE') {
-          // Save original values
           const nameValue = nameField.innerText.trim();
           const emailValue = emailField.innerText.trim();
           const contactValue = contactField.innerText.trim();
 
-          // Replace spans with input fields
-          nameField.outerHTML = `<input id="user-name" type="text" value="${nameValue}" class="form-control" />`;
-          emailField.outerHTML = `<input id="user-email" type="email" value="${emailValue}" class="form-control" disabled/>`;
-          contactField.outerHTML = `<input id="user-contact" type="text" value="${contactValue}" class="form-control" />`;
+          nameField.outerHTML = `<input id="user-name" type="text" value="${nameValue}" class="form-control mb-3" />`;
+          // Keep email as a non-editable span
+          emailField.innerHTML = `<strong>${emailValue}</strong>`;
+          contactField.outerHTML = `<input id="user-contact" type="text" value="${contactValue}" class="form-control mb-3" />`;
 
-          // Add password fields for old password, new password, and re-enter password
-          const passwordFields = `
-            <div class="form-group mt-3">
-              <label for="${passwordFieldId}">Old Password</label>
-              <input id="${passwordFieldId}" type="password" class="form-control" placeholder="Enter your old password" required>
-            </div>
-            <div class="form-group mt-3">
-              <label for="${newPasswordFieldId}">New Password</label>
-              <input id="${newPasswordFieldId}" type="password" class="form-control" placeholder="Enter your new password (optional)">
-            </div>
-            <div class="form-group mt-3">
-              <label for="${reenterPasswordFieldId}">Re-enter New Password</label>
-              <input id="${reenterPasswordFieldId}" type="password" class="form-control" placeholder="Re-enter your new password">
-            </div>
+          // Add password input fields
+          const passwordContainer = document.createElement('div');
+          passwordContainer.id = 'password-fields';
+          passwordContainer.innerHTML = `
+            <input id="user-old-password" type="password" placeholder="Old Password" class="form-control mb-3" />
+            <input id="user-new-password" type="password" placeholder="New Password" class="form-control mb-3" />
+            <input id="user-reenter-password" type="password" placeholder="Re-enter New Password" class="form-control mb-3" />
           `;
-          button.parentNode.insertAdjacentHTML('beforeend', passwordFields);
+          button.parentNode.insertBefore(passwordContainer, button);
 
           button.innerText = 'Save Profile';
 
-          // Add cancel button
+          // Add cancel button beside save button
           const cancelButton = document.createElement('button');
           cancelButton.id = cancelButtonId;
-          cancelButton.className = 'btn btn-secondary text-uppercase btn-rounded-none mt-3 ms-2';
+          cancelButton.className = 'btn btn-secondary text-uppercase btn-rounded-none ms-2';
           cancelButton.innerText = 'Cancel';
           cancelButton.onclick = function () {
             cancelEditProfile(nameValue, emailValue, contactValue);
           };
-          button.parentNode.appendChild(cancelButton);
+          button.after(cancelButton);
         } else {
-          // Save changes
           const updatedName = document.getElementById('user-name').value.trim();
-          const updatedEmail = document.getElementById('user-email').value.trim();
           const updatedContact = document.getElementById('user-contact').value.trim();
-          const oldPassword = document.getElementById(passwordFieldId).value.trim();
-          const newPassword = document.getElementById(newPasswordFieldId).value.trim();
-          const reenterPassword = document.getElementById(reenterPasswordFieldId).value.trim();
+          const oldPassword = document.getElementById('user-old-password').value.trim();
+          const newPassword = document.getElementById('user-new-password').value.trim();
+          const reenterPassword = document.getElementById('user-reenter-password').value.trim();
 
-          if (!oldPassword) {
-            alert("Old password is required to save changes.");
+          if (newPassword && newPassword !== reenterPassword) {
+            alert('New passwords do not match.');
             return;
           }
 
-          if (newPassword || reenterPassword) {
-            if (newPassword !== reenterPassword) {
-              alert("New passwords do not match.");
-              return;
-            }
-          }
-
-          // Make an API call using Axios
           axios.post(`https://mini-store-api-ud3r.onrender.com/profile`, {
             name: updatedName,
-            email: updatedEmail,
+            email: emailField.innerText.trim(),
             contact: updatedContact,
-            oldPassword: oldPassword,
-            newPassword: newPassword || null, // Include newPassword only if provided
+            oldPassword: oldPassword || null,
+            newPassword: newPassword || null,
           })
           .then(() => {
-            // Replace input fields with spans
             document.getElementById('user-name').outerHTML = `<span id="user-name">${updatedName}</span>`;
-            document.getElementById('user-email').outerHTML = `<span id="user-email">${updatedEmail}</span>`;
             document.getElementById('user-contact').outerHTML = `<span id="user-contact">${updatedContact}</span>`;
 
-            // Remove password fields
-            document.getElementById(passwordFieldId).parentNode.remove();
-            document.getElementById(newPasswordFieldId).parentNode.remove();
-            document.getElementById(reenterPasswordFieldId).parentNode.remove();
-
-            // Update button and remove cancel button
             button.innerText = 'Edit Profile';
+
             const cancelButton = document.getElementById(cancelButtonId);
             if (cancelButton) cancelButton.remove();
+
+            const passwordContainer = document.getElementById('password-fields');
+            if (passwordContainer) passwordContainer.remove();
           })
           .catch((error) => {
             console.error('Failed to update profile:', error);
