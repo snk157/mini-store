@@ -57,9 +57,9 @@
       }
     }
 
-    async function login()
+    async function login(event)
     {
-      alert("login")
+      event.preventDefault();
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
 
@@ -77,17 +77,16 @@
         }
       })
       .then(response => {
-        alert(JSON.stringify(response.data));
-        // if(response.data.status)
-        // {
-        //   localStorage.setItem("token", response.data.data.token);
-        //   window.location.href = `${window.location.origin}/index.html`;
-        // }
-        // else
-        // {
-        //   alert(response.data.message);
-        //   window.location.href = `${window.location.origin}/login.html`;
-        // }
+        if(response.data.status)
+        {
+          localStorage.setItem("token", response.data.data.token);
+          window.location.href = `${window.location.origin}/index.html`;
+        }
+        else
+        {
+          alert(response.data.message);
+          window.location.href = `${window.location.origin}/login.html`;
+        }
       })
     }
 
@@ -153,7 +152,7 @@
                   <label for="password" class="form-label">Password</label>
                   <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
                 </div>
-                <button class="btn btn-primary w-100" onclick="login()">Login</button>
+                <button class="btn btn-primary w-100" onclick="login(event)">Login</button>
               </form>
               <div class="text-center mt-3">
                 <p>
