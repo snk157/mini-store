@@ -86,7 +86,7 @@
       }
     
       function addToCart(productId) {
-        const userToken = localStorage.getItem('userToken');
+        const userToken = localStorage.getItem('token');
         if (!userToken || userToken == null || userToken == "")
         {
           alert('Please log in to add items to your cart.');
