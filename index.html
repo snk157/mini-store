@@ -85,7 +85,7 @@
           });
       }
     
-      function addToCart() {
+      function addToCart(productId) {
         const userToken = localStorage.getItem('token');
         if (!userToken || userToken == null || userToken == "")
         {
@@ -94,7 +94,6 @@
           return;
         }
 
-        const qty = Number(document.getElementById("quantity").value);
         axios.post("https://mini-store-api-ud3r.onrender.com/carts", {
           productId: id,
           qty: qty

@@ -49,7 +49,7 @@
 
       async function fetchCart(page) {
           try {
-            const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/cart?id=${id}`);
+            const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/cart`);
             const cartItems = response.data;
 
             // Populate the cart dynamically
