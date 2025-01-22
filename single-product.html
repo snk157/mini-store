@@ -85,7 +85,11 @@
           return;
         }
 
-        axios.post("https://mini-store-api-ud3r.onrender.com/product", { id }, {
+        const qty = Number(document.getElementById("quantity").value);
+        axios.post("https://mini-store-api-ud3r.onrender.com/carts", {
+          productId: id,
+          qty: qty
+        }, {
           headers: {
             Authorization: `Bearer ${userToken}`,
           },
