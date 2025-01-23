@@ -88,10 +88,11 @@
     
       async function addToCart(productId) {
         const token = localStorage.getItem("token");
+        console.log("addToCart");
+        console.log(token);
         
         if(token)
         {
-          alert(token);
           var decoded_token = jwt_decode(token);
           if (decoded_token.exp < Math.floor(Date.now()/1000))
           {
