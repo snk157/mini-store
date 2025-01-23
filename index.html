@@ -88,13 +88,16 @@
     
       function addToCart(productId) {
         const token = localStorage.getItem("token");
-        var decoded_token = jwt_decode(token);
-        if (decoded_token.exp < Math.floor(Date.now()/1000))
+        if(token)
         {
-          localStorage.removeItem("token");
-          alert('Please log in to add items to your cart.');
-          window.location.href = `${window.location.origin}/login.html`;
-          return;
+          var decoded_token = jwt_decode(token);
+          if (decoded_token.exp < Math.floor(Date.now()/1000))
+          {
+            localStorage.removeItem("token");
+            alert('Please log in to add items to your cart.');
+            window.location.href = `${window.location.origin}/login.html`;
+            return;
+          }
         }
 
         axios.post("https://mini-store-api-ud3r.onrender.com/carts", {
