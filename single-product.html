@@ -89,6 +89,12 @@
             return;
           }
         }
+        else
+        {
+          alert('Please log in to add items to your cart.');
+          window.location.href = `${window.location.origin}/login.html`;
+          return;
+        }
 
         const qty = Number(document.getElementById("quantity").value);
         axios.post("https://mini-store-api-ud3r.onrender.com/carts", {

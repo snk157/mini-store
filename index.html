@@ -88,9 +88,7 @@
     
       async function addToCart(productId) {
         const token = localStorage.getItem("token");
-        console.log("addToCart");
-        console.log(token);
-        
+
         if(token)
         {
           var decoded_token = jwt_decode(token);
@@ -102,6 +100,13 @@
             return;
           }
         }
+        else
+        {
+          alert('Please log in to add items to your cart.');
+          window.location.href = `${window.location.origin}/login.html`;
+          return;
+        }
+        
 
         await axios.post("https://mini-store-api-ud3r.onrender.com/carts", {
           productId: productId,
