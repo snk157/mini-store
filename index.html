@@ -86,7 +86,7 @@
           });
       }
     
-      function addToCart(productId) {
+      async function addToCart(productId) {
         const token = localStorage.getItem("token");
         
         if(token)
@@ -102,7 +102,7 @@
           }
         }
 
-        axios.post("https://mini-store-api-ud3r.onrender.com/carts", {
+        await axios.post("https://mini-store-api-ud3r.onrender.com/carts", {
           productId: productId,
           qty: 1
         }, {
