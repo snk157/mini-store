@@ -20,14 +20,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
     <!-- script ================================================== -->
     <script>
-
-      const token = localStorage.getItem("token");
-      var decoded_token = jwt_decode(token);
-      if (decoded_token.exp < Math.floor(Date.now()/1000))
-      {
-        localStorage.removeItem("token");
-      }
-
       async function fetchProducts() {
         try {
           // Fetch feature products
@@ -95,9 +87,11 @@
       }
     
       function addToCart(productId) {
-        const userToken = localStorage.getItem('token');
-        if (!userToken || userToken == null || userToken == "")
+        const token = localStorage.getItem("token");
+        var decoded_token = jwt_decode(token);
+        if (decoded_token.exp < Math.floor(Date.now()/1000))
         {
+          localStorage.removeItem("token");
           alert('Please log in to add items to your cart.');
           window.location.href = `${window.location.origin}/login.html`;
           return;
