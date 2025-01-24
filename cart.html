@@ -73,18 +73,20 @@
 
           cartRow.innerHTML = `
             <td>
-                <img src="${item.images[0]}" alt="${item.product_name}" style="width: 60px; margin-right: 10px;">
+              <img src="${item.images[0]}" alt="${item.product_name}" style="width: 60px; margin-right: 10px;">
             </td>
             <td>
-                <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${item.id}, 'decrease')">-</button>
-                <input type="text" class="text-center mx-2 qty-input" value="${item.qty}" readonly style="width: 50px; border: none; background-color: #f1f1f1;">
-                <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${item.id}, 'increase')">+</button>
+              <h5>${item.product_name}</h5>
+              <small class="text-muted">$${item.price}</small>
             </td>
-            <td class="text-end">$${(item.price * item.qty).toFixed(2)}</td>
-            <td class="text-end">
-              <a href="#" class="text-danger" onclick="removeFromCart(${item.id})">
-                <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
-              </a>
+            <td>
+              <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${item.id}, 'decrease')">-</button>
+              <input type="text" class="text-center mx-2 qty-input" value="${item.qty}" readonly style="width: 50px; border: none; background-color: #f1f1f1;">
+              <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${item.id}, 'increase')">+</button>
+            </td>
+            <td>$${(item.price * item.qty).toFixed(2)}</td>
+            <td>
+              <button class="btn btn-sm btn-danger delete-btn" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button>
             </td>
           `;
           cartBody.appendChild(cartRow);
@@ -147,7 +149,7 @@
           <table class="cart-table table">
             <thead>
               <tr>
-                <th>Product</th>
+                <th col="2">Product</th>
                 <th>Quantity</th>
                 <th>Total</th>
                 <th></th>
