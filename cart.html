@@ -65,45 +65,60 @@
         
       function populateCart(cartItems) {
         const cartContainer = document.querySelector('.cart-table');
-        cartContainer.innerHTML = '';
+        cartContainer.innerHTML = '';  // Clear the cart container
+
+        // Add table header
+        const tableHeader = document.createElement('thead');
+        tableHeader.innerHTML = `
+          <tr>
+            <th class="col-lg-4 col-md-3">Product</th>
+            <th class="col-lg-3 col-md-4">Quantity</th>
+            <th class="col-lg-4 col-md-4 text-end">Total</th>
+            <th class="col-lg-1 col-md-1 text-end">Remove</th>
+          </tr>
+        `;
+        cartContainer.appendChild(tableHeader);
+
+        // Create the table body
+        const tableBody = document.createElement('tbody');
 
         cartItems.forEach((item) => {
           // Create a cart item element
-          const cartItem = document.createElement('div');
-          cartItem.classList.add('cart-item', 'border-top', 'border-bottom', 'padding-small');
-          cartItem.setAttribute('data-cart-id', item.id);
+          const cartItem = document.createElement('tr');
+          cartItem.classList.add('cart-item');
 
           // Populate the cart item
           cartItem.innerHTML = `
-            <div class="row align-items-center">
-              <div class="col-lg-4 col-md-3">
-                <div class="cart-info d-flex align-items-center">
-                  <img src="${item.images[0]}" alt="${item.product_name}" class="img-fluid me-3" style="width: 60px;">
-                  <div>
-                    <h4 class="card-title text-uppercase mb-1">${item.product_name}</h4>
-                    <span class="money text-primary">$${item.price}</span>
-                  </div>
+            <td class="col-lg-4 col-md-3">
+              <div class="cart-info d-flex align-items-center">
+                <img src="${item.image}" alt="${item.product_name}" class="img-fluid me-3" style="width: 60px;">
+                <div>
+                  <h4 class="card-title text-uppercase mb-1">${item.product_name}</h4>
+                  <span class="money text-primary">$${item.price}</span>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-4">
-                <div class="qty-number">
-                  <input class="spin-number-output text-center mx-2" type="text" readonly value="${item.qty}" style="width: 50px;">
-                </div>
+            </td>
+            <td class="col-lg-3 col-md-4">
+              <div class="qty-number">
+                <input class="spin-number-output text-center mx-2" type="text" readonly value="${item.qty}" style="width: 50px;">
               </div>
-              <div class="col-lg-4 col-md-4 text-end">
-                <span class="money text-dark">$${(item.price * item.qty).toFixed(2)}</span>
-              </div>
-              <div class="col-lg-1 col-md-1 text-end">
-                <a href="#" class="text-danger remove-item" data-cart-id="${item.id}">
-                  <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
-                </a>
-              </div>
-            </div>
+            </td>
+            <td class="col-lg-4 col-md-4 text-end">
+              <span class="money text-dark">$${(item.price * item.qty).toFixed(2)}</span>
+            </td>
+            <td class="col-lg-1 col-md-1 text-end">
+              <a href="#" class="text-danger remove-item" data-cart-id="${item.id}">
+                <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
+              </a>
+            </td>
           `;
 
-          // Append the cart item to the cart container
-          cartContainer.appendChild(cartItem);
+          // Append the cart item to the table body
+          tableBody.appendChild(cartItem);
         });
+
+        // Append the table body to the cart container
+        cartContainer.appendChild(tableBody);
       }
         
       function proceedToCheckOut() {
