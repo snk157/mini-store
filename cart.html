@@ -85,7 +85,7 @@
               <input type="text" class="text-center mx-2 qty-input" value="${item.qty}" readonly style="width: 50px; border: none; background-color: #f1f1f1;">
               <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${item.id}, 'increase')">+</button>
             </td>
-            <td>$${(item.price * item.qty).toFixed(2)}</td>
+            <td>$<span class="subtotal">${(item.price * item.qty).toFixed(2)}</span></td>
             <td>
               <button class="btn btn-sm btn-danger delete-btn" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button>
             </td>
@@ -97,6 +97,7 @@
       function changeQuantity(itemId, action) {
         const cartRow = document.querySelector(`[data-cart-id='${itemId}']`);
         const qtyInput = cartRow.querySelector('.qty-input');
+        const subTotal = cartRow.querySelector('.subtotal');
         let currentQty = parseInt(qtyInput.value);
 
         if (action === 'increase') {
