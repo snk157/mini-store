@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/refs/heads/master/json/countries%2Bstates%2Bcities.json"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
     <!-- script ================================================== -->
     <script>
       function loadHeaderFooter() {
@@ -117,6 +120,35 @@
         grandTotalElement.textContent = `$${grandTotal.toFixed(2)}`;
       }
 
+      async function createOrder() {
+        const orderData = {
+          firstname: document.getElementById('fname').value.trim(),
+          lastname: document.getElementById('lname').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          address: document.getElementById('adr').value.trim(),
+          address2: document.getElementById('adr2').value.trim(),
+          country: document.getElementById('country-select').value,
+          state: document.getElementById('state-select').value,
+          city: document.getElementById('city').value.trim(),
+          zip: document.getElementById('zip').value.trim(),
+          notes: document.getElementById('order-notes').value.trim(),
+          status: 'pending',
+        };
+
+        const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/orders`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.status === 200) {
+
+        } else {
+          alert('Something went wrong while creating the order.');
+        }
+      }
+
       document.addEventListener('DOMContentLoaded', populateCountriesAndStates);
       // Call function to load header and footer
       window.onload = function () {
@@ -147,74 +179,73 @@
     </section>
     <section class="shopify-cart checkout-wrap padding-large">
       <div class="container">
-        <form class="form-group">
-          <div class="row d-flex flex-wrap">
-            <div class="col-lg-6">
-              <h2 class="display-7 text-uppercase text-dark pb-4">Billing Details</h2>
-              <div class="billing-details">
-                <div class="name-fields d-flex">
-                  <div class="field-wrapper me-2 flex-grow-1">
-                    <label for="fname">First Name*</label>
-                    <input type="text" id="fname" name="firstname" class="form-control mt-2 mb-4 ps-3">
-                  </div>
-                  <div class="field-wrapper flex-grow-1">
-                    <label for="lname">Last Name*</label>
-                    <input type="text" id="lname" name="lastname" class="form-control mt-2 mb-4 ps-3">
-                  </div>
+        <div class="row d-flex flex-wrap">
+          <div class="col-lg-6">
+            <h2 class="display-7 text-uppercase text-dark pb-4">Billing Details</h2>
+            <div class="billing-details">
+              <div class="name-fields d-flex">
+                <div class="field-wrapper me-2 flex-grow-1">
+                  <label for="fname">First Name*</label>
+                  <input type="text" id="fname" name="firstname" class="form-control mt-2 mb-4 ps-3">
                 </div>
-                <label for="email">Phone *</label>
-                <input type="text" id="phone" name="phone" class="form-control mt-2 mb-4 ps-3">
-                <label for="email">Email address *</label>
-                <input type="text" id="email" name="email" class="form-control mt-2 mb-4 ps-3">
-                <label for="address">Address*</label>
-                <input type="text" id="adr" name="address" placeholder="House number and street name" class="form-control mt-3 ps-3 mb-3">
-                <input type="text" id="adr" name="address" placeholder="Appartments, suite, etc." class="form-control ps-3 mb-4">
-                <label for="cname">Country / Region*</label>
-                <select id="country-select" class="form-select form-control mt-2 mb-4" aria-label="Country/Region">
-                  <option selected="" hidden="">Select your country</option>
-                </select>
-                <label for="state">State *</label>
-                <select id="state-select" class="form-select form-control mt-2 mb-4" aria-label="State">
-                  <option selected="" hidden="">Select your state</option>
-                </select>
-                <label for="city">Town / City *</label>
-                <input type="text" id="city" name="city" class="form-control mt-3 ps-3 mb-4">
-                <label for="zip">Zip Code *</label>
-                <input type="text" id="zip" name="zip" class="form-control mt-2 mb-4 ps-3">
+                <div class="field-wrapper flex-grow-1">
+                  <label for="lname">Last Name*</label>
+                  <input type="text" id="lname" name="lastname" class="form-control mt-2 mb-4 ps-3">
+                </div>
               </div>
-            </div>
-            <div class="col-lg-6">
-              <h2 class="display-7 text-uppercase text-dark pb-4">Additional Information</h2>
-              <div class="billing-details">
-                <label for="fname">Order notes (optional)</label>
-                <textarea class="form-control pt-3 pb-3 ps-3 mt-2" placeholder="Notes about your order. Like special notes for delivery."></textarea>
-              </div>
-              <div class="your-order mt-5">
-                <h2 class="display-7 text-uppercase text-dark pb-4">Cart Totals</h2>
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Product</th>
-                      <th>Quantity</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody id="order-details">
-                    <!-- Order details will be populated here -->
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="2" class="text-end"><strong>Grand Total</strong></td>
-                      <td id="grand-total" class="text-end">$0.00</td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
+              <label for="email">Phone *</label>
+              <input type="text" id="phone" name="phone" class="form-control mt-2 mb-4 ps-3">
+              <label for="email">Email address *</label>
+              <input type="text" id="email" name="email" class="form-control mt-2 mb-4 ps-3">
+              <label for="address">Address*</label>
+              <input type="text" id="adr" name="address" placeholder="House number and street name" class="form-control mt-3 ps-3 mb-3">
+              <input type="text" id="adr2" name="address2" placeholder="Appartments, suite, etc." class="form-control ps-3 mb-4">
+              <label for="country-select">Country / Region*</label>
+              <select id="country-select" class="form-select form-control mt-2 mb-4">
+                <option selected="" hidden="">Select your country</option>
+              </select>
+              <label for="state-select">State *</label>
+              <select id="state-select" class="form-select form-control mt-2 mb-4">
+                <option selected="" hidden="">Select your state</option>
+              </select>
+              <label for="city">Town / City *</label>
+              <input type="text" id="city" name="city" class="form-control mt-3 ps-3 mb-4">
+              <label for="zip">Zip Code *</label>
+              <input type="text" id="zip" name="zip" class="form-control mt-2 mb-4 ps-3">
             </div>
           </div>
-        </form>
+          <div class="col-lg-6">
+            <h2 class="display-7 text-uppercase text-dark pb-4">Additional Information</h2>
+            <div class="billing-details">
+              <label for="order-notes">Order notes (optional)</label>
+              <textarea id="order-notes" class="form-control pt-3 pb-3 ps-3 mt-2"></textarea>
+            </div>
+            <div class="your-order mt-5">
+              <h2 class="display-7 text-uppercase text-dark pb-4">Cart Totals</h2>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody id="order-details">
+                  <!-- Order details will be populated here -->
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2" class="text-end"><strong>Grand Total</strong></td>
+                    <td id="grand-total" class="text-end">$0.00</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <button id="create-order-btn" class="btn btn-primary mt-4" onclick="createOrder()">Place Order</button>
+          </div>
+        </div>
       </div>
-    </section>
+    </section>    
     <section id="subscribe" class="container-grid position-relative overflow-hidden">
       <div class="container">
         <div class="row">
