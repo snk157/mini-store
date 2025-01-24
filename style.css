@@ -1024,7 +1024,7 @@ figure.instagram-item img.insta-image {
 
 /* 10. Cart Page
 -----------------------------------------------------*/
-.shopify-cart .card-price .money {
+/* .shopify-cart .card-price .money {
     font-size: 1.5em;
 }
 .shopify-cart .total-price .money {
@@ -1035,8 +1035,40 @@ figure.instagram-item img.insta-image {
 }
 .shopify-cart .table th {
     width: 30%;
+} */
+
+.shopify-cart .row {
+  margin-bottom: 15px;
 }
 
+.shopify-cart .cart-info {
+  display: flex;
+  align-items: center;
+}
+
+.shopify-cart .qty-input {
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.shopify-cart .money {
+  font-weight: bold;
+}
+
+.shopify-cart .remove-item {
+  cursor: pointer;
+}
+
+.shopify-cart .btn {
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+.shopify-cart .table-responsive {
+  overflow-x: auto;
+}
 
 /* 11. Checkout Page
 --------------------------------------------------------------*/

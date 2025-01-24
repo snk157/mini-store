@@ -67,60 +67,67 @@
         const cartContainer = document.querySelector('.cart-table');
         cartContainer.innerHTML = '';  // Clear the cart container
 
+        // Create the table container
+        const tableContainer = document.createElement('div');
+        tableContainer.classList.add('table-responsive');
+        
         // Add table header
-        const tableHeader = document.createElement('thead');
+        const tableHeader = document.createElement('div');
+        tableHeader.classList.add('row', 'border-bottom', 'pb-2', 'mb-3');
         tableHeader.innerHTML = `
-          <tr>
-            <th class="col-lg-4 col-md-3">Product</th>
-            <th class="col-lg-3 col-md-4">Quantity</th>
-            <th class="col-lg-4 col-md-4 text-end">Total</th>
-            <th class="col-lg-1 col-md-1 text-end">Remove</th>
-          </tr>
+          <div class="col-lg-4 col-md-3">Product</div>
+          <div class="col-lg-3 col-md-4">Quantity</div>
+          <div class="col-lg-4 col-md-4 text-end">Total</div>
+          <div class="col-lg-1 col-md-1 text-end">Remove</div>
         `;
-        cartContainer.appendChild(tableHeader);
+        tableContainer.appendChild(tableHeader);
 
         // Create the table body
-        const tableBody = document.createElement('tbody');
-
         cartItems.forEach((item) => {
-          // Create a cart item element
-          const cartItem = document.createElement('tr');
-          cartItem.classList.add('cart-item');
+          const cartItem = document.createElement('div');
+          cartItem.classList.add('row', 'align-items-center', 'border-bottom', 'py-3');
 
           // Populate the cart item
           cartItem.innerHTML = `
-            <td class="col-lg-4 col-md-3">
-              <div class="cart-info d-flex align-items-center">
-                <img src="${item.images[0]}" alt="${item.product_name}" class="img-fluid me-3" style="width: 60px;">
+            <div class="col-lg-4 col-md-3">
+              <div class="d-flex align-items-center">
+                <img src="${item.images[0]}" alt="${item.product_name}" class="img-fluid me-3" style="width: 80px;">
                 <div>
-                  <h4 class="card-title text-uppercase mb-1">${item.product_name}</h4>
+                  <h5 class="text-uppercase mb-1">${item.product_name}</h5>
                   <span class="money text-primary">$${item.price}</span>
                 </div>
               </div>
-            </td>
-            <td class="col-lg-3 col-md-4">
-              <div class="qty-number">
-                <input class="spin-number-output text-center mx-2" type="text" readonly value="${item.qty}" style="width: 50px;">
-              </div>
-            </td>
-            <td class="col-lg-4 col-md-4 text-end">
+            </div>
+            <div class="col-lg-3 col-md-4">
+              <input class="qty-input text-center" type="text" readonly value="${item.qty}" style="width: 60px; border: none; background-color: #f1f1f1;">
+            </div>
+            <div class="col-lg-4 col-md-4 text-end">
               <span class="money text-dark">$${(item.price * item.qty).toFixed(2)}</span>
-            </td>
-            <td class="col-lg-1 col-md-1 text-end">
+            </div>
+            <div class="col-lg-1 col-md-1 text-end">
               <a href="#" class="text-danger remove-item" data-cart-id="${item.id}">
                 <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
               </a>
-            </td>
+            </div>
           `;
 
-          // Append the cart item to the table body
-          tableBody.appendChild(cartItem);
+          // Append the cart item to the table container
+          tableContainer.appendChild(cartItem);
         });
 
-        // Append the table body to the cart container
-        cartContainer.appendChild(tableBody);
+        // Append the table container to the cart container
+        cartContainer.appendChild(tableContainer);
+
+        // Add buttons section
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.classList.add('text-end', 'mt-4');
+        buttonsContainer.innerHTML = `
+          <button class="btn btn-light me-2">Continue Shopping</button>
+          <button class="btn btn-primary" onclick='proceedToCheckOut()'>Proceed to Checkout</button>
+        `;
+        cartContainer.appendChild(buttonsContainer);
       }
-        
+      
       function proceedToCheckOut() {
         window.location.href = `${window.location.origin}/checkout.html?id=${id}`;
       }
@@ -156,15 +163,11 @@
       <div class="container">
         <div class="row">
           <div class="cart-table">
-            
-          </div>
-          <div class="text-end mt-4">
-            <button class="btn btn-light me-2">Continue Shopping</button>
-            <button class="btn btn-primary" onclick='proceedToCheckOut()'>Proceed to Checkout</button>
+            <!-- Cart content will be populated here by the JavaScript -->
           </div>
         </div>
       </div>
-    </section>    
+    </section>
   <div id="footer-container"></div>
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
