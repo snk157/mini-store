@@ -49,7 +49,7 @@
 
       async function fetchCart(page) {
           try {
-            const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/cart`);
+            const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/carts`);
             const cartItems = response.data;
 
             // Populate the cart dynamically
@@ -60,47 +60,47 @@
         }
         
       function populateCart(cartItems) {
-          const cartContainer = document.querySelector('.cart-table');
-          cartContainer.innerHTML = '';
+        const cartContainer = document.querySelector('.cart-table');
+        cartContainer.innerHTML = '';
 
-          cartItems.forEach((item) => {
-            // Create a cart item element
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item', 'border-top', 'border-bottom', 'padding-small');
-            cartItem.setAttribute('data-cart-id', item.id);
+        cartItems.forEach((item) => {
+          // Create a cart item element
+          const cartItem = document.createElement('div');
+          cartItem.classList.add('cart-item', 'border-top', 'border-bottom', 'padding-small');
+          cartItem.setAttribute('data-cart-id', item.id);
 
-            // Populate the cart item
-            cartItem.innerHTML = `
-              <div class="row align-items-center">
-                <div class="col-lg-4 col-md-3">
-                  <div class="cart-info d-flex align-items-center">
-                    <img src="${item.images[0]}" alt="${item.product_name}" class="img-fluid me-3" style="width: 60px;">
-                    <div>
-                      <h4 class="card-title text-uppercase mb-1">${item.product_name}</h4>
-                      <span class="money text-primary">$${item.price.toFixed(2)}</span>
-                    </div>
+          // Populate the cart item
+          cartItem.innerHTML = `
+            <div class="row align-items-center">
+              <div class="col-lg-4 col-md-3">
+                <div class="cart-info d-flex align-items-center">
+                  <img src="${item.images[0]}" alt="${item.product_name}" class="img-fluid me-3" style="width: 60px;">
+                  <div>
+                    <h4 class="card-title text-uppercase mb-1">${item.product_name}</h4>
+                    <span class="money text-primary">$${item.price.toFixed(2)}</span>
                   </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                  <div class="qty-number">
-                    <input class="spin-number-output text-center mx-2" type="text" readonly value="${item.qty}" style="width: 50px;">
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-4 text-end">
-                  <span class="money text-dark">$${(item.price * item.qty).toFixed(2)}</span>
-                </div>
-                <div class="col-lg-1 col-md-1 text-end">
-                  <a href="#" class="text-danger remove-item" data-cart-id="${item.id}">
-                    <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
-                  </a>
                 </div>
               </div>
-            `;
+              <div class="col-lg-3 col-md-4">
+                <div class="qty-number">
+                  <input class="spin-number-output text-center mx-2" type="text" readonly value="${item.qty}" style="width: 50px;">
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 text-end">
+                <span class="money text-dark">$${(item.price * item.qty).toFixed(2)}</span>
+              </div>
+              <div class="col-lg-1 col-md-1 text-end">
+                <a href="#" class="text-danger remove-item" data-cart-id="${item.id}">
+                  <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
+                </a>
+              </div>
+            </div>
+          `;
 
-            // Append the cart item to the cart container
-            cartContainer.appendChild(cartItem);
-          });
-        }
+          // Append the cart item to the cart container
+          cartContainer.appendChild(cartItem);
+        });
+      }
         
       function proceedToCheckOut() {
         window.location.href = `${window.location.origin}/checkout.html?id=${id}`;
