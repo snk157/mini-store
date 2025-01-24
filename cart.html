@@ -64,100 +64,62 @@
       }
         
       function populateCart(cartItems) {
-        const cartContainer = document.querySelector('.cart-table');
-        cartContainer.innerHTML = '';  // Clear the cart container
+        const cartBody = document.querySelector('#cart-body');
+        cartBody.innerHTML = '';
 
-        // Create the table container
-        const tableContainer = document.createElement('div');
-        tableContainer.classList.add('table');
-
-        const tableHeader = document.createElement('div');
-        tableHeader.classList.add('row', 'pb-2', 'mb-3');
-        tableHeader.innerHTML = `
-          <div class="col-lg-4 col-md-3">Product</div>
-          <div class="col-lg-3 col-md-4">Quantity</div>
-          <div class="col-lg-4 col-md-4 text-end">Total</div>
-          <div class="col-lg-1 col-md-1 text-end"></div>  <!-- Empty for remove icon -->
-        `;
-        tableContainer.appendChild(tableHeader);
-
-        // Create the table body
         cartItems.forEach((item) => {
-          const cartItem = document.createElement('div');
-          cartItem.classList.add('row', 'align-items-center', 'border-bottom', 'py-3');
+          const cartRow = document.createElement('tr');
+          cartRow.setAttribute('data-cart-id', item.id);
 
-          // Populate the cart item
-          cartItem.innerHTML = `
-            <div class="col-lg-4 col-md-3">
+          cartRow.innerHTML = `
+            <td>
               <div class="d-flex align-items-center">
-                <img src="${item.images[0]}" alt="${item.product_name}" class="img-fluid me-3" style="width: 80px;">
+                <img src="${item.images[0]}" alt="${item.product_name}" style="width: 60px; margin-right: 10px;">
                 <div>
-                  <h5 class="text-uppercase mb-1">${item.product_name}</h5>
-                  <span class="money text-primary">$${item.price}</span>
+                  <h5>${item.product_name}</h5>
+                  <small class="text-muted">$${item.price}</small>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-3 col-md-4">
-              <div class="d-flex align-items-center">
-                <button class="btn btn-outline-secondary btn-sm" onclick="changeQuantity(${item.id}, 'decrease')">-</button>
-                <input class="qty-input text-center mx-2" type="text" readonly value="${item.qty}" style="width: 60px; border: none; background-color: #f1f1f1;">
-                <button class="btn btn-outline-secondary btn-sm" onclick="changeQuantity(${item.id}, 'increase')">+</button>
+            </td>
+            <td>
+              <div class="d-flex align-items-center justify-content-center">
+                <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${item.id}, 'decrease')">-</button>
+                <input type="text" class="text-center mx-2 qty-input" value="${item.qty}" readonly style="width: 50px; border: none; background-color: #f1f1f1;">
+                <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${item.id}, 'increase')">+</button>
               </div>
-            </div>
-            <div class="col-lg-4 col-md-4 text-end">
-              <span class="money text-dark">$${(item.price * item.qty).toFixed(2)}</span>
-            </div>
-            <div class="col-lg-1 col-md-1 text-end">
-              <a href="#" class="text-danger remove-item" data-cart-id="${item.id}" onclick="removeFromCart(${item.id})">
+            </td>
+            <td class="text-end">$${(item.price * item.qty).toFixed(2)}</td>
+            <td class="text-end">
+              <a href="#" class="text-danger" onclick="removeFromCart(${item.id})">
                 <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
               </a>
-            </div>
+            </td>
           `;
 
-          // Append the cart item to the table container
-          tableContainer.appendChild(cartItem);
+          cartBody.appendChild(cartRow);
         });
-
-        // Append the table container to the cart container
-        cartContainer.appendChild(tableContainer);
-
-        // Add buttons section
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.classList.add('text-end', 'mt-4');
-        buttonsContainer.innerHTML = `
-          <button class="btn btn-light me-2">Continue Shopping</button>
-          <button class="btn btn-primary" onclick='proceedToCheckOut()'>Proceed to Checkout</button>
-        `;
-        cartContainer.appendChild(buttonsContainer);
       }
-      
+
       function changeQuantity(itemId, action) {
-        const cartItem = document.querySelector(`[data-cart-id='${itemId}']`);
-        const qtyInput = cartItem.querySelector('.qty-input');
+        const cartRow = document.querySelector(`[data-cart-id='${itemId}']`);
+        const qtyInput = cartRow.querySelector('.qty-input');
         let currentQty = parseInt(qtyInput.value);
 
         if (action === 'increase') {
-          qtyInput.value = currentQty + 1;
+          currentQty++;
         } else if (action === 'decrease' && currentQty > 1) {
-          qtyInput.value = currentQty - 1;
+          currentQty--;
         }
 
-        // Update total price
-        const price = cartItem.querySelector('.money').innerText.split('$')[1];
-        const totalPrice = (price * qtyInput.value).toFixed(2);
-        cartItem.querySelector('.money.text-dark').innerText = `$${totalPrice}`;
-
-        // You can also send an API call to update the quantity in the backend here
+        qtyInput.value = currentQty;
       }
 
       function removeFromCart(itemId) {
-        const cartItem = document.querySelector(`[data-cart-id='${itemId}']`);
-        cartItem.remove();
-
-        // You can also send an API call to remove the item from the backend here
+        const cartRow = document.querySelector(`[data-cart-id='${itemId}']`);
+        cartRow.remove();
       }
 
-      function proceedToCheckOut() {
+      function proceedToCheckout() {
         window.location.href = `${window.location.origin}/checkout.html?id=${id}`;
       }
 
@@ -191,12 +153,27 @@
     <section class="shopify-cart padding-large">
       <div class="container">
         <div class="row">
-          <div class="cart-table">
-            <!-- Cart content will be populated here by the JavaScript -->
+          <table class="cart-table table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cart-body">
+              <!-- Items will be dynamically added here -->
+            </tbody>
+          </table>
+          <div class="text-end mt-4">
+            <button class="btn btn-light me-2">Continue Shopping</button>
+            <button class="btn btn-primary" onclick="proceedToCheckout()">Proceed to Checkout</button>
           </div>
         </div>
       </div>
     </section>
+    
   <div id="footer-container"></div>
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
