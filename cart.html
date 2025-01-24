@@ -73,20 +73,12 @@
 
           cartRow.innerHTML = `
             <td>
-              <div class="d-flex align-items-center">
                 <img src="${item.images[0]}" alt="${item.product_name}" style="width: 60px; margin-right: 10px;">
-                <div>
-                  <h5>${item.product_name}</h5>
-                  <small class="text-muted">$${item.price}</small>
-                </div>
-              </div>
             </td>
             <td>
-              <div class="d-flex align-items-center justify-content-center">
                 <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${item.id}, 'decrease')">-</button>
                 <input type="text" class="text-center mx-2 qty-input" value="${item.qty}" readonly style="width: 50px; border: none; background-color: #f1f1f1;">
                 <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${item.id}, 'increase')">+</button>
-              </div>
             </td>
             <td class="text-end">$${(item.price * item.qty).toFixed(2)}</td>
             <td class="text-end">
@@ -95,7 +87,6 @@
               </a>
             </td>
           `;
-
           cartBody.appendChild(cartRow);
         });
       }
