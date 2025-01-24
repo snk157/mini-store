@@ -54,7 +54,7 @@
                 Authorization: `Bearer ${token}`,
               },
             });
-            const cartItems = response.data;
+            const cartItems = response.data.data;
 
             // Populate the cart dynamically
             populateCart(cartItems);
