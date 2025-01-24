@@ -48,7 +48,7 @@
           });
         }
 
-      async function fetchCart(page) {
+      async function fetchCart() {
         try {
           const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/carts`, {
             headers: {
@@ -115,7 +115,7 @@
       }
 
       function proceedToCheckout() {
-        window.location.href = `${window.location.origin}/checkout.html?id=${id}`;
+        window.location.href = `${window.location.origin}/checkout.html}`;
       }
 
       // Call function to load header and footer
