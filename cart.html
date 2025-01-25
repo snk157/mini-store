@@ -92,7 +92,7 @@
         });
       }
 
-      function changeQuantity(itemId, action) {
+      async function changeQuantity(itemId, action) {
         const cartRow = document.querySelector(`[data-cart-id='${itemId}']`);
         const qtyInput = cartRow.querySelector('.qty-input');
         const price = cartRow.querySelector('.price');
@@ -107,6 +107,12 @@
 
         qtyInput.value = currentQty;
         subTotal.innerHTML = currentQty * Number(price);
+
+        const response = await axios.post(`https://mini-store-api-ud3r.onrender.com/carts/${itemId}`, {}, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
       }
 
       function removeFromCart(itemId) {
