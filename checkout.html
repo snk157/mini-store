@@ -117,9 +117,9 @@
 
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td>${item.product_name}</td>
-            <td>${item.qty}</td>
-            <td>$${total.toFixed(2)}</td>
+            <td class="text-end">${item.product_name}</td>
+            <td class="text-end">${item.qty}</td>
+            <td class="text-end">$${total.toFixed(2)}</td>
           `;
           orderDetails.appendChild(row);
         });
