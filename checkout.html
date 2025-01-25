@@ -167,8 +167,10 @@
                 name: `${orderData.firstname} ${orderData.lastname}`,
               },
               confirmParams: {
-                return_url: 'if_required',
+                return_url: `${window.location.origin}/thankyou.html`,
               },
+              // Uncomment below if you only want redirect for redirect-based payments.
+              // redirect: 'if_required',
             },
           });
 
