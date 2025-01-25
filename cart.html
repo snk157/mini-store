@@ -114,8 +114,12 @@
         cartRow.remove();
       }
 
-      function proceedToCheckout() {
-        
+      async function proceedToCheckout() {
+        const response = await axios.post(`https://mini-store-api-ud3r.onrender.com/orders`, orderData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         //window.location.href = `${window.location.origin}/checkout.html`;
       }
 
