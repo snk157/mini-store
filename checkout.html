@@ -159,14 +159,25 @@
           const cardElement = elements.create('card');
           cardElement.mount('#card-element');
 
+          // Create the payment method on the frontend
+          const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card: cardElement,
+            billing_details: {
+              name: `${orderData.firstname} ${orderData.lastname}`,
+            },
+          });
+
+          if (paymentMethodError) {
+            console.error('Error creating payment method:', paymentMethodError.message);
+            alert(`Error: ${paymentMethodError.message}`);
+            return;
+          }
+
+          // Confirm the PaymentIntent with the created payment method
           const { error, paymentIntent } = await stripe.confirmPayment({
             clientSecret,
-            payment_method: {
-              card: cardElement,
-              billing_details: {
-                name: `${orderData.firstname} ${orderData.lastname}`,
-              },
-            },
+            payment_method: paymentMethod.id,  // Pass the payment method ID
             confirmParams: {
               return_url: `${window.location.origin}/thankyou.html`,
             },
