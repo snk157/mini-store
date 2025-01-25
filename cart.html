@@ -115,7 +115,7 @@
       }
 
       async function proceedToCheckout() {
-        const response = await axios.post(`https://mini-store-api-ud3r.onrender.com/orders`, orderData, {
+        const response = await axios.post(`https://mini-store-api-ud3r.onrender.com/orders`, {}, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
