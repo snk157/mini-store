@@ -118,6 +118,9 @@
             Authorization: `Bearer ${token}`,
           },
         });
+
+        const sessionUrl = response.data.sessionUrl;
+        window.location.href = sessionUrl;
         //window.location.href = `${window.location.origin}/checkout.html`;
       }
 
