@@ -30,10 +30,21 @@
         window.location.href = `${window.location.origin}/login.html`;
       }
 
-      const stripe = Stripe("pk_test_51QfvT6GsEDb48SGKxdvliYr8WTdJ5rYJNMizWi1X5VhNxleZSEhJW7tnREQI45aSqA4vqGD7aR2fr2ROCx6ubu9M00McfYmD6o");
-      const elements = stripe.elements();
-      const cardElement = elements.create('card');
-      cardElement.mount('#card-element');
+      const stripe = Stripe('pk_test_51QfvT6GsEDb48SGKxdvliYr8WTdJ5rYJNMizWi1X5VhNxleZSEhJW7tnREQI45aSqA4vqGD7aR2fr2ROCx6ubu9M00McfYmD6o');
+      const options = {
+        mode: 'payment',
+        amount: 1099,
+        currency: 'usd',
+      };
+      const elements = stripe.elements(options);
+      const expressCheckoutElement = elements.create("expressCheckout");
+      expressCheckoutElement.mount("#express-checkout-element");
+      expressCheckoutElement.on('click', (event) => {
+        const options = {
+          emailRequired: true
+        };
+        event.resolve(options);
+      });
 
       function loadHeaderFooter() {
         // Fetch and insert header content
@@ -286,7 +297,9 @@
                 </tfoot>
               </table>
             </div>
-            <div id="card-element"></div>
+            <div id="express-checkout-element">
+              <!-- Mount the Express Checkout Element here -->
+            </div>
             <button id="create-order-btn" class="btn btn-primary mt-4" onclick="createOrder()">Place Order</button>
           </div>
         </div>
