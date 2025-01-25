@@ -52,8 +52,8 @@
         let price = document.getElementById("price");
 
         productName.innerHTML = response.data.data.product_name;
-        description.innerHTML = response.data.data.product_name;
-        price.innerHTML = response.data.data.product_name;
+        description.innerHTML = response.data.data.description;
+        price.innerHTML = response.data.data.price;
 
         if (images.length > 0) {
           previewImage.src = images[0];
