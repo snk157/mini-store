@@ -166,11 +166,9 @@
               billing_details: {
                 name: `${orderData.firstname} ${orderData.lastname}`,
               },
-              confirmParams: {
-                return_url: `${window.location.origin}/thankyou.html`,
-              },
-              // Uncomment below if you only want redirect for redirect-based payments.
-              // redirect: 'if_required',
+            },
+            confirmParams: {
+              return_url: `${window.location.origin}/thankyou.html`,
             },
           });
 
@@ -301,13 +299,6 @@
               </form>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-    <section id="instagram" class="padding-large overflow-hidden">
-      <div class="container">
-        <div class="row">
-          
         </div>
       </div>
     </section>
