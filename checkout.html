@@ -158,25 +158,28 @@
           const stripe = Stripe(stripePublicKey);
           const elements = stripe.elements();
 
-          const expressCheckoutElement = elements.create('expressCheckout', { clientSecret: clientSecret});
+          const expressCheckoutElement = elements.create('expressCheckout', {
+            clientSecret: clientSecret,
+          });
+
           expressCheckoutElement.mount('#express-checkout-element');
 
-          expressCheckoutElement.on('confirm', async (event) => {
-            const { error, paymentIntent } = await stripe.confirmPayment({
-              clientSecret,
-              payment_method: event.paymentMethod.id, 
-              confirmParams: {
-                return_url: `${window.location.origin}/thankyou.html`,
-              },
-            });
+          // expressCheckoutElement.on('confirm', async (event) => {
+          //   const { error, paymentIntent } = await stripe.confirmPayment({
+          //     clientSecret,
+          //     payment_method: event.paymentMethod.id, 
+          //     confirmParams: {
+          //       return_url: `${window.location.origin}/thankyou.html`,
+          //     },
+          //   });
 
-            if (error) {
-              console.error('Payment failed:', error.message);
-              alert('Payment failed: ' + error.message);
-            } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-              alert('Payment succeeded! Thank you for your order.');
-            }
-          });
+          //   if (error) {
+          //     console.error('Payment failed:', error.message);
+          //     alert('Payment failed: ' + error.message);
+          //   } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+          //     alert('Payment succeeded! Thank you for your order.');
+          //   }
+          // });
         } else {
           alert('Something went wrong while creating the order.');
         }
