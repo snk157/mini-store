@@ -153,6 +153,8 @@
         if (response.status === 200) {
           const { stripePublicKey, clientSecret } = response.data.data;
 
+          alert(clientSecret);
+          
           const stripe = Stripe(stripePublicKey);
           const elements = stripe.elements();
 
