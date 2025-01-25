@@ -144,7 +144,7 @@
           status: 'pending',
         };
 
-        const response = await axios.post(`https://mini-store-api-ud3r.onrender.com/orders`, {
+        const response = await axios.post(`https://mini-store-api-ud3r.onrender.com/orders`, orderData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
