@@ -51,7 +51,7 @@
                     <small class="text-muted">Primary Address</small>
                   </div>
                   <div>
-                    <button class="btn btn-sm btn-primary" disabled>Primary</button>
+                    <button class="btn btn-sm btn-primary" onclick="setPrimary(this)">Primary</button>
                     <button class="btn btn-sm btn-danger" onclick="removeAddress(this)">Remove</button>
                   </div>
                 </div>
@@ -128,7 +128,6 @@
           const primaryButton = item.querySelector('.btn-primary');
           if (primaryButton) {
             primaryButton.classList.replace('btn-primary', 'btn-outline-secondary');
-            primaryButton.disabled = false;
             primaryButton.innerText = 'Set as Primary';
           }
           const label = item.querySelector('small');
@@ -136,7 +135,6 @@
         });
 
         button.classList.replace('btn-outline-secondary', 'btn-primary');
-        button.disabled = true;
         button.innerText = 'Primary';
         button.closest('.address-item').querySelector('small').innerText = 'Primary Address';
       }
