@@ -20,6 +20,8 @@
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
     <!-- script ================================================== -->
     <script>
       function loadHeaderFooter() {
@@ -142,8 +144,30 @@
           },
         });
 
-        if (response.status === 200) {
+        if (response.status === 200)
+        {
+          const { stripePublicKey, clientSecret } = response.data.data;
+          const stripe = Stripe(stripePublicKey);
+          const elements = stripe.elements();
+          const cardElement = elements.create('card');
+          cardElement.mount('#card-element');
 
+          const { error, paymentIntent } = await stripe.confirmPayment({
+            clientSecret,
+            payment_method: {
+              card: cardElement,
+              billing_details: {
+                name: `${orderData.firstname} ${orderData.lastname}`,
+              },
+            },
+          });
+
+          if (error) {
+            console.error('Payment failed:', error.message);
+            alert('Payment failed: ' + error.message);
+          } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+            alert('Payment succeeded! Thank you for your order.');
+          }
         } else {
           alert('Something went wrong while creating the order.');
         }
@@ -275,6 +299,7 @@
         </div>
       </div>
     </section>
+    <div id="card-element"></div>
   <div id="footer-container"></div>
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
