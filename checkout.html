@@ -144,7 +144,7 @@
           status: 'pending',
         };
 
-        const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/orders`, {
+        const response = await axios.post(`https://mini-store-api-ud3r.onrender.com/orders`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -156,7 +156,7 @@
 
           console.log(stripePublicKey);
           console.log(typeof(stripePublicKey));
-          
+
           const stripe = Stripe(stripePublicKey);
           const elements = stripe.elements();
           const cardElement = elements.create('card');
