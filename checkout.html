@@ -156,7 +156,7 @@
           const stripe = Stripe(stripePublicKey);
           const elements = stripe.elements();
 
-          const expressCheckoutElement = elements.create('expressCheckout');
+          const expressCheckoutElement = elements.create('expressCheckout', { clientSecret: clientSecret});
           expressCheckoutElement.mount('#express-checkout-element');
 
           expressCheckoutElement.on('confirm', async (event) => {
