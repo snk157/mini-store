@@ -24,6 +24,12 @@
     <script src="https://js.stripe.com/v3/"></script>
     <!-- script ================================================== -->
     <script>
+      const token = localStorage.getItem("token");
+      if(!token)
+      {
+        window.location.href = `${window.location.origin}/login.html`;
+      }
+      
       function loadHeaderFooter() {
         // Fetch and insert header content
         fetch('header.html')
