@@ -32,7 +32,7 @@
           <!-- Profile Details -->
           <div class="col-lg-12 col-md-12">
             <div class="profile-card p-4 bg-light rounded">
-              <h2 class="text-uppercase text-dark">Your Profile</h2>
+              <h2 class="text-uppercase text-dark">Profile</h2>
               <p><strong>Name:</strong> <span id="user-name"></span></p>
               <p><strong>Email:</strong> <span id="user-email"></span></p>
               <p><strong>Contact:</strong> <span id="user-contact"></span></p>
@@ -56,18 +56,7 @@
                   </tr>
                 </thead>
                 <tbody id="order-history">
-                  <tr>
-                    <td><a href="#" onclick="showOrderDetails('#001')">#001</a></td>
-                    <td>2025-01-01</td>
-                    <td>Delivered</td>
-                    <td>$100</td>
-                  </tr>
-                  <tr>
-                    <td><a href="#" onclick="showOrderDetails('#002')">#002</a></td>
-                    <td>2025-01-10</td>
-                    <td>Processing</td>
-                    <td>$200</td>
-                  </tr>
+                  <!-- Orders will be dynamically populated here -->
                 </tbody>
               </table>
             </div>
@@ -91,6 +80,33 @@
         window.location.href = `${window.location.origin}/login.html`;
       }
 
+      async function fetchOrderHistory() {
+        await axios.get("https://mini-store-api-ud3r.onrender.com/orders", {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        .then((response) => {
+          const data = response.data;
+          if (data.status) {
+            const orderHistoryTable = document.getElementById('order-history');
+            orderHistoryTable.innerHTML = '';
+
+            data.data.forEach((order) => {
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                <td><a href="#" onclick="showOrderDetails('${order.id}')">${order.id}</a></td>
+                <td>${new Date(order.created * 1000).toISOString().split('T')[0]}</td>
+                <td>${order.payment_status}</td>
+                <td>$${(order.amount_total / 100).toFixed(2)}</td>
+              `;
+              orderHistoryTable.appendChild(row);
+            });
+          }
+        });
+      }
+      
       function showOrderDetails(orderId) {
         window.location.href = `${window.location.origin}/order.html?orderId=${orderId}`;
       }
@@ -230,6 +246,7 @@
       window.onload = function () {
         loadHeaderFooter();
         getUserinfo();
+        fetchOrderHistory();
       };
     </script>
   </body>
