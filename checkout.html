@@ -30,7 +30,7 @@
         window.location.href = `${window.location.origin}/login.html`;
       }
 
-      const stripe = Stripe(stripePublicKey);
+      const stripe = Stripe("pk_test_51QfvT6GsEDb48SGKxdvliYr8WTdJ5rYJNMizWi1X5VhNxleZSEhJW7tnREQI45aSqA4vqGD7aR2fr2ROCx6ubu9M00McfYmD6o");
       const elements = stripe.elements();
       const cardElement = elements.create('card');
       cardElement.mount('#card-element');
