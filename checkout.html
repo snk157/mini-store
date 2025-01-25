@@ -30,22 +30,6 @@
         window.location.href = `${window.location.origin}/login.html`;
       }
 
-      const stripe = Stripe('pk_test_51QfvT6GsEDb48SGKxdvliYr8WTdJ5rYJNMizWi1X5VhNxleZSEhJW7tnREQI45aSqA4vqGD7aR2fr2ROCx6ubu9M00McfYmD6o');
-      const options = {
-        mode: 'payment',
-        amount: 1099,
-        currency: 'usd',
-      };
-      const elements = stripe.elements(options);
-      const expressCheckoutElement = elements.create("expressCheckout");
-      expressCheckoutElement.mount("#express-checkout-element");
-      expressCheckoutElement.on('click', (event) => {
-        const options = {
-          emailRequired: true
-        };
-        event.resolve(options);
-      });
-
       function loadHeaderFooter() {
         // Fetch and insert header content
         fetch('header.html')
@@ -166,40 +150,31 @@
           },
         });
 
-        if (response.status === 200)
-        {
+        if (response.status === 200) {
           const { stripePublicKey, clientSecret } = response.data.data;
 
-          // Create the payment method on the frontend
-          const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
-            card: cardElement,
-            billing_details: {
-              name: `${orderData.firstname} ${orderData.lastname}`,
-            },
+          const stripe = Stripe(stripePublicKey);
+          const elements = stripe.elements();
+
+          const expressCheckoutElement = elements.create('express-checkout');
+          expressCheckoutElement.mount('#express-checkout-element');
+
+          expressCheckoutElement.on('confirm', async (event) => {
+            const { error, paymentIntent } = await stripe.confirmPayment({
+              clientSecret,
+              payment_method: event.paymentMethod.id, 
+              confirmParams: {
+                return_url: `${window.location.origin}/thankyou.html`,
+              },
+            });
+
+            if (error) {
+              console.error('Payment failed:', error.message);
+              alert('Payment failed: ' + error.message);
+            } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+              alert('Payment succeeded! Thank you for your order.');
+            }
           });
-
-          if (paymentMethodError) {
-            console.error('Error creating payment method:', paymentMethodError.message);
-            alert(`Error: ${paymentMethodError.message}`);
-            return;
-          }
-
-          // Confirm the PaymentIntent with the created payment method
-          const { error, paymentIntent } = await stripe.confirmPayment({
-            clientSecret,
-            payment_method: paymentMethod.id,  // Pass the payment method ID
-            confirmParams: {
-              return_url: `${window.location.origin}/thankyou.html`,
-            },
-          });
-
-          if (error) {
-            console.error('Payment failed:', error.message);
-            alert('Payment failed: ' + error.message);
-          } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-            alert('Payment succeeded! Thank you for your order.');
-          }
         } else {
           alert('Something went wrong while creating the order.');
         }
