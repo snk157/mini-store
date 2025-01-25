@@ -154,15 +154,18 @@
           const { stripePublicKey, clientSecret } = response.data.data;
 
           const stripe = Stripe(stripePublicKey);
-          const options = {
-            mode: 'payment',
-            amount: 1099,
-            currency: 'myr',
-          };
-          const elements = stripe.elements(options);
-          const expressCheckoutElement = elements.create('expressCheckout');
-          expressCheckoutElement.mount('#express-checkout-element');
-          
+          const paymentRequest = stripe.paymentRequest({
+            country: 'MY', // Set this to your testing country
+            currency: 'myr', // Or your preferred currency
+            paymentMethodTypes: ['card', 'apple_pay', 'google_pay', 'fpx', 'grabpay', 'link', 'alipay'],
+          });
+
+          const elements = stripe.elements();
+          const paymentRequestButton = elements.create('paymentRequestButton', {
+            paymentRequest,
+          });
+
+
         } else {
           alert('Something went wrong while creating the order.');
         }
