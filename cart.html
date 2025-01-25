@@ -76,7 +76,7 @@
             </td>
             <td>
               <h5>${item.product_name}</h5>
-              <small class="text-muted">$${item.price}</small>
+              <small class="text-muted price">$${item.price}</small>
             </td>
             <td>
               <button class="btn btn-sm btn-outline-secondary" onclick="changeQuantity(${item.id}, 'decrease')">-</button>
@@ -95,6 +95,7 @@
       function changeQuantity(itemId, action) {
         const cartRow = document.querySelector(`[data-cart-id='${itemId}']`);
         const qtyInput = cartRow.querySelector('.qty-input');
+        const price = cartRow.querySelector('.price');
         const subTotal = cartRow.querySelector('.subtotal');
         let currentQty = parseInt(qtyInput.value);
 
@@ -105,6 +106,7 @@
         }
 
         qtyInput.value = currentQty;
+        subTotal.innerHTML = currentQty * Number(price);
       }
 
       function removeFromCart(itemId) {
@@ -113,6 +115,13 @@
       }
 
       async function proceedToCheckout() {
+        
+        await axios.post(`https://mini-store-api-ud3r.onrender.com/carts`, {cartData} {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         const response = await axios.post(`https://mini-store-api-ud3r.onrender.com/checkout`, {}, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -121,7 +130,6 @@
 
         const sessionUrl = response.data.sessionUrl;
         window.location.href = sessionUrl;
-        //window.location.href = `${window.location.origin}/checkout.html`;
       }
 
       // Call function to load header and footer

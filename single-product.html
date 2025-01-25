@@ -51,10 +51,12 @@
         let productName = document.getElementById("product_name");
         let description = document.getElementById("description");
         let price = document.getElementById("price");
+        let stock = document.getElementById("stock");
 
         productName.innerHTML = response.data.data.product_name;
         description.innerHTML = response.data.data.description;
         price.innerHTML = response.data.data.price;
+        stock.innerHTML = response.data.data.qty;
 
         if (images.length > 0) {
           previewImage.src = images[0];
@@ -157,7 +159,7 @@
             </div>
             <p id="description">Justo, cum feugiat imperdiet nulla molestie ac vulputate scelerisque amet. Bibendum adipiscing platea blandit sit sed quam semper rhoncus. Diam ultrices maecenas consequat eu tortor orci, cras lectus mauris, cras egestas quam venenatis neque.</p>
             <div class="product-quantity">
-              <div class="stock-number text-dark">2 in stock</div>
+              <div class="stock-number text-dark"><span id="stock">2</span> in stock</div>
               <div class="stock-button-wrap pt-3">
                 <div class="input-group product-qty">
                   <span class="input-group-btn">
