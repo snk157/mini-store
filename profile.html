@@ -107,8 +107,33 @@
         });
       }
       
-      function showOrderDetails(orderId) {
-        window.location.href = `${window.location.origin}/order.html?orderId=${orderId}`;
+      async function showOrderDetails(orderId) {
+        axios.get("https://mini-store-api-ud3r.onrender.com/orders/${orderId}", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+            const data = response.data;
+            if (data.status)
+            {
+              const orderDetails = data.data;
+              const modalContent = document.getElementById('modal-content');
+              modalContent.innerHTML = `
+                <h3>Order Details for ${orderId}</h3>
+                <p><strong>Date:</strong> ${new Date(orderDetails.created * 1000).toLocaleDateString()}</p>
+                <p><strong>Status:</strong> ${orderDetails.payment_status}</p>
+                <p><strong>Total:</strong> $${(orderDetails.amount_total / 100).toFixed(2)}</p>
+                <p><strong>Items:</strong></p>
+                <ul>
+                  ${orderDetails.line_items.data.map(item => `<li>${item.description} - Qty: ${item.quantity}</li>`).join('')}
+                </ul>
+              `;
+
+              const modal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
+              modal.show();
+            }
+        });
       }
 
       function editProfile() {
