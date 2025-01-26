@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords"
+    content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, materialpro admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, materialpro admin lite design, materialpro admin lite dashboard bootstrap 5 dashboard template" />
+  <meta name="description"
+    content="Material Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Material Pro Free Bootstrap Admin Template by WrapPixel</title>
+  <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Custom CSS -->
+  <link href="css/style.min.css" rel="stylesheet" />
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <!-- ============================================================== -->
+  <!-- Preloader - style you can find in spinners.css -->
+  <!-- ============================================================== -->
+  <div class="preloader">
+    <div class="lds-ripple">
+      <div class="lds-pos"></div>
+      <div class="lds-pos"></div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- Main wrapper - style you can find in pages.scss -->
+  <!-- ============================================================== -->
+  <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+    data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <header class="topbar" data-navbarbg="skin6">
+      <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+        <div class="navbar-header" data-logobg="skin6">
+          <!-- ============================================================== -->
+          <!-- Logo -->
+          <!-- ============================================================== -->
+          <a class="navbar-brand ms-4" href="index.html">
+            <!-- Logo icon -->
+            <b class="logo-icon">
+              <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+              <!-- Dark Logo icon -->
+              <img src="assets/images/logo-light-icon.png" alt="homepage" class="dark-logo" />
+            </b>
+            <!--End Logo icon -->
+            <!-- Logo text -->
+            <span class="logo-text">
+              <!-- dark Logo text -->
+              <img src="assets/images/logo-light-text.png" alt="homepage" class="dark-logo" />
+            </span>
+          </a>
+          <!-- ============================================================== -->
+          <!-- End Logo -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- toggle and nav items -->
+          <!-- ============================================================== -->
+          <a class="
+                nav-toggler
+                waves-effect waves-light
+                text-white
+                d-block d-md-none
+              " href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+          <ul class="navbar-nav d-lg-none d-md-block">
+            <li class="nav-item">
+              <a class="
+                    nav-toggler nav-link
+                    waves-effect waves-light
+                    text-white
+                  " href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+            </li>
+          </ul>
+          <!-- ============================================================== -->
+          <!-- toggle and nav items -->
+          <!-- ============================================================== -->
+          <ul class="navbar-nav me-auto mt-md-0">
+            <!-- ============================================================== -->
+            <!-- Search -->
+            <!-- ============================================================== -->
+
+            <li class="nav-item search-box">
+              <a class="nav-link text-muted" href="javascript:void(0)"><i class="mdi mdi-magnify fs-3"></i></a>
+              <form class="app-search" style="display: none">
+                <input type="text" class="form-control" placeholder="Search &amp; enter" />
+                <a class="srh-btn"><i class="mdi mdi-close"></i></a>
+              </form>
+            </li>
+          </ul>
+
+          <!-- ============================================================== -->
+          <!-- Right side toggle and nav items -->
+          <!-- ============================================================== -->
+          <ul class="navbar-nav">
+            <!-- ============================================================== -->
+            <!-- User profile and search -->
+            <!-- ============================================================== -->
+            <li class="nav-item dropdown">
+              <a class="
+                    nav-link
+                    dropdown-toggle
+                    text-muted
+                    waves-effect waves-dark
+                  " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="assets/images/users/1.jpg" alt="user" class="profile-pic me-2" /><p id="username"></p>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <div id="sidebar-container"></div>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+      <!-- ============================================================== -->
+      <!-- Bread crumb and right sidebar toggle -->
+      <!-- ============================================================== -->
+      <div class="page-breadcrumb">
+        <div class="row align-items-center">
+          <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Products</h3>
+            <div class="d-flex align-items-center">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Orders
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Bread crumb and right sidebar toggle -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Container fluid  -->
+      <!-- ============================================================== -->
+      <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+          <!-- column -->
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="card-title">Order List</h4>
+                </div>
+                <div class="table-responsive">
+                  <table class="table product-table">
+                    <thead>
+                      <tr>
+                        <td colspan="7">
+                          <div class="input-group mb-3">
+                            <input 
+                              type="text" 
+                              class="form-control" 
+                              id="product-search" 
+                              placeholder="Search products by name, description, or category..." 
+                              aria-label="Search" 
+                            />
+                            <span class="input-group-text">
+                              <i class="fas fa-search"></i>
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Thumbnail</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+                <div id="product-pagination" class="pagination"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Add Product Form -->
+          <div class="col-12">
+            <div class="card" id="product-form-card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="card-title">Add New Product</h4>
+                  <button class="btn btn-secondary" id="add-cancel-btn">Cancel</button>
+                </div>
+                <form id="product-form">
+                  <!-- Product Name -->
+                  <div class="mb-3">
+                    <label for="product-name" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" id="product-name" name="product-name" required />
+                  </div>
+        
+                  <!-- Product Description -->
+                  <div class="mb-3">
+                    <label for="product-description" class="form-label">Description</label>
+                    <textarea class="form-control" id="product-description" name="description" rows="3" required></textarea>
+                  </div>
+        
+                  <!-- Category Selection -->
+                  <div class="mb-3">
+                    <label for="product-category" class="form-label">Category</label>
+                    <select class="form-select" id="product-category" name="product-category" required>
+                      <option value="" disabled selected>- Select Category -</option>
+                    </select>
+                  </div>
+        
+                  <!-- Item Price -->
+                  <div class="mb-3">
+                    <label for="product-price" class="form-label">Price (MYR)</label>
+                    <input type="text" class="form-control" id="product-price" name="price" placeholder="0.00" inputmode="decimal" required />
+                  </div>
+                  
+                  <!-- Stock/Quantity -->
+                  <div class="mb-3">
+                    <label for="product-quantity" class="form-label">Stock / Quantity</label>
+                    <input type="number" class="form-control" id="product-quantity" name="quantity" min="0" value="0" inputmode="decimal" 
+                    required/>
+                  </div>
+
+                  <!-- Is Hot -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="is-hot" name="is-hot" />
+                    <label for="is-hot" class="form-check-label">Hot Product</label>
+                  </div>
+
+                  <!-- Is Feature -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="is-feature" name="is-feature" />
+                    <label for="is-feature" class="form-check-label">Featured Product</label>
+                  </div>
+        
+                  <!-- Product Images (Multiple Upload) -->
+                  <div class="mb-3">
+                    <label for="product-images" class="form-label">Product Images</label>
+                    <input type="file" class="form-control" id="product-images" name="images[]" accept="image/*" multiple required />
+                    <div id="image-thumbnails" class="mt-3"></div>
+                  </div>
+        
+                  <!-- Submit Button -->
+                  <div class="d-flex justify-content-end mt-3">
+                    <button type="button" id="add-product-button" class="btn btn-primary">Add Product</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Edit Product Form -->
+          <div class="col-12">
+            <div class="card" id="edit-product-form-card" style="display: none;">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="card-title">Edit Product</h4>
+                  <button class="btn btn-secondary" id="edit-cancel-btn">Cancel</button>
+                </div>
+                <form id="edit-product-form">
+                  <!-- Product Name -->
+                  <div class="mb-3">
+                    <label for="edit-product-name" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" id="edit-product-name" name="product-name" required />
+                  </div>
+          
+                  <!-- Product Description -->
+                  <div class="mb-3">
+                    <label for="edit-product-description" class="form-label">Description</label>
+                    <textarea class="form-control" id="edit-product-description" name="description" rows="3" required></textarea>
+                  </div>
+          
+                  <!-- Category Selection -->
+                  <div class="mb-3">
+                    <label for="edit-product-category" class="form-label">Category</label>
+                    <select class="form-select" id="edit-product-category" name="product-category" required>
+                      <option value="" disabled>- Select Category -</option>
+                    </select>
+                  </div>
+          
+                  <!-- Item Price -->
+                  <div class="mb-3">
+                    <label for="edit-product-price" class="form-label">Price (MYR)</label>
+                    <input type="text" class="form-control" id="edit-product-price" name="price" placeholder="0.00" inputmode="decimal" required />
+                  </div>
+          
+                  <!-- Stock/Quantity -->
+                  <div class="mb-3">
+                    <label for="edit-product-quantity" class="form-label">Stock / Quantity</label>
+                    <input type="number" class="form-control" id="edit-product-quantity" name="quantity" min="0" value="0" inputmode="decimal" required />
+                  </div>
+          
+                  <!-- Is Hot -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="edit-is-hot" name="is-hot" />
+                    <label for="edit-is-hot" class="form-check-label">Hot Product</label>
+                  </div>
+          
+                  <!-- Is Feature -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="edit-is-feature" name="is-feature" />
+                    <label for="edit-is-feature" class="form-check-label">Featured Product</label>
+                  </div>
+          
+                  <!-- Product Images (Multiple Upload) -->
+                  <div class="mb-3">
+                    <label for="edit-product-images" class="form-label">Product Images</label>
+                    <input type="file" class="form-control" id="edit-product-images" name="images[]" accept="image/*" multiple />
+                    <div id="edit-image-thumbnails" class="mt-3"></div>
+                  </div>
+          
+                  <!-- Submit Button -->
+                  <div class="d-flex justify-content-end mt-3">
+                    <button type="button" id="edit-product-button" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Container fluid  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- footer -->
+      <!-- ============================================================== -->
+      <footer class="footer">
+        © 2024 Material Pro Admin by
+        <a href="https://www.wrappixel.com/">wrappixel.com </a>
+      </footer>
+      <!-- ============================================================== -->
+      <!-- End footer -->
+      <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Wrapper -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- All Jquery -->
+  <!-- ============================================================== -->
+  <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap tether Core JavaScript -->
+  <script src="assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app-style-switcher.js"></script>
+  <!--Wave Effects -->
+  <script src="js/waves.js"></script>
+  <!--Menu sidebar -->
+  <script src="js/sidebarmenu.js"></script>
+  <!--Custom JavaScript -->
+  <script src="js/custom.js"></script>
+</body>
+<script>
+  if (token)
+  {
+    var decoded_token = jwt_decode(token);
+    document.getElementById("username").innerHTML = decoded_token.username;
+
+    if (decoded_token.exp < Math.floor(Date.now()/1000))
+    {
+      window.stop();
+      localStorage.removeItem("token");
+      window.location.href = `${window.location.origin}/admin.html`;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const newProductButton = document.querySelector(".btn-primary")
+    const addCancelButton = document.querySelector("#add-cancel-btn");
+    const editCancelButton = document.querySelector("#edit-cancel-btn");
+
+    const productFormCard = document.querySelector("#product-form").closest(".card");
+    const productTableCard = document.querySelector(".product-table").closest(".card");
+    const editFormCard = document.querySelector("#edit-product-form").closest(".card");
+
+    const addProductButton = document.getElementById("add-product-button")
+    const updateProductButton = document.getElementById("edit-product-button")
+    const priceInput = document.getElementById('product-price');
+    const quantityInput = document.getElementById('product-quantity');
+    const token = localStorage.getItem("token");
+
+    // Enforce numeric input
+    enforceNumericInput(priceInput, true);  // Allows decimals
+    enforceNumericInput(quantityInput, false);  // Only integers
+
+    loadSidebar();
+    fetchProducts();
+    loadCategories();
+
+    // Initially hide the form card
+    productFormCard.style.display = "none";
+    editFormCard.style.display = "none";
+
+    function loadSidebar() {
+      fetch('sidebar.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('sidebar-container').innerHTML = data;
+      });
+    }
+  
+    async function fetchProducts(page = 1) {
+      try {
+        const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/products?page=${page}`);
+
+        const { data, total, categoryId=null} = response.data;
+        displayProducts(data);
+        generatePagination(total, 15, page);
+
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    }
+
+    function displayProducts(products) {
+      const tableBody = document.querySelector('.product-table tbody');
+      tableBody.innerHTML = '';
+
+      products.forEach(product => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><img src="${product.images?.[0] || 'default-thumbnail.jpg'}" alt="Thumbnail" style="width: 50px; height: auto;"></td>
+          <td>${product.id}</td>
+          <td>${product.product_name}</td>
+          <td>${product.description}</td>
+          <td>${product.price}</td>
+          <td>${product.qty}</td>
+          <td>
+            <button class="btn btn-sm btn-primary edit-btn" data-id="${product.id}"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-sm btn-danger delete-btn" data-id="${product.id}"><i class="fas fa-trash"></i></button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function generatePagination(total, limit, currentPage) {
+      const totalPages = Math.ceil(total / limit);
+      const paginationNav = document.getElementById('product-pagination');
+      paginationNav.innerHTML = '';
+
+      const ul = document.createElement('ul');
+      ul.className = 'pagination justify-content-center';
+
+      // Previous Button
+      const prevButton = document.createElement('li');
+      prevButton.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+      prevButton.innerHTML = `
+        <a class="page-link" href="#" aria-label="Previous" tabindex="-1">
+          <span aria-hidden="true">&laquo;</span>
+        </a>`;
+      prevButton.onclick = () => {
+        if (currentPage > 1) fetchProducts(currentPage - 1);
+      };
+      ul.appendChild(prevButton);
+
+      // Page Number Buttons
+      for (let i = 1; i <= totalPages; i++) {
+        const pageItem = document.createElement('li');
+        pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+        pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        pageItem.onclick = () => fetchProducts(i);
+        ul.appendChild(pageItem);
+      }
+
+      // Next Button
+      const nextButton = document.createElement('li');
+      nextButton.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+      nextButton.innerHTML = `
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>`;
+      nextButton.onclick = () => {
+        if (currentPage < totalPages) fetchProducts(currentPage + 1);
+      };
+      ul.appendChild(nextButton);
+
+      paginationNav.appendChild(ul);
+    }
+
+    document.querySelector('.product-table tbody').addEventListener('click', (event) => {
+      if (event.target.closest('.edit-btn')) {
+        const productId = event.target.closest('.edit-btn').getAttribute('data-id');
+        editProduct(productId);
+      }
+    });
+
+    document.querySelector('.product-table tbody').addEventListener('click', (event) => {
+      if (event.target.closest('.delete-btn')) {
+        const productId = event.target.closest('.delete-btn').getAttribute('data-id');
+        deleteProduct(productId);
+      }
+    });
+
+    async function loadCategories() {
+      try {
+        const response = await axios.get('https://mini-store-api-ud3r.onrender.com/categories');
+
+        const categories = response.data.data;
+        const createProductCategorySelect = document.getElementById('product-category');
+        const editProductCategorySelect = document.getElementById('edit-product-category');
+        for(var i = 0; i < categories.length; i++)
+        {
+          const option = document.createElement('option');
+          option.value = categories[i].id;
+          option.textContent = categories[i].category_name;
+          createProductCategorySelect.appendChild(option);
+          editProductCategorySelect.appendChild(option);
+        }
+      } catch (error) {
+        console.error('Failed to load categories:', error);
+      }
+    }
+
+    newProductButton.addEventListener("click", async function () {
+      editFormCard.style.display = 'none';
+
+      if (productTableCard.style.display === "none") {
+        productTableCard.style.display = "block";
+        productFormCard.style.display = "none";
+      } else {
+        productTableCard.style.display = "none";
+        productFormCard.style.display = "block";
+      }
+    });
+
+    addCancelButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      productTableCard.style.display = "block";
+      productFormCard.style.display = "none";
+    });
+
+    editCancelButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      productTableCard.style.display = "block";
+      editFormCard.style.display = "none";
+    });
+
+    addProductButton.addEventListener("click", async function () {
+      const form = document.getElementById('product-form');
+      const formData = new FormData(form);
+
+      try {
+        const response = await axios.post('https://mini-store-api-ud3r.onrender.com/product', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+          },
+        });
+
+        alert('Product added successfully!');
+        productFormCard.style.display = "none";
+        productTableCard.style.display = "block";
+        form.reset();
+      } catch (error) {
+        console.error('Error adding product:', error.response?.data || error.message);
+        alert('Failed to add product. Please check the form and try again.');
+      }
+    });
+
+    updateProductButton.addEventListener("click", async function (productId) {
+      try {
+        const editForm = document.getElementById("edit-product-form");
+        const formData = new FormData(editForm);
+
+        formData.set("is_hot", document.getElementById("edit-is-hot").checked);
+        formData.set("is_feature", document.getElementById("edit-is-feature").checked);
+
+        const response = await axios.put(
+          `https://mini-store-api-ud3r.onrender.com/products/${productId}`,
+          formData,
+          {
+            headers: {
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          alert("Product updated successfully!");
+          productTableCard.style.display = "block";
+          productFormCard.style.display = "none";
+          fetchProductList();
+        } else {
+          alert("Failed to update the product.");
+        }
+      } catch (error) {
+        console.error("Error updating product:", error);
+      }
+  });
+    
+    document.getElementById('product-search').addEventListener('input', function (event) {
+    const searchTerm = event.target.value.toLowerCase();
+    const tableRows = document.querySelectorAll('.product-table tbody tr');
+
+    tableRows.forEach(row => {
+      const productName = row.cells[2].textContent.toLowerCase();
+      const description = row.cells[3].textContent.toLowerCase();
+
+      if (productName.includes(searchTerm) || description.includes(searchTerm))
+        row.style.display = '';
+      else
+        row.style.display = 'none';
+    });
+  });
+
+    async function deleteProduct(productId) {
+      try {
+        const response = await axios.delete(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.status === 200) {
+          alert('Product deleted successfully!');
+          fetchProductList(); // Refresh the product list
+        } else {
+          alert('Failed to delete the product.');
+        }
+      } catch (error) {
+        console.error('Error deleting product:', error);
+      }
+    }
+
+    async function editProduct(productId) {
+      productTableCard.style.display = 'none';
+      productFormCard.style.display = 'none';
+      editFormCard.style.display = 'block';
+
+      // Fetch the product details to prefill the edit form
+      await axios.get(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      }).then((response) => {
+        if (response.status === 200) {
+          const product = response.data.data;
+
+          document.getElementById('edit-product-name').value = product.product_name;
+          document.getElementById('edit-product-description').value = product.description;
+          document.getElementById('edit-product-category').options[product.category-1].setAttribute('selected', 'selected');
+          document.getElementById('edit-product-price').value = product.price;
+          document.getElementById('edit-product-quantity').value = product.qty;
+          document.getElementById('edit-is-hot').checked = product.is_hot;
+          document.getElementById('edit-is-feature').checked = product.is_feature;
+
+          const thumbnailsContainer = document.querySelector("#edit-image-thumbnails");
+          thumbnailsContainer.innerHTML = "";
+
+          if (product.images && product.images.length > 0) {
+            for (let i = 0; i < product.images.length; i++) {
+              const imageUrl = product.images[i];
+
+              const imgContainer = document.createElement("div");
+              imgContainer.classList.add("thumbnail-container");
+              imgContainer.style.display = "inline-block";
+              imgContainer.style.marginRight = "10px";
+              imgContainer.style.position = "relative";
+
+              const img = document.createElement("img");
+              img.src = imageUrl;
+              img.alt = "Product Image";
+              img.style.maxWidth = "100px";
+              img.style.maxHeight = "100px";
+              img.style.objectFit = "cover";
+              img.style.borderRadius = "5px";
+              img.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.1)";
+
+              imgContainer.appendChild(img);
+              thumbnailsContainer.appendChild(imgContainer);
+            }
+          }
+        }
+      }).catch((error) => {
+        console.error('Error fetching product details:', error);
+      });
+    }
+
+    function enforceNumericInput(input, allowDecimal = false) {
+      input.addEventListener('input', function () {
+        const regex = allowDecimal ? /[^0-9.]/g : /[^0-9]/g;
+        this.value = this.value.replace(regex, ''); // Remove invalid characters
+
+        // Allow only one decimal point
+        if (allowDecimal && this.value.split('.').length > 2) {
+          const parts = this.value.split('.');
+          this.value = parts[0] + '.' + parts.slice(1).join(''); // Keep the first decimal
+        }
+      });
+
+      input.addEventListener('blur', function () {
+        // Ensure the value is valid on blur
+        if (allowDecimal) {
+          if (this.value === '.' || this.value === '') {
+            this.value = '0.00'; // Reset invalid input
+          } else {
+            this.value = parseFloat(this.value).toFixed(2); // Format to two decimals
+          }
+        } else {
+          if (this.value === '' || isNaN(parseInt(this.value, 10))) {
+            this.value = '0'; // Reset invalid input
+          }
+        }
+      });
+    }
+
+    document.getElementById('product-images').addEventListener('change', function(event) {
+      const files = event.target.files;
+      const imageThumbnailsContainer = document.getElementById('image-thumbnails');
+      imageThumbnailsContainer.innerHTML = ''; // Clear existing thumbnails
+
+      if (files.length === 0) return;
+
+      // Create thumbnails for each uploaded image
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const imgElement = document.createElement('img');
+          imgElement.src = e.target.result;
+          imgElement.classList.add('img-thumbnail', 'me-2');
+          imgElement.style.width = '100px';
+          imageThumbnailsContainer.appendChild(imgElement);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+});
+</script>
+</html>

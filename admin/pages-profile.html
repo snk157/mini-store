@@ -28,16 +28,17 @@
     <![endif]-->
 </head>
 <script>
-  const token = localStorage.getItem('token');
-  var decoded_token = jwt_decode(token);
+ if (token)
+  {
+    var decoded_token = jwt_decode(token);
+    document.getElementById("username").innerHTML = decoded_token.username;
 
-  if (token && decoded_token.usertype == 0)
-  {
-    window.location.href = './dashboard.html';
-  }
-  else
-  {
-    window.location.href = './index.html';
+    if (decoded_token.exp < Math.floor(Date.now()/1000))
+    {
+      window.stop();
+      localStorage.removeItem("token");
+      window.location.href = `${window.location.origin}/admin.html`;
+    }
   }
 
   function loadSidebar()
