@@ -117,7 +117,7 @@
             const data = response.data;
             if (data.status)
             {
-              const orderDetails = data.data;
+              const orderDetails = data.order;
               const modalContent = document.getElementById('modal-content');
               modalContent.innerHTML = `
                 <h3>Order Details for ${orderId}</h3>
