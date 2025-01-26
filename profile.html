@@ -138,7 +138,7 @@
               const orderDetails = data.order;
               const modalContent = document.getElementById('modal-content');
               modalContent.innerHTML = `
-                <h3>Order Details for ${orderId}</h3>
+                <p><strong>Order ID:</strong> ${orderId}</p>
                 <p><strong>Date:</strong> ${new Date(orderDetails.created * 1000).toLocaleDateString()}</p>
                 <p><strong>Status:</strong> ${orderDetails.payment_status}</p>
                 <p><strong>Total:</strong> $${(orderDetails.amount_total / 100).toFixed(2)}</p>
