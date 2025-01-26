@@ -118,6 +118,8 @@
             if (data.status)
             {
               const orderDetails = data.order;
+              alert(JSON.stringify(orderDetails));
+              
               const modalContent = document.getElementById('modal-content');
               modalContent.innerHTML = `
                 <h3>Order Details for ${orderId}</h3>
