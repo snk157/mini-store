@@ -108,7 +108,7 @@
       }
       
       async function showOrderDetails(orderId) {
-        axios.get("https://mini-store-api-ud3r.onrender.com/orders/${orderId}", {
+        axios.get(`https://mini-store-api-ud3r.onrender.com/orders/${orderId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
