@@ -15,6 +15,9 @@
   <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png" />
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
   <!-- Custom CSS -->
   <link href="css/style.min.css" rel="stylesheet" />
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -25,6 +28,18 @@
     <![endif]-->
 </head>
 <script>
+  const token = localStorage.getItem('token');
+  var decoded_token = jwt_decode(token);
+
+  if (token && decoded_token.usertype == 0)
+  {
+    window.location.href = './dashboard.html';
+  }
+  else
+  {
+    window.location.href = './index.html';
+  }
+
   function loadSidebar()
   {
     // Fetch and insert header content
@@ -34,8 +49,31 @@
         document.getElementById('sidebar-container').innerHTML = data;
       });
   }
-  // Call function to load header and footer
-  window.onload = loadSidebar;
+
+  async function getAdminUserInfo() {
+    try {
+      const response = await axios.get(`https://mini-store-api-ud3r.onrender.com/users/${decoded_token.userId}`);
+      const data = response.data;
+
+      if (data.status) {
+        document.getElementById('admin-fullname').value = data.data.username || '';
+        document.getElementById('admin-email').value = data.data.email || '';
+        document.getElementById('admin-password').value = data.data.password || '';
+        document.getElementById('admin-phone').value = data.data.contact || '';
+      } else {
+        alert('Failed to fetch admin user info.');
+      }
+    } catch (error) {
+      console.error('Error fetching admin user info:', error);
+      alert('An error occurred while fetching admin user info.');
+    }
+  }
+
+   // Call function to load header and footer
+   window.onload = function() {
+    loadSidebar();
+   };
+
 </script>
 <body>
   <!-- ============================================================== -->
@@ -190,36 +228,34 @@
           <div class="col-lg-12 col-xlg-9 col-md-7">
             <div class="card">
               <div class="card-body">
-                <form class="form-horizontal form-material mx-2">
+                <form class="form-horizontal form-material mx-2" id="admin-profile-form">
                   <div class="form-group">
                     <label class="col-md-12 mb-0">Full Name</label>
                     <div class="col-md-12">
-                      <input type="text" placeholder="Johnathan Doe" class="form-control ps-0 form-control-line" />
+                      <input type="text" id="admin-fullname" placeholder="Johnathan Doe" class="form-control ps-0 form-control-line" />
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="example-email" class="col-md-12">Email</label>
                     <div class="col-md-12">
-                      <input type="email" placeholder="johnathan@admin.com" class="form-control ps-0 form-control-line"
-                        name="example-email" id="example-email" />
+                      <input type="email" id="admin-email" placeholder="johnathan@admin.com" class="form-control ps-0 form-control-line" name="example-email" />
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-12 mb-0">Password</label>
                     <div class="col-md-12">
-                      <input type="password" value="password" class="form-control ps-0 form-control-line" />
+                      <input type="password" id="admin-password" value="password" class="form-control ps-0 form-control-line" />
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-12 mb-0">Phone No</label>
                     <div class="col-md-12">
-                      <input type="text" placeholder="123 456 7890" class="form-control ps-0 form-control-line" />
+                      <input type="text" id="admin-phone" placeholder="123 456 7890" class="form-control ps-0 form-control-line" />
                     </div>
                   </div>
-                 
                   <div class="form-group">
                     <div class="col-sm-12 d-flex">
-                      <button class="btn btn-success mx-auto mx-md-0 text-white">
+                      <button type="button" id="update-profile-btn" class="btn btn-success mx-auto mx-md-0 text-white">
                         Update Profile
                       </button>
                     </div>
