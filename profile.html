@@ -118,8 +118,6 @@
             if (data.status)
             {
               const orderDetails = data.order;
-              alert(JSON.stringify(orderDetails));
-              
               const modalContent = document.getElementById('modal-content');
               modalContent.innerHTML = `
                 <h3>Order Details for ${orderId}</h3>
@@ -128,7 +126,7 @@
                 <p><strong>Total:</strong> $${(orderDetails.amount_total / 100).toFixed(2)}</p>
                 <p><strong>Items:</strong></p>
                 <ul>
-                  ${orderDetails.line_items.data.map(item => `<li>${item.description} - Qty: ${item.quantity}</li>`).join('')}
+                  ${orderDetails.line_items.map(item => `<li>${item.description} - Qty: ${item.quantity}</li>`).join('')}
                 </ul>
               `;
 
