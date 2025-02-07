@@ -410,19 +410,6 @@
   <script src="js/custom.js"></script>
 </body>
 <script>
-  if (token)
-  {
-    var decoded_token = jwt_decode(token);
-    document.getElementById("username").innerHTML = decoded_token.username;
-
-    if (decoded_token.exp < Math.floor(Date.now()/1000))
-    {
-      window.stop();
-      localStorage.removeItem("token");
-      window.location.href = `${window.location.origin}/admin.html`;
-    }
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     const newProductButton = document.querySelector(".btn-primary")
     const addCancelButton = document.querySelector("#add-cancel-btn");
@@ -437,6 +424,19 @@
     const priceInput = document.getElementById('product-price');
     const quantityInput = document.getElementById('product-quantity');
     const token = localStorage.getItem("token");
+
+    if (token)
+    {
+      var decoded_token = jwt_decode(token);
+      document.getElementById("username").innerHTML = decoded_token.username;
+
+      if (decoded_token.exp < Math.floor(Date.now()/1000))
+      {
+        window.stop();
+        localStorage.removeItem("token");
+        window.location.href = `${window.location.origin}/admin.html`;
+      }
+    }
 
     // Enforce numeric input
     enforceNumericInput(priceInput, true);  // Allows decimals
