@@ -560,16 +560,20 @@
         const createProductCategorySelect = document.getElementById('product-category');
         const editProductCategorySelect = document.getElementById('edit-product-category');
         
-        for(var i = 0; i < categories.length; i++)
-        {
-          const option = document.createElement('option');
-          option.value = categories[i].id;
-          option.textContent = categories[i].category_name;
-          createProductCategorySelect.appendChild(option);
-          editProductCategorySelect.appendChild(option);
-        }
+        categories.forEach(category => {
+          const createOption = document.createElement('option');
+          createOption.value = category.id;
+          createOption.textContent = category.category_name;
+          createProductCategorySelect.appendChild(createOption);
 
-        console.log(JSON.stringify(createProductCategorySelect));
+          const editOption = document.createElement('option');
+          editOption.value = category.id;
+          editOption.textContent = category.category_name;
+          editProductCategorySelect.appendChild(editOption);
+        });
+
+        console.log('Final Create Dropdown:', createProductCategorySelect.innerHTML);
+        console.log('Final Edit Dropdown:', editProductCategorySelect.innerHTML);
       } catch (error) {
         console.error('Failed to load categories:', error);
       }
