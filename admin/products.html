@@ -559,8 +559,7 @@
         const categories = response.data.data;
         const createProductCategorySelect = document.getElementById('product-category');
         const editProductCategorySelect = document.getElementById('edit-product-category');
-        alert(createProductCategorySelect);
-
+        
         for(var i = 0; i < categories.length; i++)
         {
           const option = document.createElement('option');
@@ -568,8 +567,9 @@
           option.textContent = categories[i].category_name;
           createProductCategorySelect.appendChild(option);
           editProductCategorySelect.appendChild(option);
-          alert(categories[i].category_name)
         }
+
+        console.log(JSON.stringify(createProductCategorySelect));
       } catch (error) {
         console.error('Failed to load categories:', error);
       }
