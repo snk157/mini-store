@@ -693,7 +693,7 @@
       editFormCard.style.display = 'block';
 
       // Fetch the product details to prefill the edit form
-      await axios.get(`https://mini-store-api-ud3r.onrender.com/products/${productId}`, {
+      await axios.get(`https://mini-store-api-ud3r.onrender.com/product/${productId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       }).then((response) => {
         if (response.status === 200) {
