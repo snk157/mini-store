@@ -571,9 +571,6 @@
           editOption.textContent = category.category_name;
           editProductCategorySelect.appendChild(editOption);
         });
-
-        console.log('Final Create Dropdown:', createProductCategorySelect.innerHTML);
-        console.log('Final Edit Dropdown:', editProductCategorySelect.innerHTML);
       } catch (error) {
         console.error('Failed to load categories:', error);
       }
@@ -619,6 +616,7 @@
         productFormCard.style.display = "none";
         productTableCard.style.display = "block";
         form.reset();
+        window.location.reload();
       } catch (error) {
         console.error('Error adding product:', error.response?.data || error.message);
         alert('Failed to add product. Please check the form and try again.');
