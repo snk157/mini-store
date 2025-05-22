@@ -5,7 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script>
       function loadHeaderFooter() {
         fetch('header.html').then(r=>r.text()).then(d=>document.getElementById('header-container').innerHTML=d);
@@ -13,71 +22,104 @@
       }
       window.onload = loadHeaderFooter;
     </script>
+    <script src="js/modernizr.js"></script>
   </head>
   <body>
     <div id="header-container"></div>
-    <section class="bg-light py-5 text-center">
-      <h1 class="display-4 text-uppercase">Shipping Policy</h1>
+    <section class="hero-section position-relative bg-light-blue padding-medium">
+      <div class="container text-center">
+        <h1 class="display-2 text-uppercase text-dark">Shipping Policy</h1>
+        <div class="breadcrumbs">
+          <span class="item"><a href="index.html">Home ></a></span>
+          <span class="item">Shipping Policy</span>
+        </div>
+      </div>
     </section>
     <div class="container my-5">
       <div class="row g-4">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="card h-100">
             <div class="card-header text-uppercase">Order Processing</div>
             <div class="card-body">
-              <p class="card-text">All orders processed within <strong>1–2 business days</strong>.</p>
+              <p>Processed within <strong>1–2 business days</strong>.</p>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="card h-100">
-            <div class="card-header text-uppercase">Shipping Destinations</div>
+            <div class="card-header text-uppercase">Destinations</div>
             <div class="card-body">
-              <p class="card-text">Domestic & International shipping available.</p>
+              <p>Domestic & International shipping.</p>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="card h-100">
-            <div class="card-header text-uppercase">Carriers & Methods</div>
+            <div class="card-header text-uppercase">Carriers</div>
             <div class="card-body">
-              <ul class="card-text mb-0">
-                <li>Domestic: Pos Malaysia or equivalent courier</li>
-                <li>International: DHL, FedEx, UPS, etc.</li>
+              <ul>
+                <li>Domestic: Pos Malaysia</li>
+                <li>International: DHL, FedEx, UPS</li>
               </ul>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="card h-100">
             <div class="card-header text-uppercase">Delivery Times</div>
             <div class="card-body">
-              <ul class="card-text mb-0">
-                <li>Domestic: 3–7 business days</li>
-                <li>International: 7–21 business days</li>
+              <ul>
+                <li>Domestic: 3–7 days</li>
+                <li>International: 7–21 days</li>
               </ul>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="card h-100">
             <div class="card-header text-uppercase">Shipping Costs</div>
             <div class="card-body">
-              <p class="card-text">Calculated at checkout by weight & destination. Free domestic shipping over threshold.</p>
+              <p>Calculated at checkout. Free domestic over threshold.</p>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="card h-100">
-            <div class="card-header text-uppercase">Tracking & Duties</div>
+            <div class="card-header text-uppercase">Tracking & Taxes</div>
             <div class="card-body">
-              <p class="card-text">Tracking emailed. International duties/taxes paid by recipient.</p>
+              <p>Tracking emailed. Duties paid by recipient.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <section id="subscribe" class="container-grid padding-large position-relative overflow-hidden">
+      <div class="container">
+        <div class="row">
+          <div class="subscribe-content bg-dark d-flex flex-wrap justify-content-center align-items-center padding-medium">
+            <div class="col-md-6 col-sm-12">
+              <div class="display-header pe-3">
+                <h2 class="display-7 text-uppercase text-light">Subscribe Us Now</h2>
+                <p>Get latest news, updates and deals directly mailed to your inbox.</p>
+              </div>
+            </div>
+            <div class="col-md-5 col-sm-12">
+              <form class="subscription-form validate">
+                <div class="input-group flex-wrap">
+                  <input class="form-control btn-rounded-none" type="email" name="EMAIL" placeholder="Your email address here" required>
+                  <button class="btn btn-medium btn-primary text-uppercase btn-rounded-none" type="submit" name="subscribe">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <div id="footer-container"></div>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

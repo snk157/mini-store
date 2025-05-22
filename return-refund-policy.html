@@ -10,6 +10,11 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/vendor.css">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script>
       function loadHeaderFooter() {
         fetch('header.html').then(r=>r.text()).then(d=>document.getElementById('header-container').innerHTML=d);
@@ -17,34 +22,101 @@
       }
       window.onload = loadHeaderFooter;
     </script>
+    <script src="js/modernizr.js"></script>
   </head>
   <body>
     <div id="header-container"></div>
-    <section class="hero-section bg-light-blue padding-medium text-center">
-      <h1 class="display-2 text-uppercase text-dark">Return & Refund Policy</h1>
+    <section class="hero-section position-relative bg-light-blue padding-medium">
+      <div class="container text-center">
+        <h1 class="display-2 text-uppercase text-dark">Return & Refund Policy</h1>
+        <div class="breadcrumbs">
+          <span class="item"><a href="index.html">Home ></a></span>
+          <span class="item">Return & Refund Policy</span>
+        </div>
+      </div>
     </section>
-    <div class="policy-content padding-large">
-      <div class="container">
-        <h2 class="text-dark">Returns</h2>
-        <p>Accepted within 30 days of delivery. Items must be unused, in original packaging.</p>
-        <h2 class="text-dark">Non-returnable</h2>
-        <p>Custom-engraved cues, clearance items, gift cards.</p>
-        <h2 class="text-dark">Return Process</h2>
-        <p>Request authorization via support@snk157157@gmail.com with order number and reason. Ship to:</p>
-        <p>SNK 157 Returns<br>[Return Address]</p>
-        <h2 class="text-dark">Shipping Costs</h2>
-        <p>Buyer pays return shipping unless item is defective or incorrect.</p>
-        <h2 class="text-dark">Inspection & Approval</h2>
-        <p>We inspect returns within 5 business days; approval or rejection notified by email.</p>
-        <h2 class="text-dark">Refunds & Exchanges</h2>
-        <ul>
-          <li>Refund to original payment method within 7 business days of approval.</li>
-          <li>Exchanges subject to stock availability; pay any price difference.</li>
-        </ul>
-        <h2 class="text-dark">Defective/Damaged</h2>
-        <p>Report within 7 days with photos. We replace free or issue full refund including shipping.</p>
+    <div class="container my-5">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header text-uppercase">Returns</div>
+            <div class="card-body">
+              <p>Within <strong>30 days</strong> of delivery. Unused, in original packaging.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header text-uppercase">Non-returnable</div>
+            <div class="card-body">
+              <p>Custom-engraved cues, clearance items, gift cards.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header text-uppercase">Process</div>
+            <div class="card-body">
+              <p>Email <a href="mailto:snk157157@gmail.com">snk157157@gmail.com</a> with order no. Ship to SNK 157 Returns, [Return Address].</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header text-uppercase">Shipping Cost</div>
+            <div class="card-body">
+              <p>Buyer pays unless defective or incorrect.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header text-uppercase">Inspection</div>
+            <div class="card-body">
+              <p>Inspect within 5 business days; notify approval/rejection.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header text-uppercase">Refunds & Exchanges</div>
+            <div class="card-body">
+              <ul>
+                <li>Refund to original method within 7 days.</li>
+                <li>Exchanges subject to stock; pay difference.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <section id="subscribe" class="container-grid padding-large position-relative overflow-hidden">
+      <div class="container">
+        <div class="row">
+          <div class="subscribe-content bg-dark d-flex flex-wrap justify-content-center align-items-center padding-medium">
+            <div class="col-md-6 col-sm-12">
+              <div class="display-header pe-3">
+                <h2 class="display-7 text-uppercase text-light">Subscribe Us Now</h2>
+                <p>Get latest news, updates and deals directly mailed to your inbox.</p>
+              </div>
+            </div>
+            <div class="col-md-5 col-sm-12">
+              <form class="subscription-form validate">
+                <div class="input-group flex-wrap">
+                  <input class="form-control btn-rounded-none" type="email" name="EMAIL" placeholder="Your email address here" required>
+                  <button class="btn btn-medium btn-primary text-uppercase btn-rounded-none" type="submit" name="subscribe">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <div id="footer-container"></div>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
