@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Privacy Policy</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+      function loadHeaderFooter() {
+        fetch('header.html').then(r=>r.text()).then(d=>document.getElementById('header-container').innerHTML=d);
+        fetch('footer.html').then(r=>r.text()).then(d=>document.getElementById('footer-container').innerHTML=d);
+      }
+      window.onload = loadHeaderFooter;
+    </script>
+  </head>
+  <body>
+    <div id="header-container"></div>
+    <section class="hero-section bg-light-blue padding-medium text-center">
+      <h1 class="display-2 text-uppercase text-dark">Privacy Policy</h1>
+    </section>
+    <div class="policy-content padding-large">
+      <div class="container">
+        <h2 class="text-dark">Information We Collect</h2>
+        <ul>
+          <li>Personal Data: name, email, address, payment details, phone number.</li>
+          <li>Usage Data: site interactions, pages visited, referral source.</li>
+          <li>Cookies & Tracking: session cookies, analytics (Google Analytics, Facebook Pixel).</li>
+        </ul>
+        <h2 class="text-dark">Use of Information</h2>
+        <ul>
+          <li>Process orders and payments.</li>
+          <li>Send order updates and marketing (opt-out available).</li>
+          <li>Improve site performance and analyze trends.</li>
+        </ul>
+        <h2 class="text-dark">Data Sharing</h2>
+        <ul>
+          <li>Service Providers: payment gateways, shipping carriers, analytics.</li>
+          <li>Legal Compliance: as required by law.</li>
+          <li>No sale of personal data.</li>
+        </ul>
+        <h2 class="text-dark">Your Rights</h2>
+        <ul>
+          <li>Access, correct, or delete personal data.</li>
+          <li>Opt‐out of marketing communications.</li>
+          <li>Disable cookies (may affect site features).</li>
+        </ul>
+        <h2 class="text-dark">Security & Retention</h2>
+        <ul>
+          <li>TLS/SSL encryption; secure servers.</li>
+          <li>Data retained only as needed for business/legal.</li>
+        </ul>
+        <h2 class="text-dark">Contact</h2>
+        <p>Email: <a href="mailto:snk157157@gmail.com">snk157157@gmail.com</a></p>
+      </div>
+    </div>
+    <div id="footer-container"></div>
+  </body>
+</html>

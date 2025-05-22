@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Return & Refund Policy</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+      function loadHeaderFooter() {
+        fetch('header.html').then(r=>r.text()).then(d=>document.getElementById('header-container').innerHTML=d);
+        fetch('footer.html').then(r=>r.text()).then(d=>document.getElementById('footer-container').innerHTML=d);
+      }
+      window.onload = loadHeaderFooter;
+    </script>
+  </head>
+  <body>
+    <div id="header-container"></div>
+    <section class="hero-section bg-light-blue padding-medium text-center">
+      <h1 class="display-2 text-uppercase text-dark">Return & Refund Policy</h1>
+    </section>
+    <div class="policy-content padding-large">
+      <div class="container">
+        <h2 class="text-dark">Returns</h2>
+        <p>Accepted within 30 days of delivery. Items must be unused, in original packaging.</p>
+        <h2 class="text-dark">Non-returnable</h2>
+        <p>Custom-engraved cues, clearance items, gift cards.</p>
+        <h2 class="text-dark">Return Process</h2>
+        <p>Request authorization via support@snk157157@gmail.com with order number and reason. Ship to:</p>
+        <p>SNK 157 Returns<br>[Return Address]</p>
+        <h2 class="text-dark">Shipping Costs</h2>
+        <p>Buyer pays return shipping unless item is defective or incorrect.</p>
+        <h2 class="text-dark">Inspection & Approval</h2>
+        <p>We inspect returns within 5 business days; approval or rejection notified by email.</p>
+        <h2 class="text-dark">Refunds & Exchanges</h2>
+        <ul>
+          <li>Refund to original payment method within 7 business days of approval.</li>
+          <li>Exchanges subject to stock availability; pay any price difference.</li>
+        </ul>
+        <h2 class="text-dark">Defective/Damaged</h2>
+        <p>Report within 7 days with photos. We replace free or issue full refund including shipping.</p>
+      </div>
+    </div>
+    <div id="footer-container"></div>
+  </body>
+</html>

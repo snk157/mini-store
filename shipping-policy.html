@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shipping Policy</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+      function loadHeaderFooter() {
+        fetch('header.html').then(r=>r.text()).then(d=>document.getElementById('header-container').innerHTML=d);
+        fetch('footer.html').then(r=>r.text()).then(d=>document.getElementById('footer-container').innerHTML=d);
+      }
+      window.onload = loadHeaderFooter;
+    </script>
+  </head>
+  <body>
+    <div id="header-container"></div>
+    <section class="hero-section bg-light-blue padding-medium text-center">
+      <h1 class="display-2 text-uppercase text-dark">Shipping Policy</h1>
+    </section>
+    <div class="policy-content padding-large">
+      <div class="container">
+        <h2 class="text-dark">Order Processing</h2>
+        <p>All orders processed within 1–2 business days.</p>
+        <h2 class="text-dark">Shipping Destinations</h2>
+        <p>We ship domestically and internationally.</p>
+        <h2 class="text-dark">Carriers & Methods</h2>
+        <ul>
+          <li>Domestic: Pos Malaysia or equivalent courier.</li>
+          <li>International: DHL, FedEx, UPS, etc.</li>
+        </ul>
+        <h2 class="text-dark">Delivery Times</h2>
+        <ul>
+          <li>Domestic: 3–7 business days.</li>
+          <li>International: 7–21 business days (varies by country).</li>
+        </ul>
+        <h2 class="text-dark">Shipping Costs</h2>
+        <p>Calculated at checkout by weight and destination. Free domestic shipping on orders over specified threshold.</p>
+        <h2 class="text-dark">Tracking</h2>
+        <p>Tracking number emailed once shipped. Check status in your account.</p>
+        <h2 class="text-dark">Duties & Taxes</h2>
+        <p>International orders may incur import duties/taxes, paid by recipient.</p>
+      </div>
+    </div>
+    <div id="footer-container"></div>
+  </body>
+</html>
